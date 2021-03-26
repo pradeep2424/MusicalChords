@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.ScrollView;
 
-import com.heaven.vegetable.R;
+import com.music.chords.R;
 
 import java.util.ArrayList;
 

@@ -1,55 +1,56 @@
 <tabs>
-    <tab
-        activeColor="@colors/menu_active"
-        icon="@drawable/ic_home"
-        id="@+id/tab_home"
-        inActiveColor="@colors/menu_inactive" />
+<!--    <tab-->
+<!--        activeColor="@colors/menu_active"-->
+<!--        icon="@drawable/ic_home"-->
+<!--        id="@+id/tab_home"-->
+<!--        inActiveColor="@colors/menu_inactive" />-->
 
-    <tab
-        activeColor="@colors/menu_active"
-        icon="@drawable/ic_search"
-        id="@+id/tab_search"
-        inActiveColor="@colors/menu_inactive" />
+<!--    <tab-->
+<!--        activeColor="@colors/menu_active"-->
+<!--        icon="@drawable/ic_search"-->
+<!--        id="@+id/tab_search"-->
+<!--        inActiveColor="@colors/menu_inactive" />-->
 
-    <tab
-        activeColor="@colors/menu_active"
-        icon="@drawable/ic_like"
-        id="@+id/tab_orders"
-        inActiveColor="@colors/menu_inactive" />
+<!--    <tab-->
+<!--        activeColor="@colors/menu_active"-->
+<!--        icon="@drawable/ic_like"-->
+<!--        id="@+id/tab_orders"-->
+<!--        inActiveColor="@colors/menu_inactive" />-->
 
-    <tab
-        activeColor="@colors/menu_active"
-        icon="@drawable/ic_person"
-        id="@+id/tab_profile"
-        inActiveColor="@colors/menu_inactive" />
+<!--    <tab-->
+<!--        activeColor="@colors/menu_active"-->
+<!--        icon="@drawable/ic_person"-->
+<!--        id="@+id/tab_profile"-->
+<!--        inActiveColor="@colors/menu_inactive" />-->
 
-    <!--    <tab-->
-    <!--        id="@+id/tab_home"-->
-    <!--        icon="@drawable/ic_home"-->
-    <!--        activeColor="@colors/menu_active"-->
-    <!--        title="@string/menu_home"-->
-    <!--        inActiveColor="@colors/menu_inactive"/>-->
+<!--    &lt;!&ndash;    <tab&ndash;&gt;-->
+<!--    &lt;!&ndash;        id="@+id/tab_home"&ndash;&gt;-->
+<!--    &lt;!&ndash;        icon="@drawable/ic_home"&ndash;&gt;-->
+<!--    &lt;!&ndash;        activeColor="@colors/menu_active"&ndash;&gt;-->
+<!--    &lt;!&ndash;        title="@string/menu_home"&ndash;&gt;-->
+<!--    &lt;!&ndash;        inActiveColor="@colors/menu_inactive"/>&ndash;&gt;-->
 
-    <!--    <tab-->
-    <!--        id="@+id/tab_search"-->
-    <!--        icon="@drawable/ic_search"-->
-    <!--        title="@string/menu_search"-->
-    <!--        activeColor="@colors/menu_active"-->
-    <!--        inActiveColor="@colors/menu_inactive"/>-->
+<!--    &lt;!&ndash;    <tab&ndash;&gt;-->
+<!--    &lt;!&ndash;        id="@+id/tab_search"&ndash;&gt;-->
+<!--    &lt;!&ndash;        icon="@drawable/ic_search"&ndash;&gt;-->
+<!--    &lt;!&ndash;        title="@string/menu_search"&ndash;&gt;-->
+<!--    &lt;!&ndash;        activeColor="@colors/menu_active"&ndash;&gt;-->
+<!--    &lt;!&ndash;        inActiveColor="@colors/menu_inactive"/>&ndash;&gt;-->
 
-    <!--    <tab-->
-    <!--        id="@+id/tab_orders"-->
-    <!--        icon="@drawable/ic_like"-->
-    <!--        title="@string/menu_orders"-->
-    <!--        activeColor="@colors/menu_active"-->
-    <!--        inActiveColor="@colors/menu_inactive" />-->
+<!--    &lt;!&ndash;    <tab&ndash;&gt;-->
+<!--    &lt;!&ndash;        id="@+id/tab_orders"&ndash;&gt;-->
+<!--    &lt;!&ndash;        icon="@drawable/ic_like"&ndash;&gt;-->
+<!--    &lt;!&ndash;        title="@string/menu_orders"&ndash;&gt;-->
+<!--    &lt;!&ndash;        activeColor="@colors/menu_active"&ndash;&gt;-->
+<!--    &lt;!&ndash;        inActiveColor="@colors/menu_inactive" />&ndash;&gt;-->
 
-    <!--    <tab-->
-    <!--        id="@+id/tab_profile"-->
-    <!--        icon="@drawable/ic_person"-->
-    <!--        title="@string/menu_profile"-->
-    <!--        activeColor="@colors/menu_active"-->
-    <!--        inActiveColor="@colors/menu_inactive"/>-->
+<!--    &lt;!&ndash;    <tab&ndash;&gt;-->
+<!--    &lt;!&ndash;        id="@+id/tab_profile"&ndash;&gt;-->
+<!--    &lt;!&ndash;        icon="@drawable/ic_person"&ndash;&gt;-->
+<!--    &lt;!&ndash;        title="@string/menu_profile"&ndash;&gt;-->
+<!--    &lt;!&ndash;        activeColor="@colors/menu_active"&ndash;&gt;-->
+<!--    &lt;!&ndash;        inActiveColor="@colors/menu_inactive"/>&ndash;&gt;-->
+<!--    -->
 </tabs>
 
 

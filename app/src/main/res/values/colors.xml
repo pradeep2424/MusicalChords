@@ -25,6 +25,9 @@
     <color name="setting_labels">#717171</color>
     <color name="setting_subtitles">#a9a9b0</color>
 
+    <color name="menu_active">#2e7d32</color>
+    <color name="menu_inactive">#c7c7cc</color>
+
     <color name="green">#00a306</color>
     <color name="light_green_500">#8bc34a</color>
     <color name="light_green_700">#689F38</color>
