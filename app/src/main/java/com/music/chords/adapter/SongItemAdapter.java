@@ -160,12 +160,12 @@ public class SongItemAdapter extends RecyclerView.Adapter<SongItemAdapter.MyView
     }
 
     private void applyClickEvents(MyViewHolder holder, final int position) {
-//        holder.iconContainer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                listener.onIconClicked(position);
-//            }
-//        });
+        holder.iconContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onIconClicked(position);
+            }
+        });
 
         holder.iconImp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -298,8 +298,7 @@ public class SongItemAdapter extends RecyclerView.Adapter<SongItemAdapter.MyView
     }
 
     public List<Integer> getSelectedItems() {
-        List<Integer> items =
-                new ArrayList<>(selectedItems.size());
+        List<Integer> items = new ArrayList<>(selectedItems.size());
         for (int i = 0; i < selectedItems.size(); i++) {
             items.add(selectedItems.keyAt(i));
         }

@@ -53,7 +53,8 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
     private ActionModeCallback actionModeCallback;
     private ActionMode actionMode;
 
-    ArrayList<SongObject> allSongsData = new ArrayList<>();
+    ArrayList<SongObject> listAllSongsData = new ArrayList<>();
+    ArrayList<SongObject> listSelectedSongs = new ArrayList<>();
 
     final public int REQUEST_CODE_AARTI_DETAILS_ACTIVITY = 100;
 //    private List<FavoriteContacts> aartiList = new ArrayList<>();
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        allSongsData = Application.allSongsData;
+        listAllSongsData = Application.allSongsData;
     }
 
     @Override
@@ -87,7 +88,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
     private void setupRecyclerView() {
         getDummyData();
 
-        adapter = new SongItemAdapter(getActivity(), allSongsData);
+        adapter = new SongItemAdapter(getActivity(), listAllSongsData);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -127,7 +128,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
             songObject.setSongIconColor(getRandomMaterialColor("400"));
             songObject.setIsBookmark(false);
 
-            allSongsData.add(songObject);
+            listAllSongsData.add(songObject);
         }
     }
 
@@ -140,7 +141,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 // clear the inbox
-                allSongsData.clear();
+                listAllSongsData.clear();
 
 
                 adapter.notifyDataSetChanged();
@@ -285,6 +286,8 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
             actionMode = getActivity().startActionMode(actionModeCallback);
 //            actionMode = startSupportActionMode(actionModeCallback);
         }
+
+//        addSelectedItems(position);
         toggleSelection(position);
     }
 
@@ -320,6 +323,9 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
 
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+
+
+
             return false;
         }
 
@@ -355,7 +361,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
 
 //    private boolean checkAtLeastOneUnsavedItem() {
 //        List<Integer> selectedItemPositions = adapter.getSelectedItems();
-//        for (SongObject article : allSongsData) {
+//        for (SongObject article : listAllSongsData) {
 //            if (article.getIsBookmark()) {
 //                return true;
 //            }
@@ -374,23 +380,57 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
         adapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onIconClicked(int position) {
-        if (actionMode == null) {
-            actionMode = getActivity().startActionMode(actionModeCallback);
-//            actionMode = ((AppCompatActivity)getActivity()).startSupportActionMode(actionModeCallback);
+    private void addSelectedItems(int position) {
+        SongObject songObject = listAllSongsData.get(position);
+        if (listSelectedSongs.contains(songObject)) {
+            listSelectedSongs.remove(position);
+
+        } else {
+            listSelectedSongs.add(songObject);
         }
 
-        toggleSelection(position);
+        Menu menu = actionMode.getMenu();
+        MenuItem menuItem = menu.findItem(R.id.action_saved_unsaved);
+
+
+//        if (checkAtLeastOneUnsavedItem()) {
+//            menuItem.setTitle(R.string.action_mark_saved);
+//            menuItem.setIcon(R.drawable.ic_star_selected);
+//        } else {
+//            menuItem.setTitle(R.string.action_mark_unsaved);
+//            menuItem.setIcon(R.drawable.ic_star_unselected);
+//        }
+    }
+
+    private boolean checkAtLeastOneUnsavedItem() {
+        for (SongObject songObject : listSelectedSongs) {
+            if (!songObject.getIsBookmark()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onIconClicked(int position) {
+        enableActionMode(position);
+
+//        if (actionMode == null) {
+//            actionMode = getActivity().startActionMode(actionModeCallback);
+////            actionMode = ((AppCompatActivity)getActivity()).startSupportActionMode(actionModeCallback);
+//        }
+//
+//        toggleSelection(position);
     }
 
     @Override
     public void onIconImportantClicked(int position) {
         // Star icon is clicked,
         // mark the message as important
-        SongObject songObject = allSongsData.get(position);
+        SongObject songObject = listAllSongsData.get(position);
         songObject.setIsBookmark(!songObject.getIsBookmark());
-        allSongsData.set(position, songObject);
+        listAllSongsData.set(position, songObject);
         adapter.notifyDataSetChanged();
     }
 
@@ -403,9 +443,9 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
 
         } else {
             // read the message which removes bold from the row
-            SongObject songObject = allSongsData.get(position);
+            SongObject songObject = listAllSongsData.get(position);
 //            songObject.setRead(true);
-            allSongsData.set(position, songObject);
+            listAllSongsData.set(position, songObject);
             adapter.notifyDataSetChanged();
 
             Toast.makeText(getActivity(), "Read: " + songObject.getSongTitle(), Toast.LENGTH_SHORT).show();
@@ -414,7 +454,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
 
 //    @Override
 //    public void onClick(View view, int position) {
-//        Application.songObject = allSongsData.get(position);
+//        Application.songObject = listAllSongsData.get(position);
 //
 //        Intent intent = new Intent(getActivity(), SongDetailsActivity.class);
 //        startActivity(intent);
