@@ -1,6 +1,9 @@
 package com.music.chords.service.retrofit;
 
 import com.google.gson.JsonObject;
+import com.music.chords.objects.SongObject;
+
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -20,8 +23,8 @@ public interface ApiInterface {
     Call<ResponseBody> testAnalyzeRespponse();
 
 
-    @POST("insertUserDetails")
-    Call<ResponseBody> insertUserDetails(@Body JsonObject jsonObj);
+    @GET("inbox.json")
+    Call<ResponseBody> getInbox();
 
     @GET("GetUserDetails/{Username}/{Password}")
     Call<ResponseBody> getUserDetails(@Path("Username") String username,

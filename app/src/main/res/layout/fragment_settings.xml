@@ -44,7 +44,7 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <com.heaven.vegetable.custom.MyTextView
+                <com.music.chords.custom.MyTextView
                     android:id="@+id/tv_languageText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                     android:textColor="@color/setting_labels"
                     android:textSize="16sp" />
 
-                <com.heaven.vegetable.custom.MyTextView
+                <com.music.chords.custom.MyTextView
                     android:id="@+id/tv_languageSubtext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <com.heaven.vegetable.custom.MyTextView
+                <com.music.chords.custom.MyTextView
                     android:id="@+id/tv_shareText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -190,7 +190,7 @@
                     android:textColor="@color/setting_labels"
                     android:textSize="16sp" />
 
-                <com.heaven.vegetable.custom.MyTextView
+                <com.music.chords.custom.MyTextView
                     android:id="@+id/tv_shareSubtext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -252,7 +252,7 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <com.heaven.vegetable.custom.MyTextView
+                <com.music.chords.custom.MyTextView
                     android:id="@+id/tv_rateUsText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -260,7 +260,7 @@
                     android:textColor="@color/setting_labels"
                     android:textSize="16sp" />
 
-                <com.heaven.vegetable.custom.MyTextView
+                <com.music.chords.custom.MyTextView
                     android:id="@+id/tv_rateUsSubtext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -321,7 +321,7 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <com.heaven.vegetable.custom.MyTextView
+                <com.music.chords.custom.MyTextView
                     android:id="@+id/tv_contactUsText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -329,7 +329,7 @@
                     android:textColor="@color/setting_labels"
                     android:textSize="16sp" />
 
-                <com.heaven.vegetable.custom.MyTextView
+                <com.music.chords.custom.MyTextView
                     android:id="@+id/tv_contactUsSubtext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

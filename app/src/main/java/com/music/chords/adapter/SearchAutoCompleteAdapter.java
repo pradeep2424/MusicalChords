@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.music.chords.R;
 import com.music.chords.loader.OnRecyclerViewClickListener;
-import com.music.chords.objects.ProductObject;
+import com.music.chords.objects.SongObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +23,9 @@ public class SearchAutoCompleteAdapter extends RecyclerView.Adapter<SearchAutoCo
     Context context;
 
     private OnRecyclerViewClickListener clickListener;
-    private List<ProductObject> listSearchedProducts;
+    private List<SongObject> listSearchedProducts;
 
-    public SearchAutoCompleteAdapter(Context context, List<ProductObject> listSearchedProducts) {
+    public SearchAutoCompleteAdapter(Context context, List<SongObject> listSearchedProducts) {
         this.context = context;
         this.listSearchedProducts = listSearchedProducts;
     }
@@ -57,7 +57,6 @@ public class SearchAutoCompleteAdapter extends RecyclerView.Adapter<SearchAutoCo
         }
     }
 
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -67,19 +66,19 @@ public class SearchAutoCompleteAdapter extends RecyclerView.Adapter<SearchAutoCo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        ProductObject productObject = listSearchedProducts.get(position);
+        SongObject productObject = listSearchedProducts.get(position);
 
-        ArrayList<String> listProductImages = productObject.getListProductImage();
-        String name = productObject.getProductName();
-        String category = productObject.getCategoryName();
+//        ArrayList<String> listProductImages = productObject.getSongYouTubeURL();
+        String name = productObject.getSongTitle();
+        String category = productObject.getSongSubtitle();
 
         holder.tvProductName.setText(name);
         holder.tvProductCategory.setText(category);
 
-        if (listProductImages != null && listProductImages.size() > 0) {
-            String imageURL = listProductImages.get(0);
-            Glide.with(context).load(imageURL).into(holder.ivProductImage);
-        }
+//        if (listProductImages != null && listProductImages.size() > 0) {
+//            String imageURL = listProductImages.get(0);
+//            Glide.with(context).load(imageURL).into(holder.ivProductImage);
+//        }
     }
 
     @Override

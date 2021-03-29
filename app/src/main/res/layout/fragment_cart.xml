@@ -54,7 +54,7 @@
                             android:gravity="center"
                             android:orientation="vertical">
 
-                            <com.heaven.vegetable.custom.MyTextView
+                            <com.music.chords.custom.MyTextView
                                 android:id="@+id/tv_restaurantName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
 <!--                                    android:src="@drawable/ic_green_tick"-->
 <!--                                    app:riv_corner_radius="4dip" />-->
 
-                                <com.heaven.vegetable.custom.MyTextView
+                                <com.music.chords.custom.MyTextView
                                     android:id="@+id/tv_addressType"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                                     android:textColor="@color/main_text"
                                     android:textSize="14sp" />
 
-                                <com.heaven.vegetable.custom.MyTextView
+                                <com.music.chords.custom.MyTextView
                                     android:id="@+id/tv_address"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                                     android:gravity="right"
                                     android:orientation="vertical">
 
-                                    <com.heaven.vegetable.custom.MyTextView
+                                    <com.music.chords.custom.MyTextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
@@ -183,7 +183,7 @@
 <!--                                android:layout_width="match_parent"-->
 <!--                                android:layout_height="wrap_content">-->
 
-<!--                                <com.heaven.vegetable.custom.MyTextView-->
+<!--                                <com.music.chords.custom.MyTextView-->
 <!--                                    android:id="@+id/tv_payUsingReferralPointsText"-->
 <!--                                    android:layout_width="wrap_content"-->
 <!--                                    android:layout_height="wrap_content"-->
@@ -208,7 +208,7 @@
 <!--                                    android:layout_below="@+id/tv_payUsingReferralPointsText"-->
 <!--                                    android:layout_marginTop="8dp">-->
 
-<!--                                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                                    <com.music.chords.custom.MyTextView-->
 <!--                                        android:id="@+id/tv_balanceText"-->
 <!--                                        android:layout_width="wrap_content"-->
 <!--                                        android:layout_height="wrap_content"-->
@@ -225,7 +225,7 @@
 <!--                                        android:layout_toRightOf="@+id/tv_balanceText"-->
 <!--                                        android:src="@drawable/ic_temp_coin2" />-->
 
-<!--                                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                                    <com.music.chords.custom.MyTextView-->
 <!--                                        android:id="@+id/tv_balanceReferralPoints"-->
 <!--                                        android:layout_width="wrap_content"-->
 <!--                                        android:layout_height="wrap_content"-->
@@ -253,7 +253,7 @@
 <!--                        android:layout_marginBottom="10dp"-->
 <!--                        android:orientation="vertical">-->
 
-<!--                        <com.heaven.vegetable.custom.MyTextView-->
+<!--                        <com.music.chords.custom.MyTextView-->
 <!--                            android:id="@+id/tv_referralPointsSaveMessage"-->
 <!--                            android:layout_width="wrap_content"-->
 <!--                            android:layout_height="wrap_content"-->
@@ -288,7 +288,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <com.heaven.vegetable.custom.MyTextView
+                        <com.music.chords.custom.MyTextView
                             android:id="@+id/tv_billDetails"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -304,7 +304,7 @@
                             android:orientation="horizontal"
                             android:weightSum="2">
 
-                            <com.heaven.vegetable.custom.MyTextView
+                            <com.music.chords.custom.MyTextView
                                 android:id="@+id/tv_itemTotalTitle"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -325,7 +325,7 @@
 <!--                                    android:layout_height="wrap_content"-->
 <!--                                    android:layout_toLeftOf="@+id/tv_itemTotalText">-->
 
-<!--                                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                                    <com.music.chords.custom.MyTextView-->
 <!--                                        android:id="@+id/tv_addReferralMoneyBillDetails"-->
 <!--                                        android:layout_width="wrap_content"-->
 <!--                                        android:layout_height="wrap_content"-->
@@ -343,7 +343,7 @@
 <!--                                        android:layout_toLeftOf="@+id/tv_addBillDetails"-->
 <!--                                        android:src="@drawable/ic_temp_coin2" />-->
 
-<!--                                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                                    <com.music.chords.custom.MyTextView-->
 <!--                                        android:id="@+id/tv_addBillDetails"-->
 <!--                                        android:layout_width="wrap_content"-->
 <!--                                        android:layout_height="wrap_content"-->
@@ -356,7 +356,7 @@
 
 <!--                                </RelativeLayout>-->
 
-                                <com.heaven.vegetable.custom.MyTextView
+                                <com.music.chords.custom.MyTextView
                                     android:id="@+id/tv_itemTotalText"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -384,7 +384,7 @@
                             android:orientation="horizontal"
                             android:weightSum="2">
 
-                            <com.heaven.vegetable.custom.MyTextView
+                            <com.music.chords.custom.MyTextView
                                 android:id="@+id/tv_deliveryFeesTitle"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -400,7 +400,7 @@
                                 android:gravity="right"
                                 android:orientation="horizontal">
 
-                                <com.heaven.vegetable.custom.MyTextView
+                                <com.music.chords.custom.MyTextView
                                     android:id="@+id/tv_deliveryFeeTextFree"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -410,7 +410,7 @@
                                     android:textColor="@color/light_green_700"
                                     android:textSize="16sp" />
 
-                                <com.heaven.vegetable.custom.MyTextView
+                                <com.music.chords.custom.MyTextView
                                     android:id="@+id/tv_deliveryFeeText"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -431,7 +431,7 @@
                             android:orientation="horizontal"
                             android:weightSum="2">
 
-                            <com.heaven.vegetable.custom.MyTextView
+                            <com.music.chords.custom.MyTextView
                                 android:id="@+id/tv_deliveryFeeMessageText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -458,7 +458,7 @@
                             android:orientation="horizontal"
                             android:weightSum="2">
 
-                            <com.heaven.vegetable.custom.MyTextViewBold
+                            <com.music.chords.custom.MyTextViewBold
                                 android:id="@+id/tv_totalPayTitle"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -480,7 +480,7 @@
 <!--                                    android:layout_height="wrap_content"-->
 <!--                                    android:layout_toLeftOf="@+id/tv_totalPayText">-->
 
-<!--                                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                                    <com.music.chords.custom.MyTextView-->
 <!--                                        android:id="@+id/tv_addReferralMoneyTotalPay"-->
 <!--                                        android:layout_width="wrap_content"-->
 <!--                                        android:layout_height="wrap_content"-->
@@ -498,7 +498,7 @@
 <!--                                        android:layout_toLeftOf="@+id/tv_addTotalPay"-->
 <!--                                        android:src="@drawable/ic_temp_coin2" />-->
 
-<!--                                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                                    <com.music.chords.custom.MyTextView-->
 <!--                                        android:id="@+id/tv_addTotalPay"-->
 <!--                                        android:layout_width="wrap_content"-->
 <!--                                        android:layout_height="wrap_content"-->
@@ -511,7 +511,7 @@
 
 <!--                                </RelativeLayout>-->
 
-                                <com.heaven.vegetable.custom.MyTextViewBold
+                                <com.music.chords.custom.MyTextViewBold
                                     android:id="@+id/tv_totalPayText"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -559,7 +559,7 @@
             android:visibility="visible"
             android:weightSum="2">
 
-            <com.heaven.vegetable.custom.MyTextView
+            <com.music.chords.custom.MyTextView
                 android:id="@+id/tv_paymentButtonAmount"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -572,7 +572,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <com.heaven.vegetable.custom.MyTextView
+            <com.music.chords.custom.MyTextView
                 android:id="@+id/tv_paymentButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

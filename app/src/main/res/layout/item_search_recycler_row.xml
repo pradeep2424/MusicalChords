@@ -27,7 +27,7 @@
             android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
-            <com.heaven.vegetable.custom.MyTextView
+            <com.music.chords.custom.MyTextView
                 android:id="@+id/tv_productName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:textColor="@color/main_text"
                 android:textSize="15sp" />
 
-            <com.heaven.vegetable.custom.MyTextView
+            <com.music.chords.custom.MyTextView
                 android:id="@+id/tv_productCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

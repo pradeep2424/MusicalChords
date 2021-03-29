@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.heaven.vegetable.custom.MyTextViewBold
+                    <com.music.chords.custom.MyTextViewBold
                         android:id="@+id/tv_productName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                         android:textColor="@color/main_dark_text"
                         android:textSize="20sp" />
 
-                    <com.heaven.vegetable.custom.MyTextView
+                    <com.music.chords.custom.MyTextView
                         android:id="@+id/tv_productCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                         android:layout_marginTop="15dp"
                         android:orientation="vertical">
 
-                        <com.heaven.vegetable.custom.MyTextView
+                        <com.music.chords.custom.MyTextView
                             android:id="@+id/tv_ProductMRP"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
                             android:textColor="@color/hint_gray"
                             android:textSize="14sp" />
 
-                        <com.heaven.vegetable.custom.MyTextViewBold
+                        <com.music.chords.custom.MyTextViewBold
                             android:id="@+id/tv_productPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
 
-                    <com.heaven.vegetable.custom.MyTextView
+                    <com.music.chords.custom.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="pack_size"
@@ -170,7 +170,7 @@
 <!--                            android:background="@drawable/rect1"-->
 <!--                            android:orientation="vertical">-->
 
-<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                            <com.music.chords.custom.MyTextView-->
 <!--                                android:id="@+id/tv_250Gram"-->
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
@@ -178,7 +178,7 @@
 <!--                                android:textColor="#4a4a4a"-->
 <!--                                android:textSize="16sp" />-->
 
-<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                            <com.music.chords.custom.MyTextView-->
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
 <!--                                android:text="Small"-->
@@ -196,7 +196,7 @@
 <!--                            android:background="@drawable/rect1"-->
 <!--                            android:orientation="vertical">-->
 
-<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                            <com.music.chords.custom.MyTextView-->
 <!--                                android:id="@+id/tv_500Gram"-->
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
@@ -204,7 +204,7 @@
 <!--                                android:textColor="#4a4a4a"-->
 <!--                                android:textSize="16sp" />-->
 
-<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                            <com.music.chords.custom.MyTextView-->
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
 <!--                                android:text="Medium"-->
@@ -222,7 +222,7 @@
 <!--                            android:background="@drawable/rect1"-->
 <!--                            android:orientation="vertical">-->
 
-<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                            <com.music.chords.custom.MyTextView-->
 <!--                                android:id="@+id/tv_1Kilo"-->
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
@@ -230,7 +230,7 @@
 <!--                                android:textColor="#4a4a4a"-->
 <!--                                android:textSize="16sp" />-->
 
-<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                            <com.music.chords.custom.MyTextView-->
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
 <!--                                android:text="Regular"-->
@@ -255,14 +255,14 @@
                 android:orientation="vertical"
                 android:padding="15dp">
 
-                <com.heaven.vegetable.custom.MyTextView
+                <com.music.chords.custom.MyTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="about_this_product"
                     android:textColor="@color/main_text"
                     android:textSize="16sp" />
 
-                <com.heaven.vegetable.custom.MyTextView
+                <com.music.chords.custom.MyTextView
                     android:id="@+id/tv_productDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -286,7 +286,7 @@
 <!--                android:paddingLeft="13.4dp"-->
 <!--                android:paddingTop="25dp">-->
 
-<!--                <com.heaven.vegetable.custom.MyTextView-->
+<!--                <com.music.chords.custom.MyTextView-->
 <!--                    android:layout_width="wrap_content"-->
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:layout_weight="1"-->
@@ -311,7 +311,7 @@
 <!--                        android:progressTint="#f05421"-->
 <!--                        android:rating="4" />-->
 
-<!--                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                    <com.music.chords.custom.MyTextView-->
 <!--                        android:id="@+id/tv_restaurantReviews"-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
@@ -518,7 +518,7 @@
             android:gravity="center"
             android:layout_height="match_parent">
 
-            <com.heaven.vegetable.custom.MyTextViewBold
+            <com.music.chords.custom.MyTextViewBold
                 android:id="@+id/tv_productAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -528,7 +528,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <com.heaven.vegetable.custom.MyTextView
+            <com.music.chords.custom.MyTextView
                 android:id="@+id/tv_viewCartText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -550,7 +550,7 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <com.heaven.vegetable.custom.MyTextView
+            <com.music.chords.custom.MyTextView
                 android:id="@+id/tv_addToCart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -694,7 +694,7 @@
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:orientation="vertical">-->
 
-<!--                    <com.heaven.vegetable.custom.MyTextViewBold-->
+<!--                    <com.music.chords.custom.MyTextViewBold-->
 <!--                        android:id="@+id/tv_productName"-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
@@ -703,7 +703,7 @@
 <!--                        android:textColor="@color/main_dark_text"-->
 <!--                        android:textSize="20sp" />-->
 
-<!--                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                    <com.music.chords.custom.MyTextView-->
 <!--                        android:id="@+id/tv_productCategory"-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
@@ -719,7 +719,7 @@
 <!--                        android:layout_marginTop="15dp"-->
 <!--                        android:background="@color/smokegray" />-->
 
-<!--                    <com.heaven.vegetable.custom.MyTextViewBold-->
+<!--                    <com.music.chords.custom.MyTextViewBold-->
 <!--                        android:id="@+id/tv_productPrice"-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
@@ -737,7 +737,7 @@
 <!--                    android:layout_marginTop="20dp"-->
 <!--                    android:orientation="vertical">-->
 
-<!--                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                    <com.music.chords.custom.MyTextView-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
 <!--                        android:text="@string/pack_size"-->
@@ -759,7 +759,7 @@
 <!--                            android:background="@drawable/rect1"-->
 <!--                            android:orientation="vertical">-->
 
-<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                            <com.music.chords.custom.MyTextView-->
 <!--                                android:id="@+id/tv_250Gram"-->
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
@@ -767,7 +767,7 @@
 <!--                                android:textColor="#4a4a4a"-->
 <!--                                android:textSize="16sp" />-->
 
-<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                            <com.music.chords.custom.MyTextView-->
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
 <!--                                android:text="Small"-->
@@ -785,7 +785,7 @@
 <!--                            android:background="@drawable/rect1"-->
 <!--                            android:orientation="vertical">-->
 
-<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                            <com.music.chords.custom.MyTextView-->
 <!--                                android:id="@+id/tv_500Gram"-->
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
@@ -793,7 +793,7 @@
 <!--                                android:textColor="#4a4a4a"-->
 <!--                                android:textSize="16sp" />-->
 
-<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                            <com.music.chords.custom.MyTextView-->
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
 <!--                                android:text="Medium"-->
@@ -811,7 +811,7 @@
 <!--                            android:background="@drawable/rect1"-->
 <!--                            android:orientation="vertical">-->
 
-<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                            <com.music.chords.custom.MyTextView-->
 <!--                                android:id="@+id/tv_1Kilo"-->
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
@@ -819,7 +819,7 @@
 <!--                                android:textColor="#4a4a4a"-->
 <!--                                android:textSize="16sp" />-->
 
-<!--                            <com.heaven.vegetable.custom.MyTextView-->
+<!--                            <com.music.chords.custom.MyTextView-->
 <!--                                android:layout_width="wrap_content"-->
 <!--                                android:layout_height="wrap_content"-->
 <!--                                android:text="Regular"-->
@@ -844,14 +844,14 @@
 <!--                android:orientation="vertical"-->
 <!--                android:padding="15dp">-->
 
-<!--                <com.heaven.vegetable.custom.MyTextView-->
+<!--                <com.music.chords.custom.MyTextView-->
 <!--                    android:layout_width="wrap_content"-->
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:text="@string/about_this_product"-->
 <!--                    android:textColor="@color/main_text"-->
 <!--                    android:textSize="16sp" />-->
 
-<!--                <com.heaven.vegetable.custom.MyTextView-->
+<!--                <com.music.chords.custom.MyTextView-->
 <!--                    android:layout_width="wrap_content"-->
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:layout_marginTop="10dp"-->
@@ -875,7 +875,7 @@
 <!--                android:paddingLeft="13.4dp"-->
 <!--                android:paddingTop="25dp">-->
 
-<!--                <com.heaven.vegetable.custom.MyTextView-->
+<!--                <com.music.chords.custom.MyTextView-->
 <!--                    android:layout_width="wrap_content"-->
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:layout_weight="1"-->
@@ -900,7 +900,7 @@
 <!--                        android:progressTint="#f05421"-->
 <!--                        android:rating="4" />-->
 
-<!--                    <com.heaven.vegetable.custom.MyTextView-->
+<!--                    <com.music.chords.custom.MyTextView-->
 <!--                        android:id="@+id/tv_restaurantReviews"-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
@@ -1107,7 +1107,7 @@
 <!--            android:gravity="center"-->
 <!--            android:layout_height="match_parent">-->
 
-<!--            <com.heaven.vegetable.custom.MyTextViewBold-->
+<!--            <com.music.chords.custom.MyTextViewBold-->
 <!--                android:id="@+id/tv_productAmount"-->
 <!--                android:layout_width="wrap_content"-->
 <!--                android:layout_height="wrap_content"-->
@@ -1117,7 +1117,7 @@
 <!--                android:textSize="16sp"-->
 <!--                android:textStyle="bold" />-->
 
-<!--            <com.heaven.vegetable.custom.MyTextView-->
+<!--            <com.music.chords.custom.MyTextView-->
 <!--                android:id="@+id/tv_viewCartText"-->
 <!--                android:layout_width="wrap_content"-->
 <!--                android:layout_height="wrap_content"-->
@@ -1139,7 +1139,7 @@
 <!--            android:gravity="center"-->
 <!--            android:orientation="horizontal">-->
 
-<!--            <com.heaven.vegetable.custom.MyTextView-->
+<!--            <com.music.chords.custom.MyTextView-->
 <!--                android:id="@+id/tv_addToCart"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="match_parent"-->

@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.music.chords.R;
 import com.music.chords.loader.DialogLoadingIndicator;
-import com.music.chords.objects.ProductObject;
+import com.music.chords.objects.SongObject;
 
 import org.apache.commons.lang3.SerializationUtils;
 
 import java.util.ArrayList;
 
-//public class ProductDetailsActivity extends AppCompatActivity  {
+//public class SongDetailsActivity extends AppCompatActivity  {
 
-public class ProductDetailsActivity extends AppCompatActivity {
+public class SongDetailsActivity extends AppCompatActivity {
     DialogLoadingIndicator progressIndicator;
     CoordinatorLayout clRootLayout;
 
@@ -58,7 +58,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private double itemPackDiscountPrice;
     private int unitSize;
 
-    private ProductObject productObject;
+    private SongObject productObject;
 
     //    LinearLayout ll250Gram;
 //    LinearLayout ll500Gram;
@@ -75,7 +75,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            productObject = SerializationUtils.clone((ProductObject) bundle.getSerializable("ProductObject"));
+            productObject = SerializationUtils.clone((SongObject) bundle.getSerializable("SongObject"));
         }
 
 //        initComponents();
@@ -615,7 +615,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //    }
 //
 //
-//    private JsonObject createJsonCart(ProductObject productObject, int quantity) {
+//    private JsonObject createJsonCart(SongObject productObject, int quantity) {
 //        double totalPrice;
 //
 //        JsonObject postParam = new JsonObject();
@@ -654,7 +654,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //    }
 //
 //
-//    public void addItemToCart(final int quantity, final ProductObject productObject, final String incrementOrDecrement) {
+//    public void addItemToCart(final int quantity, final SongObject productObject, final String incrementOrDecrement) {
 //        if (InternetConnection.checkConnection(this)) {
 //
 //            ApiInterface apiService = RetroClient.getApiService(this);
@@ -711,7 +711,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //    }
 //
 //    public void showDialog() {
-//        progressIndicator.showProgress(com.heaven.vegetable.activity.ProductDetailsActivity.this);
+//        progressIndicator.showProgress(com.heaven.vegetable.activity.SongDetailsActivity.this);
 //    }
 //
 //    public void dismissDialog() {

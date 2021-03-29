@@ -6,7 +6,8 @@ package com.music.chords.utils;
 
 public class ConstantValues {
 //    public static final String ROOT_URL = "http://www.miracleinfotech.in:9091/service1.svc/";
-    public static final String ROOT_URL = "http://miracleinfotech.in:9195/Service1.svc/";
+//    public static final String ROOT_URL = "http://miracleinfotech.in:9195/Service1.svc/";
+public static final String ROOT_URL = "http://api.androidhive.info/json/";
 
 //    public static final String SP_LOGIN_DETAILS = "SPLoginDetails";
 //    public static final String SP_DEFAULT_VALUE = "Default";

@@ -18,4 +18,8 @@
     <string name="search_main_title">What can we serve you today?</string>
     <string name="search_box_text">Search for vegetables or fruits...</string>
     <string name="search_button">SEARCH</string>
+
+    <string name="action_mark_saved">Mark saved</string>
+    <string name="action_mark_unsaved">Mark unsaved</string>
+    <string name="action_search">Search</string>
 </resources>

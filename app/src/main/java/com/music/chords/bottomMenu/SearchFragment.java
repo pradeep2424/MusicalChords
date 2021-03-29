@@ -18,11 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.music.chords.R;
-import com.music.chords.activity.ProductDetailsActivity;
+import com.music.chords.activity.SongDetailsActivity;
 import com.music.chords.adapter.SearchAutoCompleteAdapter;
 import com.music.chords.interfaces.TriggerTabChangeListener;
 import com.music.chords.loader.OnRecyclerViewClickListener;
-import com.music.chords.objects.ProductObject;
+import com.music.chords.objects.SongObject;
 import com.music.chords.service.retrofit.ApiInterface;
 import com.music.chords.service.retrofit.RetroClient;
 import com.music.chords.utils.InternetConnection;
@@ -46,7 +46,7 @@ public class SearchFragment extends Fragment implements OnRecyclerViewClickListe
 
     private RecyclerView rvSearchItems;
     private SearchAutoCompleteAdapter adapterSearch;
-    private ArrayList<ProductObject> listProductObject = new ArrayList<>();
+    private ArrayList<SongObject> listProductObject = new ArrayList<>();
 
     TriggerTabChangeListener triggerTabChangeListener;
 
@@ -122,9 +122,9 @@ public class SearchFragment extends Fragment implements OnRecyclerViewClickListe
 
     @Override
     public void onClick(View view, int position) {
-        ProductObject productObject = listProductObject.get(position);
-        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
-        intent.putExtra("ProductObject", productObject);
+        SongObject productObject = listProductObject.get(position);
+        Intent intent = new Intent(getActivity(), SongDetailsActivity.class);
+        intent.putExtra("SongObject", productObject);
         startActivityForResult(intent, REQUEST_CODE_PRODUCT_DETAILS);
     }
 
@@ -174,20 +174,20 @@ public class SearchFragment extends Fragment implements OnRecyclerViewClickListe
                                 ArrayList<String> listProdImages = new ArrayList<>();
                                 listProdImages.add(productImage);
 
-                                ProductObject productObject = new ProductObject();
-                                productObject.setProductID(productID);
-                                productObject.setProductName(productName);
-                                productObject.setProductDescription(productDesc);
-                                productObject.setListProductImage(listProdImages);
-                                productObject.setPrice(price);
-                                productObject.setCategoryID(categoryID);
-                                productObject.setCategoryName(categoryName);
-                                productObject.setFoodTypeID(foodTypeID);
-                                productObject.setFoodType(foodType);
-                                productObject.setGroupID(groupID);
-                                productObject.setGroup(group);
-                                productObject.setUnitID(unitID);
-                                productObject.setUnit(unit);
+                                SongObject productObject = new SongObject();
+//                                productObject.setProductID(productID);
+//                                productObject.setProductName(productName);
+//                                productObject.setProductDescription(productDesc);
+//                                productObject.setListProductImage(listProdImages);
+//                                productObject.setPrice(price);
+//                                productObject.setCategoryID(categoryID);
+//                                productObject.setCategoryName(categoryName);
+//                                productObject.setFoodTypeID(foodTypeID);
+//                                productObject.setFoodType(foodType);
+//                                productObject.setGroupID(groupID);
+//                                productObject.setGroup(group);
+//                                productObject.setUnitID(unitID);
+//                                productObject.setUnit(unit);
 
                                 listProductObject.add(productObject);
                             }

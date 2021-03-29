@@ -17,7 +17,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <com.heaven.vegetable.custom.MyTextView
+        <com.music.chords.custom.MyTextView
             android:id="@+id/tv_toolbarTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
         <!--                android:src="@drawable/ic_search"-->
         <!--                android:tint="#d0d0d0" />-->
 
-        <!--            <com.heaven.vegetable.custom.MyEditText-->
+        <!--            <com.music.chords.custom.MyEditText-->
         <!--                android:layout_width="0dp"-->
         <!--                android:layout_height="wrap_content"-->
         <!--                android:layout_marginLeft="10dp"-->
@@ -111,7 +111,7 @@
     <!--                android:layout_height="18dp"-->
     <!--                android:src="@mipmap/ic_places" />-->
 
-    <!--            <com.heaven.vegetable.custom.MyTextView-->
+    <!--            <com.music.chords.custom.MyTextView-->
     <!--                android:id="@+id/tv_toolbarTitle"-->
     <!--                android:layout_width="wrap_content"-->
     <!--                android:layout_height="wrap_content"-->
