@@ -2,7 +2,8 @@ package com.music.chords.service.retrofit;
 
 import android.content.Context;
 
-import com.music.chords.utils.ConstantValues;
+import com.music.chords.interfaces.Constants;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -13,12 +14,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Pradeep Jadhav.
  */
 
-public class RetroClient {
+public class RetroClient implements Constants {
 
     private static Retrofit getRetrofitInstance(Context mContext) {
 
         return new Retrofit.Builder()
-                .baseUrl(ConstantValues.ROOT_URL)
+                .baseUrl(ROOT_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(getRequestHeader(mContext))
 //                .addConverterFactory(ScalarsConverterFactory.create())

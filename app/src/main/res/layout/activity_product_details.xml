@@ -24,72 +24,81 @@
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <FrameLayout
-                android:id="@+id/fl_cover"
+            <!--            <FrameLayout-->
+            <!--                android:id="@+id/fl_cover"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="250dp">-->
+
+            <!--                <com.github.florent37.shapeofview.shapes.ArcView-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="250dp"-->
+            <!--                    android:layout_marginBottom="20dp"-->
+            <!--                    app:elevation="10dp"-->
+            <!--                    app:shape_arc_cropDirection="inside"-->
+            <!--                    app:shape_arc_height="30dp"-->
+            <!--                    app:shape_arc_position="bottom">-->
+
+            <!--                    <ImageView-->
+            <!--                        android:id="@+id/iv_coverPic"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="match_parent"-->
+            <!--                        android:scaleType="centerCrop"-->
+            <!--                        android:src="@mipmap/ic_loading_wallpaper"-->
+            <!--                        android:transitionName="@string/transition_name_aarti_cover" />-->
+
+            <!--                    &lt;!&ndash;<ImageView&ndash;&gt;-->
+            <!--                    &lt;!&ndash;android:id="@+id/iv_coverPic"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;android:scaleType="centerCrop"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;android:src="@mipmap/cover"&ndash;&gt;-->
+            <!--                    &lt;!&ndash;android:transitionName="@string/transition_name_aarti_cover" />&ndash;&gt;-->
+
+            <!--                </com.github.florent37.shapeofview.shapes.ArcView>-->
+
+            <ImageView
+                android:id="@+id/iv_coverPic"
                 android:layout_width="match_parent"
-                android:layout_height="250dp">
-
-<!--                <com.github.florent37.shapeofview.shapes.ArcView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="250dp"-->
-<!--                    android:layout_marginBottom="20dp"-->
-<!--                    app:elevation="10dp"-->
-<!--                    app:shape_arc_cropDirection="inside"-->
-<!--                    app:shape_arc_height="30dp"-->
-<!--                    app:shape_arc_position="bottom">-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/iv_coverPic"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:scaleType="centerCrop"-->
-<!--                        android:src="@mipmap/ic_loading_wallpaper"-->
-<!--                        android:transitionName="@string/transition_name_aarti_cover" />-->
-
-<!--                    &lt;!&ndash;<ImageView&ndash;&gt;-->
-<!--                    &lt;!&ndash;android:id="@+id/iv_coverPic"&ndash;&gt;-->
-<!--                    &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-<!--                    &lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-<!--                    &lt;!&ndash;android:scaleType="centerCrop"&ndash;&gt;-->
-<!--                    &lt;!&ndash;android:src="@mipmap/cover"&ndash;&gt;-->
-<!--                    &lt;!&ndash;android:transitionName="@string/transition_name_aarti_cover" />&ndash;&gt;-->
-
-<!--                </com.github.florent37.shapeofview.shapes.ArcView>-->
-
-                <ImageView
-                    android:id="@+id/iv_coverPic"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_launcher_round" />
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher_round" />
 
 
-<!--                <com.varunest.sparkbutton.SparkButton-->
-<!--                    android:id="@+id/heart_button"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="top|right|end"-->
-<!--                    android:layout_marginTop="-15dp"-->
-<!--                    android:layout_marginRight="-15dp"-->
-<!--                    app:sparkbutton_activeImage="@drawable/ic_heart_on"-->
-<!--                    app:sparkbutton_animationSpeed="1.5"-->
-<!--                    app:sparkbutton_iconSize="40dp"-->
-<!--                    app:sparkbutton_inActiveImage="@drawable/ic_heart_off"-->
-<!--                    app:sparkbutton_primaryColor="@color/heart_primary_color"-->
-<!--                    app:sparkbutton_secondaryColor="@color/heart_secondary_color" />-->
+            <!--                <com.varunest.sparkbutton.SparkButton-->
+            <!--                    android:id="@+id/heart_button"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="top|right|end"-->
+            <!--                    android:layout_marginTop="-15dp"-->
+            <!--                    android:layout_marginRight="-15dp"-->
+            <!--                    app:sparkbutton_activeImage="@drawable/ic_heart_on"-->
+            <!--                    app:sparkbutton_animationSpeed="1.5"-->
+            <!--                    app:sparkbutton_iconSize="40dp"-->
+            <!--                    app:sparkbutton_inActiveImage="@drawable/ic_heart_off"-->
+            <!--                    app:sparkbutton_primaryColor="@color/heart_primary_color"-->
+            <!--                    app:sparkbutton_secondaryColor="@color/heart_secondary_color" />-->
 
-            </FrameLayout>
+            <!--            </FrameLayout>-->
 
-            <com.music.chords.helper.NonClickableToolbar
+            <!--                        <com.music.chords.helper.NonClickableToolbar-->
+            <!--                            android:id="@+id/toolbar"-->
+            <!--                            android:layout_width="match_parent"-->
+            <!--                            android:layout_height="?attr/actionBarSize"-->
+            <!--                            app:layout_collapseMode="pin"-->
+            <!--                            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
+
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -148,66 +157,66 @@
 
             </LinearLayout>
 
-<!--            <LinearLayout-->
-<!--                android:id="@+id/ll_footer"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/ll_mainContent"-->
-<!--                android:layout_alignParentBottom="true"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginBottom="10dp"-->
-<!--                android:background="@color/white"-->
-<!--                android:elevation="5dp"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:padding="5dp"-->
-<!--                android:weightSum="100">-->
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/ll_footer"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_below="@+id/ll_mainContent"-->
+            <!--                android:layout_alignParentBottom="true"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:layout_marginBottom="10dp"-->
+            <!--                android:background="@color/white"-->
+            <!--                android:elevation="5dp"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:padding="5dp"-->
+            <!--                android:weightSum="100">-->
 
-<!--                &lt;!&ndash;                <Button&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:id="@+id/btn_pictures"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:layout_width="0dp"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:layout_gravity="center_horizontal|center_vertical"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:layout_weight="100"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:background="@color/white"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:gravity="center_horizontal|center_vertical"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:text="@string/aarti_details_photos"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:textAllCaps="false"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:textColor="@color/colorSubtitle"&ndash;&gt;-->
-<!--                &lt;!&ndash;                    android:textSize="15sp" />&ndash;&gt;-->
+            <!--                &lt;!&ndash;                <Button&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:id="@+id/btn_pictures"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:layout_width="0dp"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:layout_gravity="center_horizontal|center_vertical"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:layout_weight="100"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:background="@color/white"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:gravity="center_horizontal|center_vertical"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:text="@string/aarti_details_photos"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:textAllCaps="false"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:textColor="@color/colorSubtitle"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:textSize="15sp" />&ndash;&gt;-->
 
-<!--                <Button-->
-<!--                    android:id="@+id/btn_audio"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center_horizontal|center_vertical"-->
-<!--                    android:layout_weight="49.8"-->
-<!--                    android:background="@color/white"-->
-<!--                    android:gravity="center_horizontal|center_vertical"-->
-<!--                    android:text="@string/aarti_details_audio"-->
-<!--                    android:textAllCaps="false"-->
-<!--                    android:textColor="@color/colorSubtitle"-->
-<!--                    android:textSize="15sp" />-->
+            <!--                <Button-->
+            <!--                    android:id="@+id/btn_audio"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_horizontal|center_vertical"-->
+            <!--                    android:layout_weight="49.8"-->
+            <!--                    android:background="@color/white"-->
+            <!--                    android:gravity="center_horizontal|center_vertical"-->
+            <!--                    android:text="@string/aarti_details_audio"-->
+            <!--                    android:textAllCaps="false"-->
+            <!--                    android:textColor="@color/colorSubtitle"-->
+            <!--                    android:textSize="15sp" />-->
 
-<!--                <View-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="4dp"-->
-<!--                    android:layout_weight="0.4"-->
-<!--                    android:gravity="center_horizontal|center_vertical" />-->
+            <!--                <View-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="4dp"-->
+            <!--                    android:layout_weight="0.4"-->
+            <!--                    android:gravity="center_horizontal|center_vertical" />-->
 
-<!--                <Button-->
-<!--                    android:id="@+id/btn_pictures"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center_horizontal|center_vertical"-->
-<!--                    android:layout_weight="49.8"-->
-<!--                    android:background="@color/white"-->
-<!--                    android:gravity="center_horizontal|center_vertical"-->
-<!--                    android:text="@string/aarti_details_photos"-->
-<!--                    android:textAllCaps="false"-->
-<!--                    android:textColor="@color/colorSubtitle"-->
-<!--                    android:textSize="15sp" />-->
+            <!--                <Button-->
+            <!--                    android:id="@+id/btn_pictures"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_horizontal|center_vertical"-->
+            <!--                    android:layout_weight="49.8"-->
+            <!--                    android:background="@color/white"-->
+            <!--                    android:gravity="center_horizontal|center_vertical"-->
+            <!--                    android:text="@string/aarti_details_photos"-->
+            <!--                    android:textAllCaps="false"-->
+            <!--                    android:textColor="@color/colorSubtitle"-->
+            <!--                    android:textSize="15sp" />-->
 
-<!--            </LinearLayout>-->
+            <!--            </LinearLayout>-->
 
         </RelativeLayout>
 

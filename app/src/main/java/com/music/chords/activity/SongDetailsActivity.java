@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.gson.Gson;
 import com.music.chords.R;
+import com.music.chords.interfaces.Constants;
 import com.music.chords.objects.SongObject;
 import com.music.chords.utils.Application;
 
@@ -28,11 +29,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class SongDetailsActivity extends AppCompatActivity {
+public class SongDetailsActivity extends AppCompatActivity implements Constants {
 
-    SongObject aartiObject;
-
-//    int aartiSelectedPosition;
+    SongObject songObject;
 
     ImageView ivCoverPic;
     TextView tvTitle;
@@ -40,43 +39,35 @@ public class SongDetailsActivity extends AppCompatActivity {
     TextView tvLyrics;
 
 //    SparkButton heartButton;
-    Button btnAudio;
-    Button btnPictures;
-
-//    private PrefManagerAppData prefManagerAppData;
-
-    final public int REQUEST_CODE_PHOTOS = 100;
-    final public int REQUEST_CODE_AUDIO = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
 
-        aartiObject = Application.songObject;
-
-//        Bundle bundle = getIntent().getExtras();
-//        if (bundle != null) {
-//            aartiObject = (AartiObject) bundle.getSerializable("AartiObject");
-//            aartiSelectedPosition = bundle.getInt("SelectedPosition");
-//        }
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            songObject = (SongObject) bundle.getSerializable(SONG_OBJECT);
+        }
 
         init();
         componentEvents();
-        setAartiData();
+        setSongData();
     }
 
     private void init() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 //        getSupportActionBar().setTitle(getResources().getString(R.string.title_aarti));
 
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.transparent));
         collapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.white));
-        collapsingToolbarLayout.setTitle(aartiObject.getSongTitle());
+        collapsingToolbarLayout.setTitle(songObject.getSongTitle());
 
 //        prefManagerAppData = new PrefManagerAppData(this);
 
@@ -93,7 +84,7 @@ public class SongDetailsActivity extends AppCompatActivity {
 //        handler.postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
-//                if (aartiObject.getIsFavourites()) {
+//                if (songObject.getIsFavourites()) {
 //                    heartButton.setChecked(true);
 //                    heartButton.playAnimation();
 //                }
@@ -126,34 +117,36 @@ public class SongDetailsActivity extends AppCompatActivity {
 //        });
     }
 
-    private void setAartiData() {
-        if (aartiObject != null) {
+    private void setSongData() {
+        if (songObject != null) {
 
-            Glide.with(this).load(aartiObject.getSongYouTubeURL()).into(ivCoverPic);
-            tvTitle.setText(aartiObject.getSongTitle());
-            tvSubtitle.setText(aartiObject.getSongSubtitle());
-            tvLyrics.setText(aartiObject.getSongLyrics());
+            Glide.with(this).load(songObject.getSongYouTubeURL()).into(ivCoverPic);
+            tvTitle.setText(songObject.getSongTitle());
+            tvSubtitle.setText(songObject.getSongSubtitle());
+            tvLyrics.setText(songObject.getSongLyrics());
         }
     }
+
+
 
     //    @Override
 //    public void liked() {
 //        try {
-//            ArrayList<AartiObject> listFavourites = new ArrayList<>();
+//            ArrayList<songObject> listFavourites = new ArrayList<>();
 //
 //            String json = prefManagerAppData.getFavourites();
 //            if (!json.equalsIgnoreCase("NotFound")) {
 //                listFavourites = getFavouritesListFromSP();
 //            }
 //
-//            AartiObject favouriteAartiObject = (AartiObject) SerializationUtils.clone(aartiObject);
+//            songObject favouriteSongObject = (songObject) SerializationUtils.clone(songObject);
 //
-//            favouriteAartiObject.setIsFavourites(true);
-//            listFavourites.add(favouriteAartiObject);
+//            favouriteSongObject.setIsFavourites(true);
+//            listFavourites.add(favouriteSongObject);
 //
-//            AartiApplication.allAartiData.set(AartiApplication.allAartiData.indexOf(aartiObject), favouriteAartiObject);
+//            SongApplication.allSongData.set(SongApplication.allSongData.indexOf(songObject), favouriteSongObject);
 //
-////        AartiApplication.allAartiData.set(aartiSelectedPosition, aartiObject);
+////        SongApplication.allSongData.set(songSelectedPosition, songObject);
 //
 //            setFavouritesListToSP(listFavourites);
 //        } catch (Exception e) {
@@ -163,41 +156,41 @@ public class SongDetailsActivity extends AppCompatActivity {
 
     //    @Override
 //    public void unLiked() {
-//        ArrayList<AartiObject> listNewFavourites = new ArrayList<>();
+//        ArrayList<songObject> listNewFavourites = new ArrayList<>();
 //
 //        String json = prefManagerAppData.getFavourites();
 //        if (!json.equalsIgnoreCase("NotFound")) {
 //            listNewFavourites = getFavouritesListFromSP();
 //        }
 //
-//        AartiObject removedFavouriteObject = (AartiObject) SerializationUtils.clone(aartiObject);
+//        songObject removedFavouriteObject = (songObject) SerializationUtils.clone(songObject);
 //        if (listNewFavourites != null) {
 //            listNewFavourites.remove(removedFavouriteObject);
 //        }
 //
 //        removedFavouriteObject.setIsFavourites(false);
-//        AartiApplication.allAartiData.set(AartiApplication.allAartiData.indexOf(aartiObject), removedFavouriteObject);
+//        SongApplication.allSongData.set(SongApplication.allSongData.indexOf(songObject), removedFavouriteObject);
 //
 ////        saving new favourite list to shared preference
 //        setFavouritesListToSP(listNewFavourites);
 //    }
 //
 //
-//    private ArrayList<AartiObject> getFavouritesListFromSP() {
+//    private ArrayList<songObject> getFavouritesListFromSP() {
 //        String json = prefManagerAppData.getFavourites();
 //        Gson gson = new Gson();
-//        Type type = new TypeToken<List<AartiObject>>() {
+//        Type type = new TypeToken<List<songObject>>() {
 //        }.getType();
-//        ArrayList<AartiObject> listFavourites = gson.fromJson(json, type);
+//        ArrayList<songObject> listFavourites = gson.fromJson(json, type);
 //
 //        return listFavourites;
 //    }
 //
-//    private void setFavouritesListToSP(ArrayList<AartiObject> listFavourites) {
+//    private void setFavouritesListToSP(ArrayList<songObject> listFavourites) {
 //        String jsonFavourites = null;
 //
 ////        removing duplicate records
-//        Set<AartiObject> set = new HashSet<AartiObject>();
+//        Set<songObject> set = new HashSet<songObject>();
 //        set.addAll(listFavourites);
 //        listFavourites.clear();
 //        listFavourites.addAll(set);
@@ -223,6 +216,13 @@ public class SongDetailsActivity extends AppCompatActivity {
 //
 //        return true;
 //    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

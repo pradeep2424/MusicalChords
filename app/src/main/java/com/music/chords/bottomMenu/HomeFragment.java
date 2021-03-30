@@ -3,10 +3,13 @@ package com.music.chords.bottomMenu;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.util.Predicate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -26,6 +29,7 @@ import android.widget.Toast;
 import com.music.chords.R;
 import com.music.chords.activity.SongDetailsActivity;
 import com.music.chords.adapter.SongItemAdapter;
+import com.music.chords.interfaces.Constants;
 import com.music.chords.interfaces.SongAdapterListener;
 import com.music.chords.loader.OnRecyclerViewClickListener;
 import com.music.chords.objects.SongObject;
@@ -44,7 +48,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class HomeFragment extends Fragment implements SongAdapterListener, SwipeRefreshLayout.OnRefreshListener {
+public class HomeFragment extends Fragment implements SongAdapterListener, SwipeRefreshLayout.OnRefreshListener,
+        Constants {
     private View rootView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
@@ -287,7 +292,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
 //            actionMode = startSupportActionMode(actionModeCallback);
         }
 
-//        addSelectedItems(position);
+        addSelectedItems(position);
         toggleSelection(position);
     }
 
@@ -301,6 +306,43 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
             actionMode.setTitle(String.valueOf(count));
             actionMode.invalidate();
         }
+    }
+
+    private void addSelectedItems(int position) {
+        SongObject songObject = listAllSongsData.get(position);
+        if (listSelectedSongs.contains(songObject)) {
+            listSelectedSongs.remove(songObject);
+
+        } else {
+            listSelectedSongs.add(songObject);
+        }
+    }
+
+    private boolean checkAllSelectedItemsSaved() {
+        int count = 0;
+        for (SongObject songObject : listSelectedSongs) {
+            if (songObject.getIsBookmark()) {
+                count++;
+            }
+        }
+
+        if (count == listSelectedSongs.size()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void markAllSavedUnsaved(boolean isSaved) {
+        adapter.resetAnimationIndex();
+
+        List<Integer> selectedItemPositions = adapter.getSelectedItems();
+        for (int i = 0; i < selectedItemPositions.size(); i++) {
+            int position = selectedItemPositions.get(i);
+            listAllSongsData.get(position).setIsBookmark(isSaved);
+//            adapter.removeData(selectedItemPositions.get(i));
+        }
+        adapter.notifyDataSetChanged();
     }
 
     private class ActionModeCallback implements ActionMode.Callback {
@@ -323,9 +365,16 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
 
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            MenuItem menuItem = menu.findItem(R.id.action_saved_unsaved);
 
-
-
+            if (checkAllSelectedItemsSaved()) {
+                menuItem.setTitle(R.string.action_mark_unsaved);
+                menuItem.setIcon(R.drawable.ic_star_unselected);
+            } else {
+                menuItem.setTitle(R.string.action_mark_saved);
+                menuItem.setIcon(R.drawable.ic_star_selected);
+            }
+            DrawableCompat.setTint(menuItem.getIcon(), ContextCompat.getColor(getActivity(), R.color.white));
             return false;
         }
 
@@ -333,8 +382,17 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_saved_unsaved:
-                    // delete all the selected messages
-                    deleteMessages();
+
+                    String menuText = item.getTitle().toString();
+                    if (menuText.equalsIgnoreCase(getString(R.string.action_mark_saved))) {
+                        markAllSavedUnsaved(true);                         // saved
+
+                    } else {
+                        markAllSavedUnsaved(false);                        // unsaved
+                    }
+
+//                    // delete all the selected messages
+//                    deleteMessages();
                     mode.finish();
                     return true;
 
@@ -380,38 +438,6 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
         adapter.notifyDataSetChanged();
     }
 
-    private void addSelectedItems(int position) {
-        SongObject songObject = listAllSongsData.get(position);
-        if (listSelectedSongs.contains(songObject)) {
-            listSelectedSongs.remove(position);
-
-        } else {
-            listSelectedSongs.add(songObject);
-        }
-
-        Menu menu = actionMode.getMenu();
-        MenuItem menuItem = menu.findItem(R.id.action_saved_unsaved);
-
-
-//        if (checkAtLeastOneUnsavedItem()) {
-//            menuItem.setTitle(R.string.action_mark_saved);
-//            menuItem.setIcon(R.drawable.ic_star_selected);
-//        } else {
-//            menuItem.setTitle(R.string.action_mark_unsaved);
-//            menuItem.setIcon(R.drawable.ic_star_unselected);
-//        }
-    }
-
-    private boolean checkAtLeastOneUnsavedItem() {
-        for (SongObject songObject : listSelectedSongs) {
-            if (!songObject.getIsBookmark()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     @Override
     public void onIconClicked(int position) {
         enableActionMode(position);
@@ -442,13 +468,17 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
             enableActionMode(position);
 
         } else {
-            // read the message which removes bold from the row
             SongObject songObject = listAllSongsData.get(position);
-//            songObject.setRead(true);
-            listAllSongsData.set(position, songObject);
-            adapter.notifyDataSetChanged();
+            Intent intent = new Intent(getActivity(), SongDetailsActivity.class);
+            intent.putExtra(SONG_OBJECT, songObject);
+            startActivity(intent);
 
-            Toast.makeText(getActivity(), "Read: " + songObject.getSongTitle(), Toast.LENGTH_SHORT).show();
+//            // read the message which removes bold from the row
+//            SongObject songObject = listAllSongsData.get(position);
+////            songObject.setRead(true);
+//            listAllSongsData.set(position, songObject);
+//            adapter.notifyDataSetChanged();
+//            Toast.makeText(getActivity(), "Read: " + songObject.getSongTitle(), Toast.LENGTH_SHORT).show();
         }
     }
 

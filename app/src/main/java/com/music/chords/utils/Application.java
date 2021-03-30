@@ -25,7 +25,7 @@ public class Application extends android.app.Application {
 //    public static AppSetting appSetting;
 ////    public static int MINIMUM_FREE_DELIVERY_AMOUNT;
 
-    public static SongObject songObject;
+//    public static SongObject songObject;
     public static ArrayList<SongObject> allSongsData = new ArrayList<>();
 
     public static HashMap<String, String> mapBannerDetails = new HashMap<>();
