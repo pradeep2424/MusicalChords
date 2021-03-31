@@ -17,7 +17,6 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/details_background"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
@@ -101,6 +100,7 @@
 
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
@@ -150,10 +150,21 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
+                    android:linksClickable="true"
                     android:text="Aarti"
                     android:textColor="@color/main_text"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
+
+<!--                <TextView-->
+<!--                    android:id="@+id/find_chords_viewing_text_view"-->
+<!--                    android:layout_width="fill_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:linksClickable="true"-->
+<!--                    android:text="nasnsan"-->
+<!--                    android:textColor="@android:color/primary_text_dark_nodisable"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:typeface="monospace" />-->
 
             </LinearLayout>
 

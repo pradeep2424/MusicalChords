@@ -1,18 +1,24 @@
 package com.music.chords.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 
 import android.os.Handler;
+import android.os.PowerManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -23,6 +29,8 @@ import com.music.chords.interfaces.Constants;
 import com.music.chords.objects.SongObject;
 import com.music.chords.utils.Application;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,13 +38,17 @@ import java.util.List;
 import java.util.Set;
 
 public class SongDetailsActivity extends AppCompatActivity implements Constants {
-
     SongObject songObject;
 
+    NestedScrollView nestedScrollView;
     ImageView ivCoverPic;
     TextView tvTitle;
     TextView tvSubtitle;
     TextView tvLyrics;
+
+    private PowerManager.WakeLock wakeLock;
+
+    private volatile String chordText;
 
 //    SparkButton heartButton;
 
@@ -53,9 +65,14 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants 
         init();
         componentEvents();
         setSongData();
+
+        chordText = "";
     }
 
     private void init() {
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, getPackageName());
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -71,6 +88,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants 
 
 //        prefManagerAppData = new PrefManagerAppData(this);
 
+        nestedScrollView = findViewById(R.id.nestedScrollView);
         ivCoverPic = (ImageView) findViewById(R.id.iv_coverPic);
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvSubtitle = (TextView) findViewById(R.id.tv_subtitle);
@@ -218,9 +236,27 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants 
 //    }
 
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_song_details, menu);
+
+//        if(menu instanceof MenuBuilder){
+//            MenuBuilder m = (MenuBuilder) menu;
+//            m.setOptionalIconsVisible(true);
+//        }
+
+        // Find the menuItem to add your SubMenu
+        MenuItem menuItemShare = menu.findItem(R.id.menu_share);
+        SubMenu subMenuShare = menuItemShare.getSubMenu();
+
+        MenuItem submenuItemShareText = subMenuShare.findItem(R.id.submenu_share_text);
+        MenuItem submenuItemSharePDF = subMenuShare.findItem(R.id.submenu_share_pdf);
+
+//        // Inflating the sub_menu menu this way, will add its menu items
+//        // to the empty SubMenu you created in the xml
+//        getMenuInflater().inflate(R.menu.sub_menu, myMenuItem.getSubMenu());
+
         return true;
     }
 

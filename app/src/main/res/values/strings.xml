@@ -22,4 +22,12 @@
     <string name="action_mark_saved">Mark saved</string>
     <string name="action_mark_unsaved">Mark unsaved</string>
     <string name="action_search">Search</string>
+    <string name="action_fullscreen">Fullscreen</string>
+    <string name="action_text_size">Text Size</string>
+    <string name="action_auto_scroll">Auto Scroll</string>
+    <string name="action_transpose">Transpose</string>
+    <string name="action_share">Share</string>
+    <string name="action_share_text">Share as Text</string>
+    <string name="action_share_pdf">Share as PDF</string>
+
 </resources>
