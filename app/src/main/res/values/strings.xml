@@ -4,6 +4,44 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <string name="pref_note_naming_english">English</string>
+    <string name="pref_note_naming_northern">Northern European</string>
+    <string name="pref_note_naming_southern">Southern European</string>
+
+    <string name="pref_scheme">color_scheme</string>
+    <string name="pref_note_naming">note_naming</string>
+    <string name="pref_note_naming_value_english">English</string>
+    <string name="pref_note_naming_default">@string/pref_note_naming_value_english</string>
+
+    <string name="pref_text_size">text_size</string>
+    <string name="pref_text_size_title">Text Size</string>
+
+    <string name="text_size_xsmall_value">XS</string>
+    <string name="text_size_small_value">S</string>
+    <string name="text_size_medium_value">M</string>
+    <string name="text_size_large_value">L</string>
+    <string name="text_size_xlarge_value">XL</string>
+
+    <string name="text_size_xsmall_name">Extra Small (8pt)</string>
+    <string name="text_size_small_name">Small (10pt)</string>
+    <string name="text_size_medium_name">Medium (12pt)</string>
+    <string name="text_size_large_name">Large (14pt)</string>
+    <string name="text_size_xlarge_name">Extra Large (16pt)</string>
+
+    <string name="pref_scheme_dark">Dark</string>
+    <string name="pref_scheme_light">Light</string>
+
+    <string name="stopping">Stopping...</string>
+    <string name="transposing">Transposing</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="loading_title">Loading</string>
+
+    <string name="no_guitar_chord_available">No guitar fingering available.</string>
+    <string name="variation">Var.</string>
+    <string name="capo_title">Capo on Fret:</string>
+    <string name="transpose_title">Transpose (half-steps):</string>
+    <string name="transpose">Transpose</string>
+
     <string name="menu_home">Home</string>
     <string name="menu_search">Search</string>
     <string name="menu_cart">Cart</string>
@@ -29,5 +67,7 @@
     <string name="action_share">Share</string>
     <string name="action_share_text">Share as Text</string>
     <string name="action_share_pdf">Share as PDF</string>
+
+    <string name="confirm_chords">Confirm Chords</string>
 
 </resources>
