@@ -33,6 +33,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -49,6 +50,7 @@ import com.music.chords.chordsReader.helper.DialogHelper;
 import com.music.chords.chordsReader.helper.PopupHelper;
 import com.music.chords.chordsReader.helper.PreferenceHelper;
 import com.music.chords.chordsReader.helper.TransposeHelper;
+import com.music.chords.chordsReader.helper.WebPageExtractionHelper;
 import com.music.chords.chordsReader.utils.InternalURLSpan;
 import com.music.chords.chordsReader.utils.Pair;
 import com.music.chords.chordsReader.utils.UtilLogger;
@@ -76,8 +78,8 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 
     private PowerManager.WakeLock wakeLock;
 
-    private  float lastXCoordinate;
-    private  float lastYCoordinate;
+    private float lastXCoordinate;
+    private float lastYCoordinate;
 
     private int capoFret = 0;
     private int transposeHalfSteps = 0;
@@ -106,9 +108,46 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         initializeChordDictionary();
         applyColorScheme();
 
-        showConfirmChordchartDialog();
+//        showConfirmChordchartDialog();
 
-        chordText = "";
+
+        chordText = "G                     Em\n" +
+                "Dil ka dariya beh hi gaya\n" +
+                "  C                      D\n" +
+                "Raahon mein yun jo tu mil gaya\n" +
+                "     G                   Em\n" +
+                "Mushqil se main sambhla tha haan\n" +
+                "       C               D\n" +
+                "Toot gaya hoon phir ek dafaa\n" +
+                "        C            Bm\n" +
+                "Baat bigdi hai iss qadar\n" +
+                "        Am               D\n" +
+                "Dil hai toota, toote hain hum\n" +
+                " \n" +
+                "      Am                    D\n" +
+                "Tere bin ab na lenge ek bhi dum\n" +
+                "       C      D          G\n" +
+                "Tujhe kitna chaahein aur hum\n" +
+                "     Am                    D\n" +
+                "Tere bin ab na lenge ek bhi dum\n" +
+                "     C         D           G\n" +
+                "Tujhe kitna chaahein aur hum\n" +
+                "    C                 Bm\n" +
+                "Baat bigdi hai iss qadar\n" +
+                "        Am                D\n" +
+                "Dil hai toota, toote hain hum\n" +
+                "    Am                    D\n" +
+                "Tere bin ab na lenge ek bhi dum\n" +
+                "C           D           G\n" +
+                "Tujhe kitna chaahein aur hum\n" +
+                "Am                          D\n" +
+                "Tere bin ab na lenge ek bhi dum\n" +
+                "C         D            G\n" +
+                "Tujhe kitna chaahein aur hum";
+
+//		showConfirmChordchartDialog(true);
+
+        analyzeChordsAndShowChordView();
     }
 
     private void init() {
@@ -136,6 +175,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvSubtitle = (TextView) findViewById(R.id.tv_subtitle);
         tvLyrics = (TextView) findViewById(R.id.tv_lyricsText);
+        tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, PreferenceHelper.getTextSizePreference(this));
 
 //        heartButton = (SparkButton) findViewById(R.id.heart_button);
 //        btnAudio = (Button) findViewById(R.id.btn_audio);
@@ -187,7 +227,6 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
             tvLyrics.setText(songObject.getSongLyrics());
         }
     }
-
 
 
     //    @Override
@@ -292,14 +331,14 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 
     private void initializeChordDictionary() {
         // do in the background to avoid jank
-        new AsyncTask<Void, Void, Void>(){
+        new AsyncTask<Void, Void, Void>() {
 
             @Override
             protected Void doInBackground(Void... params) {
                 ChordDictionary.initialize(SongDetailsActivity.this);
                 return null;
             }
-        }.execute((Void)null);
+        }.execute((Void) null);
 
     }
 
@@ -319,6 +358,8 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
                     public void onClick(DialogInterface dialog, int which) {
                         chordText = editText.getText().toString();
                         switchToViewingMode();
+
+//                        analyzeHtml();
                     }
                 })
                 .create()
@@ -327,37 +368,40 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 
     private void analyzeHtml() {
 
-        if (chordWebpage != null) {
-            // known webpage
+//        if (chordWebpage != null) {
+//            // known webpage
+//
+//            log.d("known web page: %s", chordWebpage);
+//
+//            chordText = WebPageExtractionHelper.extractChordChart(
+//                    chordWebpage, html, getNoteNaming());
+//        } else {
+//            // unknown webpage
 
-            log.d("known web page: %s", chordWebpage);
+        log.d("unknown webpage");
 
-            chordText = WebPageExtractionHelper.extractChordChart(
-                    chordWebpage, html, getNoteNaming());
-        } else {
-            // unknown webpage
-
-            log.d("unknown webpage");
-
-            chordText = WebPageExtractionHelper.extractLikelyChordChart(html, getNoteNaming());
+        chordText = WebPageExtractionHelper.extractLikelyChordChart(chordText, getNoteNaming());
 
 
-            if (chordText == null) { // didn't find a good extraction, so use the entire html
+        if (chordText == null) { // didn't find a good extraction, so use the entire html
 
-                log.d("didn't find a good chord chart using the <pre> tag");
+            log.d("didn't find a good chord chart using the <pre> tag");
 
-                chordText = WebPageExtractionHelper.convertHtmlToText(html);
-            }
+            chordText = WebPageExtractionHelper.convertHtmlToText(chordText);
         }
+//        }
 
-        showConfirmChordchartDialog(false);
-
+//        showConfirmChordchartDialog();
+        switchToViewingMode();
     }
 
 
     private void switchToViewingMode() {
         wakeLock.acquire();
 //        resetDataExceptChordTextAndFilename();
+
+        capoFret = 0;
+        transposeHalfSteps = 0;
         analyzeChordsAndShowChordView();
     }
 
@@ -379,7 +423,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         progressDialog.setMessage(getText(R.string.please_wait));
         progressDialog.setIndeterminate(true);
 
-        AsyncTask<Void,Void, Spannable> task = new AsyncTask<Void, Void, Spannable>(){
+        AsyncTask<Void, Void, Spannable> task = new AsyncTask<Void, Void, Spannable>() {
 
             @Override
             protected void onPreExecute() {
@@ -405,7 +449,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
                     try {
                         Thread.sleep(PROGRESS_DIALOG_MIN_TIME - elapsed);
                     } catch (InterruptedException e) {
-                        log.e(e,"unexpected exception");
+                        log.e(e, "unexpected exception");
                     }
                 }
                 return newText;
@@ -420,7 +464,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
             }
         };
 
-        task.execute((Void)null);
+        task.execute((Void) null);
     }
 
     private void updateChordsInTextForTransposition(int transposeDiff, int capoDiff) {
@@ -437,8 +481,8 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         int lastEndIndex = 0;
         StringBuilder sb = new StringBuilder();
 
-        List<Pair<Integer,Integer>> newStartAndEndPositions =
-                new ArrayList<Pair<Integer,Integer>>(chordsInText.size());
+        List<Pair<Integer, Integer>> newStartAndEndPositions =
+                new ArrayList<Pair<Integer, Integer>>(chordsInText.size());
 
         for (ChordInText chordInText : chordsInText) {
 
@@ -465,7 +509,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         // add a hyperlink to each chord
         for (int i = 0; i < newStartAndEndPositions.size(); i++) {
 
-            Pair<Integer,Integer> newStartAndEndPosition = newStartAndEndPositions.get(i);
+            Pair<Integer, Integer> newStartAndEndPosition = newStartAndEndPositions.get(i);
 
             //log.d("pair is %s", newStartAndEndPosition);
             //log.d("substr is '%s'", sb.substring(
@@ -605,7 +649,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         progressDialog.setIndeterminate(true);
 
         // transpose in background to avoid jankiness
-        AsyncTask<Void,Void,Spannable> task = new AsyncTask<Void, Void, Spannable>(){
+        AsyncTask<Void, Void, Spannable> task = new AsyncTask<Void, Void, Spannable>() {
 
 
             @Override
@@ -637,7 +681,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
                     try {
                         Thread.sleep(PROGRESS_DIALOG_MIN_TIME - elapsed);
                     } catch (InterruptedException e) {
-                        log.e(e,"unexpected exception");
+                        log.e(e, "unexpected exception");
                     }
                 }
 
@@ -657,7 +701,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 
         };
 
-        task.execute((Void)null);
+        task.execute((Void) null);
     }
 
 

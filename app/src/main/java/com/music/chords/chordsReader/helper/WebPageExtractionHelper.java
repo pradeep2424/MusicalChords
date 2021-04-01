@@ -3,6 +3,10 @@ package com.music.chords.chordsReader.helper;
 import android.text.Html;
 import android.text.TextUtils;
 
+import com.music.chords.chordsReader.chords.NoteNaming;
+import com.music.chords.chordsReader.chords.regex.ChordParser;
+import com.music.chords.chordsReader.data.ChordWebpage;
+import com.music.chords.chordsReader.utils.StringUtil;
 import com.music.chords.chordsReader.utils.UtilLogger;
 
 import java.util.regex.Matcher;
