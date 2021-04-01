@@ -747,10 +747,10 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_song_details, menu);
 
-//        if(menu instanceof MenuBuilder){
-//            MenuBuilder m = (MenuBuilder) menu;
-//            m.setOptionalIconsVisible(true);
-//        }
+        if(menu instanceof MenuBuilder){
+            MenuBuilder m = (MenuBuilder) menu;
+            m.setOptionalIconsVisible(true);
+        }
 
         // Find the menuItem to add your SubMenu
         MenuItem menuItemShare = menu.findItem(R.id.menu_share);
