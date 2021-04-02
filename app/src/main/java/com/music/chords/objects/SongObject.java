@@ -19,7 +19,7 @@ public class SongObject implements Serializable {
     String songArtist;
     String songYouTubeURL;
     int songIconColor;
-    Boolean isBookmark;
+    Boolean isFavorites;
 
 //    public SongObject(int songId, String songTitle, String songSubtitle, String songLyrics,
 //                      String songArtist, String songYouTubeURL, Boolean isBookmark) {
@@ -98,12 +98,12 @@ public class SongObject implements Serializable {
         this.songIconColor = songIconColor;
     }
 
-    public Boolean getIsBookmark() {
-        return isBookmark;
+    public Boolean getIsFavorites() {
+        return isFavorites;
     }
 
-    public void setIsBookmark(Boolean bookmark) {
-        isBookmark = bookmark;
+    public void setIsFavorites(Boolean isFavorites) {
+        this.isFavorites = isFavorites;
     }
 
 //    @Override

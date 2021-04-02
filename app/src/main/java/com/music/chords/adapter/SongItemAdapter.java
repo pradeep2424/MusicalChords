@@ -150,7 +150,7 @@ public class SongItemAdapter extends RecyclerView.Adapter<SongItemAdapter.MyView
     }
 
     private void applyBookmarkIcon(MyViewHolder holder, SongObject message) {
-        if (message.getIsBookmark()) {
+        if (message.getIsFavorites()) {
             holder.iconImp.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_star_selected));
 //            holder.iconImp.setColorFilter(ContextCompat.getColor(context, R.color.icon_tint_selected));
         } else {
@@ -310,7 +310,7 @@ public class SongItemAdapter extends RecyclerView.Adapter<SongItemAdapter.MyView
 //        for (int i = 0; i < selectedItems.size(); i++) {
 //            int selectedIndex = selectedItems.keyAt(i);
 ////            items.add(listSongs.get(selectedIndex));
-//            boolean isSaved = listSongs.get(selectedIndex).getIsBookmark();
+//            boolean isSaved = listSongs.get(selectedIndex).getIsFavorites();
 //            if (!isSaved) {
 //                return true;
 //            }

@@ -131,7 +131,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
             songObject.setSongSubtitle(songSubtitle);
             songObject.setSongArtist(songArtist);
             songObject.setSongIconColor(getRandomMaterialColor("400"));
-            songObject.setIsBookmark(false);
+            songObject.setIsFavorites(false);
 
             listAllSongsData.add(songObject);
         }
@@ -321,7 +321,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
     private boolean checkAllSelectedItemsSaved() {
         int count = 0;
         for (SongObject songObject : listSelectedSongs) {
-            if (songObject.getIsBookmark()) {
+            if (songObject.getIsFavorites()) {
                 count++;
             }
         }
@@ -339,7 +339,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
         List<Integer> selectedItemPositions = adapter.getSelectedItems();
         for (int i = 0; i < selectedItemPositions.size(); i++) {
             int position = selectedItemPositions.get(i);
-            listAllSongsData.get(position).setIsBookmark(isSaved);
+            listAllSongsData.get(position).setIsFavorites(isSaved);
 //            adapter.removeData(selectedItemPositions.get(i));
         }
         adapter.notifyDataSetChanged();
@@ -420,7 +420,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
 //    private boolean checkAtLeastOneUnsavedItem() {
 //        List<Integer> selectedItemPositions = adapter.getSelectedItems();
 //        for (SongObject article : listAllSongsData) {
-//            if (article.getIsBookmark()) {
+//            if (article.getIsFavorites()) {
 //                return true;
 //            }
 //        }
@@ -455,7 +455,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
         // Star icon is clicked,
         // mark the message as important
         SongObject songObject = listAllSongsData.get(position);
-        songObject.setIsBookmark(!songObject.getIsBookmark());
+        songObject.setIsFavorites(!songObject.getIsFavorites());
         listAllSongsData.set(position, songObject);
         adapter.notifyDataSetChanged();
     }
