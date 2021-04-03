@@ -14,8 +14,13 @@ import com.music.chords.R;
 import com.music.chords.database.CreateDB;
 import com.music.chords.database.DBSongDetails;
 import com.music.chords.objects.SongObject;
+import com.music.chords.utils.Application;
 import com.music.chords.utils.InternetConnection;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
@@ -24,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
     CreateDB dbCreate;
     DBSongDetails dbSongDetails;
 
-    ArrayList<SongObject> listAllSongsData;
+    ArrayList<SongObject> listSongData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,28 +42,9 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void init() {
-        listAllSongsData = new ArrayList<>();
+        listSongData = new ArrayList<>();
         dbCreate = new CreateDB(this);
         dbSongDetails = new DBSongDetails(this);
-    }
-
-    private void loadSongData() {
-        if (isInternetAvailable()) {
-//           internet is available downloading new data from serer
-            downloadNewSongDataFromServer();
-
-        } else {
-//           no internet available checking if data is available in local DB
-            int rowsInDB = checkLocalDBCount();
-            if (rowsInDB > 0) {
-//                fetching data from local DB
-                getSongDataFromDB();
-            } else {
-//              no data available in local db also
-//        Toasty.warning(SplashActivity.this, getString(R.string.connect_to_internet), Toast.LENGTH_LONG, true).show();
-                Toasty.normal(SplashActivity.this, getString(R.string.connect_to_internet), Toast.LENGTH_LONG).show();
-            }
-        }
     }
 
     private boolean isInternetAvailable() {
@@ -69,15 +55,129 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    private void downloadNewSongDataFromServer() {
+    private void loadSongData() {
+        if (isInternetAvailable()) {
+//           internet is available downloading new data from serer
+            downloadNewSongDataFromServer();
 
+        } else {
+//           no internet available checking if data is available in local DB
+            if (checkLocalDBHasData()) {
+//                fetching data from local DB
+                getSongDataFromDB();
+            } else {
+//              no data available in local db also
+//        Toasty.warning(SplashActivity.this, getString(R.string.connect_to_internet), Toast.LENGTH_LONG, true).show();
+                Toasty.normal(SplashActivity.this, getString(R.string.connect_to_internet), Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
-    private int checkLocalDBCount() {
+    private void downloadNewSongDataFromServer() {
+        boolean isLocalDBHasData;
+
+        try {
+            String responseString = loadJSONFromAsset();
+
+            JSONObject jsonObj = new JSONObject(responseString);
+            String respStatus = jsonObj.getString("Status");
+
+            if (respStatus.equalsIgnoreCase("Success")) {
+                isLocalDBHasData = checkLocalDBHasData();
+                listSongData.clear();
+
+                JSONArray jsonArrayRoot = jsonObj.getJSONArray("SongData");
+                if (jsonArrayRoot != null && jsonArrayRoot.length() > 0) {
+
+                    for (int index = 0; index < jsonArrayRoot.length(); index++) {
+                        JSONObject json = jsonArrayRoot.getJSONObject(index);
+
+                        int songID = json.getInt("ID");
+                        String songTitle = json.getString("Title");
+                        String songSubtitle = json.getString("Subtitle");
+                        String songArtist = json.getString("Artist");
+                        String youTubeURL = json.getString("YouTubeURL");
+                        String songLyrics = json.getString("Lyrics");
+                        boolean isFavorites = false;
+
+                        SongObject songObject = new SongObject();
+                        songObject.setSongId(songID);
+                        songObject.setSongTitle(songTitle);
+                        songObject.setSongSubtitle(songSubtitle);
+                        songObject.setSongArtist(songArtist);
+                        songObject.setSongYouTubeURL(youTubeURL);
+                        songObject.setSongLyrics(songLyrics);
+
+//                       checking DB if song is added to favorites
+                        if (isLocalDBHasData) {
+                            Cursor rss = dbSongDetails.getSingleSongData(songID);
+                            int countDBRows = rss.getCount();
+
+                            rss.moveToFirst();
+                            isFavorites = (rss.getInt(6) == 1);
+                            rss.close();
+
+                            songObject.setIsFavorites(isFavorites);
+                        } else {
+                            songObject.setIsFavorites(false);
+
+//                           No data foudn in DB, hence inserting data in DB in same loop
+                            insertDataIntoDB(songID, songTitle, songSubtitle, songArtist,
+                                    youTubeURL, songLyrics, isFavorites);
+                        }
+
+                        listSongData.add(songObject);
+                    }
+
+//                  if DB has data then clearing and updating db
+                    if (isLocalDBHasData) {
+                        deleteAllTableData();
+                        copyDataFromArrayListToDB();
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void insertDataIntoDB(int songID, String songTitle, String songSubtitle, String songArtist,
+                                  String songYouTubeURL, String songLyrics, Boolean isFavorites) {
+        dbSongDetails.insertData(songID, songTitle, songSubtitle, songArtist,
+                songYouTubeURL, songLyrics, isFavorites);
+    }
+
+    private void deleteAllTableData() {
+        dbSongDetails.deleteAllTableData();
+    }
+
+    private void copyDataFromArrayListToDB() {
+        for (int index = 0; index < listSongData.size(); index++) {
+
+            int songID = listSongData.get(index).getSongId();
+            String songTitle = listSongData.get(index).getSongTitle();
+            String songSubtitle = listSongData.get(index).getSongSubtitle();
+            String songArtist = listSongData.get(index).getSongArtist();
+            String youTubeURL = listSongData.get(index).getSongYouTubeURL();
+            String songLyrics = listSongData.get(index).getSongLyrics();
+            boolean isFavorites = listSongData.get(index).getIsFavorites();
+
+            insertDataIntoDB(songID, songTitle, songSubtitle, songArtist,
+                    youTubeURL, songLyrics, isFavorites);
+        }
+    }
+
+    private boolean checkLocalDBHasData() {
         Cursor rss = dbSongDetails.getData();
         int rows = rss.getCount();
         rss.close();
-        return rows;
+
+        if (rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void getSongDataFromDB() {
@@ -106,7 +206,7 @@ public class SplashActivity extends AppCompatActivity {
                 songObject.setSongYouTubeURL(songYouTubeURL);
                 songObject.setIsFavorites(isFavorites);
                 songObject.setSongIconColor(getRandomMaterialColor());
-                listAllSongsData.add(songObject);
+                listSongData.add(songObject);
 
                 rss.moveToNext();
             }
@@ -117,9 +217,24 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    private void insertDataIntoLocalDB()
-    {
-        dbSongDetails.insertData();
+    public String loadJSONFromAsset() {
+        String json = null;
+        InputStream is;
+        try {
+
+            is = getAssets().open("songs/songs_response.json");
+
+//            is = getActivity().getAssets().open("aarti_marathi.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 
     private int getRandomMaterialColor() {
