@@ -65,6 +65,7 @@ public class SplashActivity extends AppCompatActivity {
             if (checkLocalDBHasData()) {
 //                fetching data from local DB
                 getSongDataFromDB();
+                loadNextPage();
             } else {
 //              no data available in local db also
 //        Toasty.warning(SplashActivity.this, getString(R.string.connect_to_internet), Toast.LENGTH_LONG, true).show();
@@ -135,6 +136,8 @@ public class SplashActivity extends AppCompatActivity {
                         copyDataFromArrayListToDB();
                     }
                 }
+
+                loadNextPage();
             }
 
         } catch (Exception e) {
@@ -149,7 +152,9 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void deleteAllTableData() {
+        checkLocalDBHasData();
         dbSongDetails.deleteAllTableData();
+        checkLocalDBHasData();
     }
 
     private void copyDataFromArrayListToDB() {
@@ -165,6 +170,8 @@ public class SplashActivity extends AppCompatActivity {
 
             insertDataIntoDB(songID, songTitle, songSubtitle, songArtist,
                     youTubeURL, songLyrics, isFavorites);
+
+            checkLocalDBHasData();
         }
     }
 
@@ -252,6 +259,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void loadNextPage() {
+        Application.allSongsData = listSongData;
+
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);

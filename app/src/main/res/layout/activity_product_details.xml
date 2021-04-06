@@ -2,8 +2,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/cl_rootLayout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
@@ -24,68 +24,20 @@
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <!--            <FrameLayout-->
-            <!--                android:id="@+id/fl_cover"-->
+            <!--            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
+            <!--                android:id="@+id/youtube_player_view"-->
             <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="250dp">-->
+            <!--                android:layout_height="250dp"-->
+            <!--                app:videoId="S0Q4gqBUs7c"-->
+            <!--                app:autoPlay="true"-->
+            <!--                app:showFullScreenButton="false" />-->
 
-            <!--                <com.github.florent37.shapeofview.shapes.ArcView-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="250dp"-->
-            <!--                    android:layout_marginBottom="20dp"-->
-            <!--                    app:elevation="10dp"-->
-            <!--                    app:shape_arc_cropDirection="inside"-->
-            <!--                    app:shape_arc_height="30dp"-->
-            <!--                    app:shape_arc_position="bottom">-->
 
-            <!--                    <ImageView-->
-            <!--                        android:id="@+id/iv_coverPic"-->
-            <!--                        android:layout_width="match_parent"-->
-            <!--                        android:layout_height="match_parent"-->
-            <!--                        android:scaleType="centerCrop"-->
-            <!--                        android:src="@mipmap/ic_loading_wallpaper"-->
-            <!--                        android:transitionName="@string/transition_name_aarti_cover" />-->
-
-            <!--                    &lt;!&ndash;<ImageView&ndash;&gt;-->
-            <!--                    &lt;!&ndash;android:id="@+id/iv_coverPic"&ndash;&gt;-->
-            <!--                    &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-            <!--                    &lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-            <!--                    &lt;!&ndash;android:scaleType="centerCrop"&ndash;&gt;-->
-            <!--                    &lt;!&ndash;android:src="@mipmap/cover"&ndash;&gt;-->
-            <!--                    &lt;!&ndash;android:transitionName="@string/transition_name_aarti_cover" />&ndash;&gt;-->
-
-            <!--                </com.github.florent37.shapeofview.shapes.ArcView>-->
-
-            <ImageView
-                android:id="@+id/iv_coverPic"
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/youtube_player_view"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher_round" />
-
-
-            <!--                <com.varunest.sparkbutton.SparkButton-->
-            <!--                    android:id="@+id/heart_button"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_gravity="top|right|end"-->
-            <!--                    android:layout_marginTop="-15dp"-->
-            <!--                    android:layout_marginRight="-15dp"-->
-            <!--                    app:sparkbutton_activeImage="@drawable/ic_heart_on"-->
-            <!--                    app:sparkbutton_animationSpeed="1.5"-->
-            <!--                    app:sparkbutton_iconSize="40dp"-->
-            <!--                    app:sparkbutton_inActiveImage="@drawable/ic_heart_off"-->
-            <!--                    app:sparkbutton_primaryColor="@color/heart_primary_color"-->
-            <!--                    app:sparkbutton_secondaryColor="@color/heart_secondary_color" />-->
-
-            <!--            </FrameLayout>-->
-
-            <!--                        <com.music.chords.helper.NonClickableToolbar-->
-            <!--                            android:id="@+id/toolbar"-->
-            <!--                            android:layout_width="match_parent"-->
-            <!--                            android:layout_height="?attr/actionBarSize"-->
-            <!--                            app:layout_collapseMode="pin"-->
-            <!--                            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
+                android:layout_height="wrap_content"
+                app:showFullScreenButton="true" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -93,7 +45,17 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+<!--                <androidx.appcompat.widget.AppCompatImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="end"-->
+<!--                    android:layout_marginRight="15dp"-->
+<!--                    android:src="@drawable/ic_settings"-->
+<!--                    android:tint="@android:color/white" />-->
+
+            </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -152,21 +114,21 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:linksClickable="true"
-                    android:text="Aarti"
-                    android:typeface="monospace"
                     android:paddingRight="3dp"
+                    android:text="Aarti"
                     android:textColor="@color/main_text"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:typeface="monospace" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/find_chords_viewing_text_view"-->
-<!--                    android:layout_width="fill_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:linksClickable="true"-->
-<!--                    android:text="nasnsan"-->
-<!--                    android:textColor="@android:color/primary_text_dark_nodisable"-->
-<!--                    android:textSize="16sp"-->
-<!--                    android:typeface="monospace" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/find_chords_viewing_text_view"-->
+                <!--                    android:layout_width="fill_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:linksClickable="true"-->
+                <!--                    android:text="nasnsan"-->
+                <!--                    android:textColor="@android:color/primary_text_dark_nodisable"-->
+                <!--                    android:textSize="16sp"-->
+                <!--                    android:typeface="monospace" />-->
 
             </LinearLayout>
 

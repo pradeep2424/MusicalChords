@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
@@ -19,8 +21,10 @@ import androidx.core.widget.NestedScrollView;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ImageSpan;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -57,6 +61,9 @@ import com.music.chords.chordsReader.utils.UtilLogger;
 import com.music.chords.interfaces.Constants;
 import com.music.chords.objects.SongObject;
 import com.music.chords.utils.Application;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -71,7 +78,8 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 
     CoordinatorLayout clRootLayout;
     NestedScrollView nestedScrollView;
-    ImageView ivCoverPic;
+    //    ImageView ivCoverPic;
+    YouTubePlayerView youTubePlayerView;
     TextView tvTitle;
     TextView tvSubtitle;
     TextView tvLyrics;
@@ -103,47 +111,52 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         }
 
         init();
+        initYouTubeViewPlayer();
         componentEvents();
         setSongData();
         initializeChordDictionary();
         applyColorScheme();
 
+        if (songObject != null && songObject.getSongLyrics() != null) {
+            chordText = songObject.getSongLyrics();
+        }
+
 //        showConfirmChordchartDialog();
 
 
-        chordText = "G                     Em\n" +
-                "Dil ka dariya beh hi gaya\n" +
-                "  C                      D\n" +
-                "Raahon mein yun jo tu mil gaya\n" +
-                "     G                   Em\n" +
-                "Mushqil se main sambhla tha haan\n" +
-                "       C               D\n" +
-                "Toot gaya hoon phir ek dafaa\n" +
-                "        C            Bm\n" +
-                "Baat bigdi hai iss qadar\n" +
-                "        Am               D\n" +
-                "Dil hai toota, toote hain hum\n" +
-                " \n" +
-                "      Am                    D\n" +
-                "Tere bin ab na lenge ek bhi dum\n" +
-                "       C      D          G\n" +
-                "Tujhe kitna chaahein aur hum\n" +
-                "     Am                    D\n" +
-                "Tere bin ab na lenge ek bhi dum\n" +
-                "     C         D           G\n" +
-                "Tujhe kitna chaahein aur hum\n" +
-                "    C                 Bm\n" +
-                "Baat bigdi hai iss qadar\n" +
-                "        Am                D\n" +
-                "Dil hai toota, toote hain hum\n" +
-                "    Am                    D\n" +
-                "Tere bin ab na lenge ek bhi dum\n" +
-                "C           D           G\n" +
-                "Tujhe kitna chaahein aur hum\n" +
-                "Am                          D\n" +
-                "Tere bin ab na lenge ek bhi dum\n" +
-                "C         D            G\n" +
-                "Tujhe kitna chaahein aur hum";
+//        chordText = "G                     Em\n" +
+//                "Dil ka dariya beh hi gaya\n" +
+//                "  C                      D\n" +
+//                "Raahon mein yun jo tu mil gaya\n" +
+//                "     G                   Em\n" +
+//                "Mushqil se main sambhla tha haan\n" +
+//                "       C               D\n" +
+//                "Toot gaya hoon phir ek dafaa\n" +
+//                "        C            Bm\n" +
+//                "Baat bigdi hai iss qadar\n" +
+//                "        Am               D\n" +
+//                "Dil hai toota, toote hain hum\n" +
+//                " \n" +
+//                "      Am                    D\n" +
+//                "Tere bin ab na lenge ek bhi dum\n" +
+//                "       C      D          G\n" +
+//                "Tujhe kitna chaahein aur hum\n" +
+//                "     Am                    D\n" +
+//                "Tere bin ab na lenge ek bhi dum\n" +
+//                "     C         D           G\n" +
+//                "Tujhe kitna chaahein aur hum\n" +
+//                "    C                 Bm\n" +
+//                "Baat bigdi hai iss qadar\n" +
+//                "        Am                D\n" +
+//                "Dil hai toota, toote hain hum\n" +
+//                "    Am                    D\n" +
+//                "Tere bin ab na lenge ek bhi dum\n" +
+//                "C           D           G\n" +
+//                "Tujhe kitna chaahein aur hum\n" +
+//                "Am                          D\n" +
+//                "Tere bin ab na lenge ek bhi dum\n" +
+//                "C         D            G\n" +
+//                "Tujhe kitna chaahein aur hum";
 
 //		showConfirmChordchartDialog(true);
 
@@ -171,11 +184,13 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 
         clRootLayout = findViewById(R.id.cl_rootLayout);
         nestedScrollView = findViewById(R.id.nestedScrollView);
-        ivCoverPic = (ImageView) findViewById(R.id.iv_coverPic);
-        tvTitle = (TextView) findViewById(R.id.tv_title);
-        tvSubtitle = (TextView) findViewById(R.id.tv_subtitle);
-        tvLyrics = (TextView) findViewById(R.id.tv_lyricsText);
+//        ivCoverPic =  findViewById(R.id.iv_coverPic);
+        tvTitle = findViewById(R.id.tv_title);
+        tvSubtitle = findViewById(R.id.tv_subtitle);
+        tvLyrics = findViewById(R.id.tv_lyricsText);
         tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, PreferenceHelper.getTextSizePreference(this));
+
+        youTubePlayerView = findViewById(R.id.youtube_player_view);
 
 //        heartButton = (SparkButton) findViewById(R.id.heart_button);
 //        btnAudio = (Button) findViewById(R.id.btn_audio);
@@ -193,7 +208,21 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 //        }, 500);
     }
 
+    private void initYouTubeViewPlayer() {
+        getLifecycle().addObserver(youTubePlayerView);
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                String videoId = "S0Q4gqBUs7c";
+                youTubePlayer.cueVideo(videoId, 0);
+//                youTubePlayer.loadVideo(videoId, 0);
+            }
+        });
+
+    }
+
     private void componentEvents() {
+
 //        heartButton.setEventListener(new SparkEventListener(){
 //            @Override
 //            public void onEvent(ImageView button, boolean buttonState) {
@@ -221,7 +250,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     private void setSongData() {
         if (songObject != null) {
 
-            Glide.with(this).load(songObject.getSongYouTubeURL()).into(ivCoverPic);
+//            Glide.with(this).load(songObject.getSongYouTubeURL()).into(ivCoverPic);
             tvTitle.setText(songObject.getSongTitle());
             tvSubtitle.setText(songObject.getSongSubtitle());
             tvLyrics.setText(songObject.getSongLyrics());
@@ -732,6 +761,27 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 //
 //    }
 
+    private static void updateMenuWithIcon(@NonNull final MenuItem item, final int color) {
+        SpannableStringBuilder builder = new SpannableStringBuilder()
+                .append("*") // the * will be replaced with the icon via ImageSpan
+                .append("    ") // This extra space acts as padding. Adjust as you wish
+                .append(item.getTitle());
+
+        // Retrieve the icon that was declared in XML and assigned during inflation
+        if (item.getIcon() != null && item.getIcon().getConstantState() != null) {
+            Drawable drawable = item.getIcon().getConstantState().newDrawable();
+
+            // Mutate this drawable so the tint only applies here
+            drawable.mutate().setTint(color);
+
+            // Needs bounds, or else it won't show up (doesn't know how big to be)
+            drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+            ImageSpan imageSpan = new ImageSpan(drawable);
+            builder.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            item.setTitle(builder);
+        }
+    }
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
@@ -745,23 +795,25 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_song_details, menu);
-
-        if(menu instanceof MenuBuilder){
-            MenuBuilder m = (MenuBuilder) menu;
-            m.setOptionalIconsVisible(true);
-        }
-
-        // Find the menuItem to add your SubMenu
-        MenuItem menuItemShare = menu.findItem(R.id.menu_share);
-        SubMenu subMenuShare = menuItemShare.getSubMenu();
-
-        MenuItem submenuItemShareText = subMenuShare.findItem(R.id.submenu_share_text);
-        MenuItem submenuItemSharePDF = subMenuShare.findItem(R.id.submenu_share_pdf);
-
-//        // Inflating the sub_menu menu this way, will add its menu items
-//        // to the empty SubMenu you created in the xml
-//        getMenuInflater().inflate(R.menu.sub_menu, myMenuItem.getSubMenu());
+//        getMenuInflater().inflate(R.menu.menu_song_details, menu);
+//
+////        if (menu instanceof MenuBuilder) {
+////            MenuBuilder m = (MenuBuilder) menu;
+////            m.setOptionalIconsVisible(true);
+////        }
+//
+////        MenuItem menuItemFullscreen = menu.findItem(R.id.menu_fullscreen);
+////        MenuItem menuItemTextSize = menu.findItem(R.id.menu_text_size);
+////        MenuItem menuItemAutoScroll = menu.findItem(R.id.menu_auto_scroll);
+////        MenuItem menuItemTranspose = menu.findItem(R.id.menu_transpose);
+//
+//        // Find the menuItem to add your SubMenu
+//        MenuItem menuItemShare = menu.findItem(R.id.menu_share);
+//        SubMenu subMenuShare = menuItemShare.getSubMenu();
+//
+//        MenuItem submenuItemShareText = subMenuShare.findItem(R.id.submenu_share_text);
+//        MenuItem submenuItemSharePDF = subMenuShare.findItem(R.id.submenu_share_pdf);
+//
 
         return true;
     }
@@ -769,9 +821,9 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_transpose:
-                createTransposeDialog();
-                return true;
+//            case R.id.menu_transpose:
+//                createTransposeDialog();
+//                return true;
 
             case android.R.id.home:
                 onBackPressed();
@@ -818,5 +870,6 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     @Override
     public void onDestroy() {
         super.onDestroy();
+        youTubePlayerView.release();
     }
 }

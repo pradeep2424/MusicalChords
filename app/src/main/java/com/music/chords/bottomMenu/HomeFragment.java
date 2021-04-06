@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
     }
 
     private void setupRecyclerView() {
-        getDummyData();
+        getAllSongsData();
 
         adapter = new SongItemAdapter(getActivity(), listAllSongsData);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -120,21 +120,23 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
      * Fetches mail messages by making HTTP request
      * url: http://api.androidhive.info/json/inbox.json
      */
-    private void getDummyData() {
-        for (int i = 0; i < 10; i++) {
-            String songTitle = "Title " + i;
-            String songSubtitle = "Subtitle" + i;
-            String songArtist = "Artist" + i;
+    private void getAllSongsData() {
+        listAllSongsData.addAll(Application.allSongsData);
 
-            SongObject songObject = new SongObject();
-            songObject.setSongTitle(songTitle);
-            songObject.setSongSubtitle(songSubtitle);
-            songObject.setSongArtist(songArtist);
-            songObject.setSongIconColor(getRandomMaterialColor("400"));
-            songObject.setIsFavorites(false);
-
-            listAllSongsData.add(songObject);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            String songTitle = "Title " + i;
+//            String songSubtitle = "Subtitle" + i;
+//            String songArtist = "Artist" + i;
+//
+//            SongObject songObject = new SongObject();
+//            songObject.setSongTitle(songTitle);
+//            songObject.setSongSubtitle(songSubtitle);
+//            songObject.setSongArtist(songArtist);
+//            songObject.setSongIconColor(getRandomMaterialColor("400"));
+//            songObject.setIsFavorites(false);
+//
+//            listAllSongsData.add(songObject);
+//        }
     }
 
     private void getInbox() {
