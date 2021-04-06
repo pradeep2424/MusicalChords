@@ -66,6 +66,15 @@ public class DBSongDetails extends CreateDB {
         return res;
     }
 
+    public Cursor getSearchedSongData(String searchText) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res = db.rawQuery("SELECT * from " + TABLE_SONG_DETAILS + " WHERE "
+                + KEY_SONG_TITLE + " LIKE '"+ searchText +"%' OR "
+                + KEY_SONG_SUBTITLE + " LIKE '"+ searchText +"%'" , null);
+        return res;
+    }
+
     public boolean updateSongData(int songID, String songTitle, String songSubtitle, String songArtist,
                                   String songYouTubeURL, String songLyrics, Boolean isFavorites) {
         try {

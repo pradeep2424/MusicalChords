@@ -47,13 +47,13 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-<!--                <androidx.appcompat.widget.AppCompatImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="end"-->
-<!--                    android:layout_marginRight="15dp"-->
-<!--                    android:src="@drawable/ic_settings"-->
-<!--                    android:tint="@android:color/white" />-->
+                <!--                <androidx.appcompat.widget.AppCompatImageView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_gravity="end"-->
+                <!--                    android:layout_marginRight="15dp"-->
+                <!--                    android:src="@drawable/ic_settings"-->
+                <!--                    android:tint="@android:color/white" />-->
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -82,11 +82,11 @@
                 android:layout_margin="20dp"
                 android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_margin="20dp"
-                    android:background="@color/color_divider" />
+                <!--                <View-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="0.5dp"-->
+                <!--                    android:layout_margin="20dp"-->
+                <!--                    android:background="@color/color_divider" />-->
 
                 <com.music.chords.custom.MyTextViewBold
                     android:id="@+id/tv_title"
@@ -95,7 +95,7 @@
                     android:layout_gravity="center"
                     android:text="Title"
                     android:textColor="@color/main_dark_text"
-                    android:textSize="25sp" />
+                    android:textSize="22sp" />
 
                 <com.music.chords.custom.MyTextView
                     android:id="@+id/tv_subtitle"
@@ -106,6 +106,12 @@
                     android:text="SubTitle"
                     android:textColor="@color/main_text"
                     android:textSize="16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_margin="20dp"
+                    android:background="@color/color_divider" />
 
                 <TextView
                     android:id="@+id/tv_lyricsText"

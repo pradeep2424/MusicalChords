@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
     }
 
     private void setupRecyclerView() {
-        getAllSongsData();
+//        getAllSongsData();
 
         adapter = new SongItemAdapter(getActivity(), listAllSongsData);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());

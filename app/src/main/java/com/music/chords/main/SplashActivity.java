@@ -108,6 +108,7 @@ public class SplashActivity extends AppCompatActivity {
                         songObject.setSongArtist(songArtist);
                         songObject.setSongYouTubeURL(youTubeURL);
                         songObject.setSongLyrics(songLyrics);
+                        songObject.setSongIconColor(getRandomMaterialColor());
 
 //                       checking DB if song is added to favorites
                         if (isLocalDBHasData) {

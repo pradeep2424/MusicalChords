@@ -53,8 +53,8 @@
     <string name="something_went_wrong">Something went wrong, Please try again.</string>
     <string name="server_conn_lost">Server connection lost, Please try again.</string>
 
-    <string name="search_main_title">What can we serve you today?</string>
-    <string name="search_box_text">Search for vegetables or fruits...</string>
+    <string name="search_main_title">What can we search for you?</string>
+    <string name="search_box_text">Search for songs...</string>
     <string name="search_button">SEARCH</string>
 
     <string name="action_mark_saved">Mark saved</string>
