@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.music.chords.R;
 import com.music.chords.activity.SongDetailsActivity;
 import com.music.chords.adapter.SongItemAdapter;
+import com.music.chords.database.DBSongDetails;
 import com.music.chords.interfaces.Constants;
 import com.music.chords.interfaces.SongAdapterListener;
 import com.music.chords.loader.OnRecyclerViewClickListener;
@@ -58,6 +59,8 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
     private ActionModeCallback actionModeCallback;
     private ActionMode actionMode;
 
+    DBSongDetails dbSongDetails;
+
     ArrayList<SongObject> listAllSongsData = new ArrayList<>();
     ArrayList<SongObject> listSelectedSongs = new ArrayList<>();
 
@@ -67,6 +70,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbSongDetails = new DBSongDetails(getActivity());
         listAllSongsData = Application.allSongsData;
     }
 
@@ -343,8 +347,21 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
             int position = selectedItemPositions.get(i);
             listAllSongsData.get(position).setIsFavorites(isSaved);
 //            adapter.removeData(selectedItemPositions.get(i));
+
+            updateFavoritesInDB(listAllSongsData.get(position));
         }
         adapter.notifyDataSetChanged();
+    }
+
+    private void updateFavoritesInDB(SongObject songObject) {
+        int songID = songObject.getSongId();
+        boolean isFavorites = songObject.getIsFavorites();
+
+        if (isFavorites) {
+            dbSongDetails.setSongToFavorites(songID);
+        } else {
+            dbSongDetails.removeSongFromFavorites(songID);
+        }
     }
 
     private class ActionModeCallback implements ActionMode.Callback {
@@ -429,6 +446,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
 //        return false;
 //    }
 
+
     // deleting the messages from recycler view
     private void deleteMessages() {
         adapter.resetAnimationIndex();
@@ -457,9 +475,13 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
         // Star icon is clicked,
         // mark the message as important
         SongObject songObject = listAllSongsData.get(position);
-        songObject.setIsFavorites(!songObject.getIsFavorites());
+        boolean isFavorites = !songObject.getIsFavorites();
+
+        songObject.setIsFavorites(isFavorites);
         listAllSongsData.set(position, songObject);
         adapter.notifyDataSetChanged();
+
+        updateFavoritesInDB(songObject);
     }
 
     @Override

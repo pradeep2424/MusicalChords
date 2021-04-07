@@ -1,7 +1,6 @@
 package com.music.chords.main;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -15,24 +14,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.music.chords.R;
-import com.music.chords.bottomMenu.BookmarksFragment;
+import com.music.chords.bottomMenu.FavoritesFragment;
 import com.music.chords.bottomMenu.HomeFragment;
 import com.music.chords.bottomMenu.SettingsFragment;
 import com.music.chords.bottomMenu.SearchFragment;
 import com.music.chords.interfaces.TriggerTabChangeListener;
-import com.music.chords.service.retrofit.ApiInterface;
-import com.music.chords.service.retrofit.RetroClient;
-import com.music.chords.utils.InternetConnection;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
-
-import org.json.JSONArray;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity implements TriggerTabChangeListener {
@@ -75,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements TriggerTabChangeL
                         break;
 
                     case R.id.tab_cart:
-                        replaceFragment(new BookmarksFragment());
+                        replaceFragment(new FavoritesFragment());
                         break;
 
                     case R.id.tab_settings:

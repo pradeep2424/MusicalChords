@@ -32,7 +32,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_home" />
+                android:src="@drawable/ic_bottom_menu_home" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -170,7 +170,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
-                android:src="@drawable/ic_home" />
+                android:src="@drawable/ic_bottom_menu_home" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -240,7 +240,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
-                android:src="@drawable/ic_home" />
+                android:src="@drawable/ic_bottom_menu_home" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -309,7 +309,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_home" />
+                android:src="@drawable/ic_bottom_menu_home" />
 
             <LinearLayout
                 android:layout_width="match_parent"

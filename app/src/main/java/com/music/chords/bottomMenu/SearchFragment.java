@@ -59,7 +59,7 @@ public class SearchFragment extends Fragment implements SongAdapterListener, Con
     private View viewToolbar;
     private SearchView searchView;
 
-    private RecyclerView rvSearchItems;
+    private RecyclerView recyclerView;
     private SongItemAdapter adapterSearch;
 
     private ActionModeCallback actionModeCallback;
@@ -92,7 +92,7 @@ public class SearchFragment extends Fragment implements SongAdapterListener, Con
     private void init() {
         viewToolbar = rootView.findViewById(R.id.view_toolbar);
         searchView = viewToolbar.findViewById(R.id.searchView);
-        rvSearchItems = rootView.findViewById(R.id.rv_productItems);
+        recyclerView = rootView.findViewById(R.id.rv_productItems);
     }
 
     private void events() {
@@ -127,19 +127,19 @@ public class SearchFragment extends Fragment implements SongAdapterListener, Con
     private void setupSearchProduct() {
         adapterSearch = new SongItemAdapter(getActivity(), listSearchedSongs);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        rvSearchItems.setLayoutManager(mLayoutManager);
-        rvSearchItems.setItemAnimator(new DefaultItemAnimator());
-        rvSearchItems.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        rvSearchItems.setAdapter(adapterSearch);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(adapterSearch);
         adapterSearch.setSongAdapterListener(this);
 
         actionModeCallback = new ActionModeCallback();
 
 //        adapterSearch = new SearchAutoCompleteAdapter(getActivity(), listSearchedSongs);
-//        rvSearchItems.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        rvSearchItems.setAdapter(adapterSearch);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        recyclerView.setAdapter(adapterSearch);
 //
-//        rvSearchItems.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
+//        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
 //
 //        adapterSearch.setClickListener(this);
 //        adapterSearch.notifyDataSetChanged();
@@ -162,6 +162,7 @@ public class SearchFragment extends Fragment implements SongAdapterListener, Con
                     String songArtist = rss.getString(4);
                     String songYouTubeURL = rss.getString(5);
                     Boolean isFavorites = (rss.getInt(6) == 1);
+                    int songIconColor = (rss.getInt(7));
 
                     SongObject songObject = new SongObject();
                     songObject.setSongId(songId);
@@ -171,7 +172,7 @@ public class SearchFragment extends Fragment implements SongAdapterListener, Con
                     songObject.setSongArtist(songArtist);
                     songObject.setSongYouTubeURL(songYouTubeURL);
                     songObject.setIsFavorites(isFavorites);
-                    songObject.setSongIconColor(getRandomMaterialColor());
+                    songObject.setSongIconColor(songIconColor);
                     listSearchedSongs.add(songObject);
 
                     rss.moveToNext();
@@ -440,7 +441,7 @@ public class SearchFragment extends Fragment implements SongAdapterListener, Con
             adapterSearch.clearSelections();
             actionMode = null;
 
-            rvSearchItems.post(new Runnable() {
+            recyclerView.post(new Runnable() {
                 @Override
                 public void run() {
                     adapterSearch.resetAnimationIndex();

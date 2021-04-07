@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,10 +15,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 
 import android.os.Handler;
 import android.os.PowerManager;
@@ -26,12 +31,14 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ImageSpan;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,6 +46,7 @@ import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -84,6 +92,9 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     TextView tvSubtitle;
     TextView tvLyrics;
 
+//    private PowerMenu optionMenu;
+//    private OnMenuItemClickListener<PowerMenuItem> onOptionMenuClickListener;
+
     private PowerManager.WakeLock wakeLock;
 
     private float lastXCoordinate;
@@ -116,6 +127,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         setSongData();
         initializeChordDictionary();
         applyColorScheme();
+
 
         if (songObject != null && songObject.getSongLyrics() != null) {
             chordText = songObject.getSongLyrics();
@@ -222,7 +234,6 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     }
 
     private void componentEvents() {
-
 //        heartButton.setEventListener(new SparkEventListener(){
 //            @Override
 //            public void onEvent(ImageView button, boolean buttonState) {
@@ -256,6 +267,51 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
             tvLyrics.setText(songObject.getSongLyrics());
         }
     }
+
+//    private void initPowerMenu() {
+//        optionMenu = getSongDetailsMenu(this, this, onOptionMenuClickListener);
+//    }
+//
+//    public PowerMenu getSongDetailsMenu(
+//            Context context,
+//            LifecycleOwner lifecycleOwner,
+//            OnMenuItemClickListener<PowerMenuItem> onMenuItemClickListener) {
+//
+//        String fullScreen = getString(R.string.action_fullscreen);
+//        String textSize = getString(R.string.action_text_size);
+//        String autoScroll = getString(R.string.action_auto_scroll);
+//        String transpose = getString(R.string.action_transpose);
+//        String share = getString(R.string.action_share);
+//        String shareText = getString(R.string.action_share_text);
+//        String sharePDF = getString(R.string.action_share_pdf);
+//
+//        return new PowerMenu.Builder(context)
+//                .addItem(new PowerMenuItem(fullScreen, R.drawable.ic_fullscreen, false))
+//                .addItem(new PowerMenuItem(textSize, R.drawable.ic_text_size, false))
+//                .addItem(new PowerMenuItem(autoScroll, R.drawable.ic_auto_scroll, false))
+//                .addItem(new PowerMenuItem(transpose, R.drawable.ic_transpose, false))
+//                .addItem(new PowerMenuItem(share, false))
+//                .addItem(new PowerMenuItem(shareText, R.drawable.ic_share_text, false))
+//                .addItem(new PowerMenuItem(sharePDF, R.drawable.ic_share_pdf, false))
+//                .setAutoDismiss(true)
+//                .setLifecycleOwner(lifecycleOwner)
+//                .setAnimation(MenuAnimation.SHOWUP_TOP_RIGHT)
+//                .setCircularEffect(CircularEffect.BODY)
+//                .setMenuRadius(10f)
+//                .setMenuShadow(10f)
+//                .setTextColor(ContextCompat.getColor(context, R.color.main_text))
+//                .setTextSize(14)
+//                .setTextGravity(Gravity.CENTER)
+//                .setTextTypeface(Typeface.create("sans-serif-medium", Typeface.BOLD))
+//                .setSelectedTextColor(Color.WHITE)
+//                .setMenuColor(Color.WHITE)
+//                .setSelectedMenuColor(ContextCompat.getColor(context, R.color.colorPrimary))
+//                .setOnMenuItemClickListener(onMenuItemClickListener)
+////                .setOnDismissListener(onDismissedListener)
+//                .setPreferenceName("HamburgerPowerMenu")
+//                .setInitializeRule(Lifecycle.Event.ON_CREATE, 0)
+//                .build();
+//    }
 
 
     //    @Override
@@ -761,7 +817,17 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 //
 //    }
 
-    private static void updateMenuWithIcon(@NonNull final MenuItem item, final int color) {
+    private void enterFullScreenMode() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    private void exitFullScreenMode() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+    }
+
+    private void updateMenuWithIcon(@NonNull final MenuItem item, final int color) {
         SpannableStringBuilder builder = new SpannableStringBuilder()
                 .append("*") // the * will be replaced with the icon via ImageSpan
                 .append("    ") // This extra space acts as padding. Adjust as you wish
@@ -795,25 +861,31 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_song_details, menu);
-//
-////        if (menu instanceof MenuBuilder) {
-////            MenuBuilder m = (MenuBuilder) menu;
-////            m.setOptionalIconsVisible(true);
-////        }
-//
-////        MenuItem menuItemFullscreen = menu.findItem(R.id.menu_fullscreen);
-////        MenuItem menuItemTextSize = menu.findItem(R.id.menu_text_size);
-////        MenuItem menuItemAutoScroll = menu.findItem(R.id.menu_auto_scroll);
-////        MenuItem menuItemTranspose = menu.findItem(R.id.menu_transpose);
-//
-//        // Find the menuItem to add your SubMenu
-//        MenuItem menuItemShare = menu.findItem(R.id.menu_share);
+        getMenuInflater().inflate(R.menu.menu_song_details, menu);
+
+//        if (menu instanceof MenuBuilder) {
+//            MenuBuilder m = (MenuBuilder) menu;
+//            m.setOptionalIconsVisible(true);
+//        }
+
+        MenuItem menuItemFullscreen = menu.findItem(R.id.menu_fullscreen);
+        MenuItem menuItemTextSize = menu.findItem(R.id.menu_text_size);
+        MenuItem menuItemAutoScroll = menu.findItem(R.id.menu_auto_scroll);
+        MenuItem menuItemTranspose = menu.findItem(R.id.menu_transpose);
+        MenuItem menuItemShare = menu.findItem(R.id.menu_share);
+
 //        SubMenu subMenuShare = menuItemShare.getSubMenu();
-//
 //        MenuItem submenuItemShareText = subMenuShare.findItem(R.id.submenu_share_text);
 //        MenuItem submenuItemSharePDF = subMenuShare.findItem(R.id.submenu_share_pdf);
-//
+
+//        int color = ContextCompat.getColor(this, R.color.gray);
+//        updateMenuWithIcon(menuItemFullscreen, color);
+//        updateMenuWithIcon(menuItemTextSize, color);
+//        updateMenuWithIcon(menuItemAutoScroll, color);
+//        updateMenuWithIcon(menuItemTranspose, color);
+//        updateMenuWithIcon(menuItemShare, color);
+////        updateMenuWithIcon(submenuItemShareText, color);
+////        updateMenuWithIcon(submenuItemSharePDF, color);
 
         return true;
     }
@@ -821,6 +893,10 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menu_fullscreen:
+                enterFullScreenMode();
+                return true;
+
 //            case R.id.menu_transpose:
 //                createTransposeDialog();
 //                return true;

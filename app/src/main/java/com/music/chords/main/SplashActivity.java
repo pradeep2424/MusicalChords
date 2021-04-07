@@ -99,6 +99,7 @@ public class SplashActivity extends AppCompatActivity {
                         String songArtist = json.getString("Artist");
                         String youTubeURL = json.getString("YouTubeURL");
                         String songLyrics = json.getString("Lyrics");
+                        int songIconColor = getRandomMaterialColor();
                         boolean isFavorites = false;
 
                         SongObject songObject = new SongObject();
@@ -108,7 +109,7 @@ public class SplashActivity extends AppCompatActivity {
                         songObject.setSongArtist(songArtist);
                         songObject.setSongYouTubeURL(youTubeURL);
                         songObject.setSongLyrics(songLyrics);
-                        songObject.setSongIconColor(getRandomMaterialColor());
+                        songObject.setSongIconColor(songIconColor);
 
 //                       checking DB if song is added to favorites
                         if (isLocalDBHasData) {
@@ -125,7 +126,7 @@ public class SplashActivity extends AppCompatActivity {
 
 //                           No data foudn in DB, hence inserting data in DB in same loop
                             insertDataIntoDB(songID, songTitle, songSubtitle, songArtist,
-                                    youTubeURL, songLyrics, isFavorites);
+                                    youTubeURL, songLyrics, isFavorites, songIconColor);
                         }
 
                         listSongData.add(songObject);
@@ -147,9 +148,9 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void insertDataIntoDB(int songID, String songTitle, String songSubtitle, String songArtist,
-                                  String songYouTubeURL, String songLyrics, Boolean isFavorites) {
+                                  String songYouTubeURL, String songLyrics, Boolean isFavorites, int songIconColor) {
         dbSongDetails.insertData(songID, songTitle, songSubtitle, songArtist,
-                songYouTubeURL, songLyrics, isFavorites);
+                songYouTubeURL, songLyrics, isFavorites, songIconColor);
     }
 
     private void deleteAllTableData() {
@@ -168,9 +169,10 @@ public class SplashActivity extends AppCompatActivity {
             String youTubeURL = listSongData.get(index).getSongYouTubeURL();
             String songLyrics = listSongData.get(index).getSongLyrics();
             boolean isFavorites = listSongData.get(index).getIsFavorites();
+            int songIconColor = listSongData.get(index).getSongIconColor();
 
             insertDataIntoDB(songID, songTitle, songSubtitle, songArtist,
-                    youTubeURL, songLyrics, isFavorites);
+                    youTubeURL, songLyrics, isFavorites, songIconColor);
 
             checkLocalDBHasData();
         }

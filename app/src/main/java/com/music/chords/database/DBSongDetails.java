@@ -14,6 +14,7 @@ public class DBSongDetails extends CreateDB {
     private static final String KEY_SONG_YOUTUBE_URL = "SongYouTubeURL";
     private static final String KEY_SONG_LYRICS = "SongLyrics";
     private static final String KEY_IS_FAVORITES = "IsFavorites";
+    private static final String KEY_SONG_ICON_COLOR = "SongIconColor";
 
     public DBSongDetails(Context context) {
         super(context);
@@ -29,7 +30,7 @@ public class DBSongDetails extends CreateDB {
     }
 
     public boolean insertData(int songID, String songTitle, String songSubtitle, String songArtist,
-                              String songYouTubeURL, String songLyrics, Boolean isFavorites) {
+                              String songYouTubeURL, String songLyrics, Boolean isFavorites, int songIconColor) {
 
         try {
             SQLiteDatabase db = this.getWritableDatabase();
@@ -42,6 +43,7 @@ public class DBSongDetails extends CreateDB {
             contentValues.put(KEY_SONG_YOUTUBE_URL, songYouTubeURL);
             contentValues.put(KEY_SONG_LYRICS, songLyrics);
             contentValues.put(KEY_IS_FAVORITES, isFavorites);
+            contentValues.put(KEY_SONG_ICON_COLOR, songIconColor);
 
             db.insert(TABLE_SONG_DETAILS, null, contentValues);
         } catch (Exception e) {
@@ -66,17 +68,57 @@ public class DBSongDetails extends CreateDB {
         return res;
     }
 
+    public Cursor getFavoritesSongData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res = db.rawQuery("SELECT * from " + TABLE_SONG_DETAILS + " Where "
+                + KEY_IS_FAVORITES + " = 1", null);
+
+        return res;
+    }
+
+    public boolean setSongToFavorites(int songID) {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(KEY_IS_FAVORITES, true);
+
+            db.update(TABLE_SONG_DETAILS, contentValues, KEY_SONG_ID + " = '" + songID + "'", null);
+        } catch (Exception e) {
+            System.out.println("Exception : " + e);
+        }
+
+        return true;
+    }
+
+    public boolean removeSongFromFavorites(int songID) {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(KEY_IS_FAVORITES, false);
+
+            db.update(TABLE_SONG_DETAILS, contentValues, KEY_SONG_ID + " = '" + songID + "'", null);
+        } catch (Exception e) {
+            System.out.println("Exception : " + e);
+        }
+
+        return true;
+    }
+
+
     public Cursor getSearchedSongData(String searchText) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor res = db.rawQuery("SELECT * from " + TABLE_SONG_DETAILS + " WHERE "
-                + KEY_SONG_TITLE + " LIKE '"+ searchText +"%' OR "
-                + KEY_SONG_SUBTITLE + " LIKE '"+ searchText +"%'" , null);
+                + KEY_SONG_TITLE + " LIKE '" + searchText + "%' OR "
+                + KEY_SONG_SUBTITLE + " LIKE '" + searchText + "%'", null);
         return res;
     }
 
     public boolean updateSongData(int songID, String songTitle, String songSubtitle, String songArtist,
-                                  String songYouTubeURL, String songLyrics, Boolean isFavorites) {
+                                  String songYouTubeURL, String songLyrics, Boolean isFavorites, int songIconColor) {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
 
@@ -87,6 +129,7 @@ public class DBSongDetails extends CreateDB {
             contentValues.put(KEY_SONG_YOUTUBE_URL, songYouTubeURL);
             contentValues.put(KEY_SONG_LYRICS, songLyrics);
             contentValues.put(KEY_IS_FAVORITES, isFavorites);
+            contentValues.put(KEY_SONG_ICON_COLOR, songIconColor);
 
             db.update(TABLE_SONG_DETAILS, contentValues, KEY_SONG_ID + " = '" + songID + "'", null);
         } catch (Exception e) {

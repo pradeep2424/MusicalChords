@@ -2,28 +2,28 @@
         <tab
             activeColor="@color/menu_active"
             badgeHidesWhenActive="true"
-            icon="@drawable/ic_home"
+            icon="@drawable/ic_bottom_menu_home"
             id="@+id/tab_home"
             inActiveColor="@color/menu_inactive"
             title="@string/menu_home" />
 
         <tab
             activeColor="@color/menu_active"
-            icon="@drawable/ic_search"
+            icon="@drawable/ic_bottom_menu_search"
             id="@+id/tab_search"
             inActiveColor="@color/menu_inactive"
             title="@string/menu_search" />
 
         <tab
             activeColor="@color/menu_active"
-            icon="@drawable/ic_favorite"
+            icon="@drawable/ic_bottom_menu_favorite"
             id="@+id/tab_cart"
             inActiveColor="@color/menu_inactive"
             title="@string/menu_cart" />
 
         <tab
             activeColor="@color/menu_active"
-            icon="@drawable/ic_settings"
+            icon="@drawable/ic_bottom_menu_settings"
             id="@+id/tab_settings"
             inActiveColor="@color/menu_inactive"
             title="@string/menu_settings" />
