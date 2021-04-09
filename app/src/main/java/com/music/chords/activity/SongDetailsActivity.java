@@ -46,6 +46,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
@@ -55,6 +56,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.gson.Gson;
+import com.marcoscg.dialogsheet.DialogSheet;
 import com.music.chords.R;
 import com.music.chords.chordsReader.chords.Chord;
 import com.music.chords.chordsReader.chords.NoteNaming;
@@ -70,6 +72,7 @@ import com.music.chords.chordsReader.helper.WebPageExtractionHelper;
 import com.music.chords.chordsReader.utils.InternalURLSpan;
 import com.music.chords.chordsReader.utils.Pair;
 import com.music.chords.chordsReader.utils.UtilLogger;
+import com.music.chords.helper.FullScreenHelper;
 import com.music.chords.interfaces.Constants;
 import com.music.chords.objects.SongObject;
 import com.music.chords.utils.Application;
@@ -77,6 +80,9 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+import com.travijuu.numberpicker.library.Enums.ActionEnum;
+import com.travijuu.numberpicker.library.Listener.DefaultValueChangedListener;
+import com.travijuu.numberpicker.library.NumberPicker;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -92,12 +98,12 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     CoordinatorLayout clRootLayout;
     NestedScrollView nestedScrollView;
     //    ImageView ivCoverPic;
-    TextView tvToolbarTitle;
+//    TextView tvToolbarTitle;
+    private FullScreenHelper fullScreenHelper;
     YouTubePlayerView youTubePlayerView;
     TextView tvTitle;
     TextView tvSubtitle;
     TextView tvLyrics;
-
 
 //    private PowerMenu optionMenu;
 //    private OnMenuItemClickListener<PowerMenuItem> onOptionMenuClickListener;
@@ -186,7 +192,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, getPackageName());
 
-       Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -195,15 +201,15 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 
 //        getSupportActionBar().setTitle(getResources().getString(R.string.title_aarti));
 
-//        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-//        collapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.transparent));
-//        collapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.white));
-//        collapsingToolbarLayout.setTitle(songObject.getSongTitle());
+        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.transparent));
+        collapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.white));
+        collapsingToolbarLayout.setTitle(songObject.getSongTitle());
 
 //        prefManagerAppData = new PrefManagerAppData(this);
 
         clRootLayout = findViewById(R.id.cl_rootLayout);
-        tvToolbarTitle = findViewById(R.id.tv_toolbarTitle);
+//        tvToolbarTitle = findViewById(R.id.tv_toolbarTitle);
         nestedScrollView = findViewById(R.id.nestedScrollView);
 //        ivCoverPic =  findViewById(R.id.iv_coverPic);
         tvTitle = findViewById(R.id.tv_title);
@@ -212,7 +218,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, PreferenceHelper.getTextSizePreference(this));
         youTubePlayerView = findViewById(R.id.youtube_player_view);
 
-        tvToolbarTitle.setText(songObject.getSongTitle());
+//        tvToolbarTitle.setText(songObject.getSongTitle());
 
 //        heartButton = (SparkButton) findViewById(R.id.heart_button);
 //        btnAudio = (Button) findViewById(R.id.btn_audio);
@@ -231,7 +237,10 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     }
 
     private void initYouTubeViewPlayer() {
+        fullScreenHelper = new FullScreenHelper(this);
+
         getLifecycle().addObserver(youTubePlayerView);
+        youTubePlayerView.getPlayerUiController().showMenuButton(false);
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
@@ -248,13 +257,17 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
             @Override
             public void onYouTubePlayerEnterFullScreen() {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                youTubePlayerView.enterFullScreen();
+                fullScreenHelper.enterFullScreen();
+
+//                youTubePlayerView.enterFullScreen();
             }
 
             @Override
             public void onYouTubePlayerExitFullScreen() {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                youTubePlayerView.exitFullScreen();
+                fullScreenHelper.exitFullScreen();
+
+//                youTubePlayerView.exitFullScreen();
             }
         });
 
@@ -843,7 +856,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 
     private void autoScrollPage() {
         ObjectAnimator objectAnimator = ObjectAnimator.ofInt(nestedScrollView, "scrollY",
-                nestedScrollView.getChildAt(0).getHeight() - nestedScrollView.getHeight());
+                clRootLayout.getChildAt(0).getHeight() - nestedScrollView.getHeight());
         objectAnimator.setDuration(1000);
         objectAnimator.setInterpolator(new LinearInterpolator());
         objectAnimator.start();
@@ -864,6 +877,85 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 //                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
 //                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
     }
+
+    private void showBottomSheetDialogTextSize() {
+        View view = View.inflate(this, R.layout.layout_number_picker_text_size, null);
+
+        DialogSheet dialogSheet = new DialogSheet(this, true)
+                .setView(view)
+                .setCancelable(true);
+        dialogSheet.show();
+
+        NumberPicker numberPicker = view.findViewById(R.id.numberPicker_textSize);
+        LinearLayout llDone = view.findViewById(R.id.ll_done);
+        TextView tvSampleText = view.findViewById(R.id.tv_sampleText);
+
+        numberPicker.setValueChangedListener(new DefaultValueChangedListener() {
+            @Override
+            public void valueChanged(int value, ActionEnum action) {
+                super.valueChanged(value, action);
+
+                tvSampleText.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
+                tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
+            }
+        });
+
+        llDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogSheet.dismiss();
+            }
+        });
+
+
+//        val dialogSheet = DialogSheet(this)
+//                .setTitle(R.string.app_name)
+//                .setMessage(R.string.lorem)
+//                .setColoredNavigationBar(true)
+//                .setTitleTextSize(20) // In SP
+//                .setCancelable(false)
+//                .setPositiveButton(android.R.string.ok) {
+//            // Your action
+//        }
+//    .setNegativeButton(android.R.string.cancel) {
+//            // Your action
+//        }
+//    .setNeutralButton("Neutral")
+//                .setRoundedCorners(false) // Default value is true
+//                .setBackgroundColor(Color.BLACK) // Your custom background color
+//                .setButtonsColorRes(R.color.colorAccent) // You can use dialogSheetAccent style attribute instead
+//                .setNeutralButtonColor(Color.WHITE)
+//                .show()
+    }
+
+    private void showBottomSheetDialogTranspose() {
+        View view = View.inflate(this, R.layout.layout_number_picker_transpose, null);
+
+        DialogSheet dialogSheet = new DialogSheet(this, true)
+                .setView(view)
+                .setCancelable(true);
+        dialogSheet.show();
+
+        NumberPicker numberPicker = view.findViewById(R.id.numberPicker_transpose);
+        LinearLayout llDone = view.findViewById(R.id.ll_done);
+
+        numberPicker.setValueChangedListener(new DefaultValueChangedListener() {
+            @Override
+            public void valueChanged(int value, ActionEnum action) {
+                super.valueChanged(value, action);
+
+                changeTransposeOrCapo(value, DialogHelper.CAPO_MIN);
+            }
+        });
+
+        llDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogSheet.dismiss();
+            }
+        });
+    }
+
 
     private void exitFullScreenMode() {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -911,7 +1003,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 //            m.setOptionalIconsVisible(true);
 //        }
 
-        MenuItem menuItemFullscreen = menu.findItem(R.id.menu_fullscreen);
+        MenuItem menuItemFullscreen = menu.findItem(R.id.menu_fullscreen_lyrics);
         MenuItem menuItemTextSize = menu.findItem(R.id.menu_text_size);
         MenuItem menuItemAutoScroll = menu.findItem(R.id.menu_auto_scroll);
         MenuItem menuItemTranspose = menu.findItem(R.id.menu_transpose);
@@ -936,17 +1028,26 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_fullscreen:
+            case R.id.menu_fullscreen_lyrics:
                 enterFullScreenMode();
+                return true;
+
+            case R.id.menu_text_size:
+                showBottomSheetDialogTextSize();
                 return true;
 
             case R.id.menu_auto_scroll:
                 autoScrollPage();
                 return true;
 
-//            case R.id.menu_transpose:
+            case R.id.menu_transpose:
+                showBottomSheetDialogTranspose();
 //                createTransposeDialog();
-//                return true;
+                return true;
+
+            case R.id.menu_share:
+
+                return true;
 
             case android.R.id.home:
                 onBackPressed();

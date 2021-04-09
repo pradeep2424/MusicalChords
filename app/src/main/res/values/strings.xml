@@ -60,7 +60,7 @@
     <string name="action_mark_saved">Mark saved</string>
     <string name="action_mark_unsaved">Mark unsaved</string>
     <string name="action_search">Search</string>
-    <string name="action_fullscreen">Fullscreen</string>
+    <string name="action_fullscreen_lyrics">Fullscreen Lyrics</string>
     <string name="action_text_size">Text Size</string>
     <string name="action_auto_scroll">Auto Scroll</string>
     <string name="action_transpose">Transpose</string>
@@ -69,6 +69,12 @@
     <string name="action_share_pdf">Share as PDF</string>
 
     <string name="confirm_chords">Confirm Chords</string>
+
+    <string name="choose_text_size">Choose Text Size</string>
+    <string name="sample_text">This is sample text. Check text size here.</string>
+    <string name="done">Done</string>
+
+    <string name="transpose_chords">Transpose Chords</string>
 
     <string name="no_internet_connection">No internet connection.</string>
     <string name="connect_to_internet">No internet connection available, Please connect to internet and restart the application.</string>

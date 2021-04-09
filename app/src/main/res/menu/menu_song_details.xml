@@ -3,10 +3,10 @@
     tools:context="com.sogo.sogosurvey.main.MainActivity">
 
     <item
-        android:id="@+id/menu_fullscreen"
+        android:id="@+id/menu_fullscreen_lyrics"
         android:icon="@drawable/ic_fullscreen"
         android:orderInCategory="100"
-        android:title="@string/action_fullscreen" />
+        android:title="@string/action_fullscreen_lyrics" />
 
     <item
         android:id="@+id/menu_text_size"

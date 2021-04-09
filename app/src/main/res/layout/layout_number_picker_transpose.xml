@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <com.music.chords.custom.MyTextViewBold
+            android:id="@+id/tv_textSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/choose_text_size"
+            android:textColor="@color/main_dark_text"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_margin="20dp"
+            android:background="@color/color_divider" />
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/numberPicker_transpose"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            app:custom_layout="@layout/layout_custom_number_picker"
+            app:focusable="false"
+            app:value="0"
+            app:min="-11"
+            app:max="11"
+            app:unit="1" />
+
+        <com.music.chords.custom.MyTextView
+            android:id="@+id/tv_sampleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:text="@string/sample_text"
+            android:textColor="@color/main_dark_text"
+            android:textSize="14sp" />
+
+        <!--        <com.music.chords.custom.MyTextViewBold-->
+        <!--            android:id="@+id/tv_emtpy"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="60dp"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:textColor="@color/main_dark_text"-->
+        <!--            android:textSize="16sp" />-->
+
+        <LinearLayout
+            android:id="@+id/ll_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rectangle_blue"
+            android:gravity="right"
+            android:orientation="vertical"
+            android:paddingLeft="30dp"
+            android:paddingTop="8dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="8dp">
+
+            <com.music.chords.custom.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/done"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>
