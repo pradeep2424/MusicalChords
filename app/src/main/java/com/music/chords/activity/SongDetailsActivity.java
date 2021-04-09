@@ -1,10 +1,12 @@
 package com.music.chords.activity;
 
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -38,7 +40,9 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -71,6 +75,7 @@ import com.music.chords.objects.SongObject;
 import com.music.chords.utils.Application;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.lang.reflect.Field;
@@ -87,10 +92,12 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     CoordinatorLayout clRootLayout;
     NestedScrollView nestedScrollView;
     //    ImageView ivCoverPic;
+    TextView tvToolbarTitle;
     YouTubePlayerView youTubePlayerView;
     TextView tvTitle;
     TextView tvSubtitle;
     TextView tvLyrics;
+
 
 //    private PowerMenu optionMenu;
 //    private OnMenuItemClickListener<PowerMenuItem> onOptionMenuClickListener;
@@ -179,30 +186,33 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, getPackageName());
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 //        getSupportActionBar().setTitle(getResources().getString(R.string.title_aarti));
 
-        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.transparent));
-        collapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.white));
-        collapsingToolbarLayout.setTitle(songObject.getSongTitle());
+//        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+//        collapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.transparent));
+//        collapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.white));
+//        collapsingToolbarLayout.setTitle(songObject.getSongTitle());
 
 //        prefManagerAppData = new PrefManagerAppData(this);
 
         clRootLayout = findViewById(R.id.cl_rootLayout);
+        tvToolbarTitle = findViewById(R.id.tv_toolbarTitle);
         nestedScrollView = findViewById(R.id.nestedScrollView);
 //        ivCoverPic =  findViewById(R.id.iv_coverPic);
         tvTitle = findViewById(R.id.tv_title);
         tvSubtitle = findViewById(R.id.tv_subtitle);
         tvLyrics = findViewById(R.id.tv_lyricsText);
         tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, PreferenceHelper.getTextSizePreference(this));
-
         youTubePlayerView = findViewById(R.id.youtube_player_view);
+
+        tvToolbarTitle.setText(songObject.getSongTitle());
 
 //        heartButton = (SparkButton) findViewById(R.id.heart_button);
 //        btnAudio = (Button) findViewById(R.id.btn_audio);
@@ -234,6 +244,20 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     }
 
     private void componentEvents() {
+        youTubePlayerView.addFullScreenListener(new YouTubePlayerFullScreenListener() {
+            @Override
+            public void onYouTubePlayerEnterFullScreen() {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                youTubePlayerView.enterFullScreen();
+            }
+
+            @Override
+            public void onYouTubePlayerExitFullScreen() {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                youTubePlayerView.exitFullScreen();
+            }
+        });
+
 //        heartButton.setEventListener(new SparkEventListener(){
 //            @Override
 //            public void onEvent(ImageView button, boolean buttonState) {
@@ -817,9 +841,28 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 //
 //    }
 
+    private void autoScrollPage() {
+        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(nestedScrollView, "scrollY",
+                nestedScrollView.getChildAt(0).getHeight() - nestedScrollView.getHeight());
+        objectAnimator.setDuration(1000);
+        objectAnimator.setInterpolator(new LinearInterpolator());
+        objectAnimator.start();
+    }
+
     private void enterFullScreenMode() {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        getActionBar().hide();
+
+//        View decorView = activity.getWindow().getDecorView();
+//        decorView.setSystemUiVisibility(
+//                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+//                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                        //| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//                        //| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+//                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+//                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
     }
 
     private void exitFullScreenMode() {
@@ -895,6 +938,10 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         switch (item.getItemId()) {
             case R.id.menu_fullscreen:
                 enterFullScreenMode();
+                return true;
+
+            case R.id.menu_auto_scroll:
+                autoScrollPage();
                 return true;
 
 //            case R.id.menu_transpose:
