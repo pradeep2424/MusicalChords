@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/youtube_player_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:showFullScreenButton="true" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_options"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="end"-->
+<!--                    android:layout_marginRight="15dp"-->
+<!--                    android:src="@drawable/ic_bottom_menu_settings"-->
+<!--                    android:tint="@android:color/white" />-->
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/details_background"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_mainContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="vertical">
+
+                <!--                <View-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="0.5dp"-->
+                <!--                    android:layout_margin="20dp"-->
+                <!--                    android:background="@color/color_divider" />-->
+
+                <com.music.chords.custom.MyTextViewBold
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Title"
+                    android:textColor="@color/main_dark_text"
+                    android:textSize="22sp" />
+
+                <com.music.chords.custom.MyTextView
+                    android:id="@+id/tv_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="SubTitle"
+                    android:textColor="@color/main_text"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_margin="20dp"
+                    android:background="@color/color_divider" />
+
+                <TextView
+                    android:id="@+id/tv_lyricsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:linksClickable="true"
+                    android:paddingRight="3dp"
+                    android:text="Aarti"
+                    android:textColor="@color/main_text"
+                    android:textSize="16sp"
+                    android:typeface="monospace" />
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/find_chords_viewing_text_view"-->
+                <!--                    android:layout_width="fill_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:linksClickable="true"-->
+                <!--                    android:text="nasnsan"-->
+                <!--                    android:textColor="@android:color/primary_text_dark_nodisable"-->
+                <!--                    android:textSize="16sp"-->
+                <!--                    android:typeface="monospace" />-->
+
+            </LinearLayout>
+
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/ll_footer"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_below="@+id/ll_mainContent"-->
+            <!--                android:layout_alignParentBottom="true"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:layout_marginBottom="10dp"-->
+            <!--                android:background="@color/white"-->
+            <!--                android:elevation="5dp"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:padding="5dp"-->
+            <!--                android:weightSum="100">-->
+
+            <!--                &lt;!&ndash;                <Button&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:id="@+id/btn_pictures"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:layout_width="0dp"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:layout_gravity="center_horizontal|center_vertical"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:layout_weight="100"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:background="@color/white"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:gravity="center_horizontal|center_vertical"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:text="@string/aarti_details_photos"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:textAllCaps="false"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:textColor="@color/colorSubtitle"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                    android:textSize="15sp" />&ndash;&gt;-->
+
+            <!--                <Button-->
+            <!--                    android:id="@+id/btn_audio"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_horizontal|center_vertical"-->
+            <!--                    android:layout_weight="49.8"-->
+            <!--                    android:background="@color/white"-->
+            <!--                    android:gravity="center_horizontal|center_vertical"-->
+            <!--                    android:text="@string/aarti_details_audio"-->
+            <!--                    android:textAllCaps="false"-->
+            <!--                    android:textColor="@color/colorSubtitle"-->
+            <!--                    android:textSize="15sp" />-->
+
+            <!--                <View-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="4dp"-->
+            <!--                    android:layout_weight="0.4"-->
+            <!--                    android:gravity="center_horizontal|center_vertical" />-->
+
+            <!--                <Button-->
+            <!--                    android:id="@+id/btn_pictures"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_horizontal|center_vertical"-->
+            <!--                    android:layout_weight="49.8"-->
+            <!--                    android:background="@color/white"-->
+            <!--                    android:gravity="center_horizontal|center_vertical"-->
+            <!--                    android:text="@string/aarti_details_photos"-->
+            <!--                    android:textAllCaps="false"-->
+            <!--                    android:textColor="@color/colorSubtitle"-->
+            <!--                    android:textSize="15sp" />-->
+
+            <!--            </LinearLayout>-->
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
