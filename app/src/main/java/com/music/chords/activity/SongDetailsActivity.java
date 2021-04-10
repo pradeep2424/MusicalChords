@@ -40,6 +40,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
@@ -54,7 +55,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.marcoscg.dialogsheet.DialogSheet;
 import com.music.chords.R;
@@ -96,7 +99,9 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     SongObject songObject;
 
     CoordinatorLayout clRootLayout;
+    AppBarLayout appBarLayout;
     NestedScrollView nestedScrollView;
+    FloatingActionButton fabExitFullScreen;
     //    ImageView ivCoverPic;
 //    TextView tvToolbarTitle;
     private FullScreenHelper fullScreenHelper;
@@ -135,7 +140,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         }
 
         init();
-        initYouTubeViewPlayer();
+//        initYouTubeViewPlayer();
         componentEvents();
         setSongData();
         initializeChordDictionary();
@@ -204,13 +209,18 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.transparent));
         collapsingToolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.white));
-        collapsingToolbarLayout.setTitle(songObject.getSongTitle());
+
+        if (songObject != null && songObject.getSongTitle() != null) {
+            collapsingToolbarLayout.setTitle(songObject.getSongTitle());
+        }
 
 //        prefManagerAppData = new PrefManagerAppData(this);
 
         clRootLayout = findViewById(R.id.cl_rootLayout);
+//        appBarLayout = findViewById(R.id.appBar);
 //        tvToolbarTitle = findViewById(R.id.tv_toolbarTitle);
         nestedScrollView = findViewById(R.id.nestedScrollView);
+        fabExitFullScreen = findViewById(R.id.fab_exitFullScreen);
 //        ivCoverPic =  findViewById(R.id.iv_coverPic);
         tvTitle = findViewById(R.id.tv_title);
         tvSubtitle = findViewById(R.id.tv_subtitle);
@@ -268,6 +278,13 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
                 fullScreenHelper.exitFullScreen();
 
 //                youTubePlayerView.exitFullScreen();
+            }
+        });
+
+        fabExitFullScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exitFullScreenMode();
             }
         });
 
@@ -854,30 +871,6 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 //
 //    }
 
-    private void autoScrollPage() {
-        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(nestedScrollView, "scrollY",
-                clRootLayout.getChildAt(0).getHeight() - nestedScrollView.getHeight());
-        objectAnimator.setDuration(1000);
-        objectAnimator.setInterpolator(new LinearInterpolator());
-        objectAnimator.start();
-    }
-
-    private void enterFullScreenMode() {
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        getActionBar().hide();
-
-//        View decorView = activity.getWindow().getDecorView();
-//        decorView.setSystemUiVisibility(
-//                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-//                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                        //| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//                        //| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-//                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-//                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
-    }
-
     private void showBottomSheetDialogTextSize() {
         View view = View.inflate(this, R.layout.layout_number_picker_text_size, null);
 
@@ -956,10 +949,34 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         });
     }
 
+    private void autoScrollPage() {
+        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(nestedScrollView, "scrollY",
+                clRootLayout.getChildAt(0).getHeight() - nestedScrollView.getHeight());
+        objectAnimator.setDuration(4000);
+        objectAnimator.setInterpolator(new LinearInterpolator());
+        objectAnimator.start();
+    }
+
+    private void enterFullScreenMode() {
+        fabExitFullScreen.setVisibility(View.VISIBLE);
+
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+        params.height = 0;
+        appBarLayout.setLayoutParams(params);
+    }
 
     private void exitFullScreenMode() {
+        fabExitFullScreen.setVisibility(View.GONE);
+
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+        params.height = CoordinatorLayout.LayoutParams.WRAP_CONTENT;
+        appBarLayout.setLayoutParams(params);
     }
 
     private void updateMenuWithIcon(@NonNull final MenuItem item, final int color) {
@@ -994,69 +1011,69 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         return false;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_song_details, menu);
-
-//        if (menu instanceof MenuBuilder) {
-//            MenuBuilder m = (MenuBuilder) menu;
-//            m.setOptionalIconsVisible(true);
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_song_details, menu);
+//
+////        if (menu instanceof MenuBuilder) {
+////            MenuBuilder m = (MenuBuilder) menu;
+////            m.setOptionalIconsVisible(true);
+////        }
+//
+//        MenuItem menuItemFullscreen = menu.findItem(R.id.menu_fullscreen_lyrics);
+//        MenuItem menuItemTextSize = menu.findItem(R.id.menu_text_size);
+//        MenuItem menuItemAutoScroll = menu.findItem(R.id.menu_auto_scroll);
+//        MenuItem menuItemTranspose = menu.findItem(R.id.menu_transpose);
+//        MenuItem menuItemShare = menu.findItem(R.id.menu_share);
+//
+////        SubMenu subMenuShare = menuItemShare.getSubMenu();
+////        MenuItem submenuItemShareText = subMenuShare.findItem(R.id.submenu_share_text);
+////        MenuItem submenuItemSharePDF = subMenuShare.findItem(R.id.submenu_share_pdf);
+//
+////        int color = ContextCompat.getColor(this, R.color.gray);
+////        updateMenuWithIcon(menuItemFullscreen, color);
+////        updateMenuWithIcon(menuItemTextSize, color);
+////        updateMenuWithIcon(menuItemAutoScroll, color);
+////        updateMenuWithIcon(menuItemTranspose, color);
+////        updateMenuWithIcon(menuItemShare, color);
+//////        updateMenuWithIcon(submenuItemShareText, color);
+//////        updateMenuWithIcon(submenuItemSharePDF, color);
+//
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.menu_fullscreen_lyrics:
+//                enterFullScreenMode();
+//                return true;
+//
+//            case R.id.menu_text_size:
+//                showBottomSheetDialogTextSize();
+//                return true;
+//
+//            case R.id.menu_auto_scroll:
+//                autoScrollPage();
+//                return true;
+//
+//            case R.id.menu_transpose:
+//                showBottomSheetDialogTranspose();
+////                createTransposeDialog();
+//                return true;
+//
+//            case R.id.menu_share:
+//
+//                return true;
+//
+//            case android.R.id.home:
+//                onBackPressed();
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
 //        }
-
-        MenuItem menuItemFullscreen = menu.findItem(R.id.menu_fullscreen_lyrics);
-        MenuItem menuItemTextSize = menu.findItem(R.id.menu_text_size);
-        MenuItem menuItemAutoScroll = menu.findItem(R.id.menu_auto_scroll);
-        MenuItem menuItemTranspose = menu.findItem(R.id.menu_transpose);
-        MenuItem menuItemShare = menu.findItem(R.id.menu_share);
-
-//        SubMenu subMenuShare = menuItemShare.getSubMenu();
-//        MenuItem submenuItemShareText = subMenuShare.findItem(R.id.submenu_share_text);
-//        MenuItem submenuItemSharePDF = subMenuShare.findItem(R.id.submenu_share_pdf);
-
-//        int color = ContextCompat.getColor(this, R.color.gray);
-//        updateMenuWithIcon(menuItemFullscreen, color);
-//        updateMenuWithIcon(menuItemTextSize, color);
-//        updateMenuWithIcon(menuItemAutoScroll, color);
-//        updateMenuWithIcon(menuItemTranspose, color);
-//        updateMenuWithIcon(menuItemShare, color);
-////        updateMenuWithIcon(submenuItemShareText, color);
-////        updateMenuWithIcon(submenuItemSharePDF, color);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_fullscreen_lyrics:
-                enterFullScreenMode();
-                return true;
-
-            case R.id.menu_text_size:
-                showBottomSheetDialogTextSize();
-                return true;
-
-            case R.id.menu_auto_scroll:
-                autoScrollPage();
-                return true;
-
-            case R.id.menu_transpose:
-                showBottomSheetDialogTranspose();
-//                createTransposeDialog();
-                return true;
-
-            case R.id.menu_share:
-
-                return true;
-
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    }
 
     @Override
     public void onBackPressed() {

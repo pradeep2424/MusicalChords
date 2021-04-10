@@ -62,7 +62,6 @@ dependencies {
     implementation 'com.github.marcoscgdev:DialogSheet:2.1.2'
     implementation 'com.github.travijuu:numberpicker:1.0.7'
 
-
 //    implementation "com.github.skydoves:powermenu:2.1.9"
 
 }

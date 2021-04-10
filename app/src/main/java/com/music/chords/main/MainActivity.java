@@ -1,5 +1,6 @@
 package com.music.chords.main;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -18,16 +19,21 @@ import com.music.chords.bottomMenu.FavoritesFragment;
 import com.music.chords.bottomMenu.HomeFragment;
 import com.music.chords.bottomMenu.SettingsFragment;
 import com.music.chords.bottomMenu.SearchFragment;
-import com.music.chords.interfaces.TriggerTabChangeListener;
+import com.music.chords.database.DBSongDetails;
+import com.music.chords.interfaces.TriggerDBChangeListener;
+import com.music.chords.objects.SongObject;
+import com.music.chords.utils.Application;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
 
 
-public class MainActivity extends AppCompatActivity implements TriggerTabChangeListener {
+public class MainActivity extends AppCompatActivity implements TriggerDBChangeListener {
     CoordinatorLayout clRootLayout;
     FrameLayout frameLayout;
     BottomBar bottomBar;
+
+    DBSongDetails dbSongDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements TriggerTabChangeL
     }
 
     private void init() {
+        dbSongDetails = new DBSongDetails(this);
+
         clRootLayout = (CoordinatorLayout) findViewById(R.id.cl_rootLayout);
         frameLayout = (FrameLayout) findViewById(R.id.framelayout);
         bottomBar = (BottomBar) findViewById(R.id.bottombar);
@@ -80,6 +88,45 @@ public class MainActivity extends AppCompatActivity implements TriggerTabChangeL
         transaction.replace(R.id.framelayout, fragment);
         transaction.commit();
     }
+
+    private void getSongDataFromDB() {
+        try {
+            Application.allSongsData.clear();
+            Cursor rss = dbSongDetails.getData();
+            int countDBRows = rss.getCount();
+
+            rss.moveToFirst();
+
+            for (int index = 0; index < countDBRows; index++) {
+                int songId = rss.getInt(0);
+                String songTitle = rss.getString(1);
+                String songSubtitle = rss.getString(2);
+                String songLyrics = rss.getString(3);
+                String songArtist = rss.getString(4);
+                String songYouTubeURL = rss.getString(5);
+                Boolean isFavorites = (rss.getInt(6) == 1);
+                int iconColor = rss.getInt(7);
+
+                SongObject songObject = new SongObject();
+                songObject.setSongId(songId);
+                songObject.setSongTitle(songTitle);
+                songObject.setSongSubtitle(songSubtitle);
+                songObject.setSongLyrics(songLyrics);
+                songObject.setSongArtist(songArtist);
+                songObject.setSongYouTubeURL(songYouTubeURL);
+                songObject.setIsFavorites(isFavorites);
+                songObject.setSongIconColor(iconColor);
+                Application.allSongsData.add(songObject);
+
+                rss.moveToNext();
+            }
+            rss.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 //    private void getCartItems() {
 //        if (InternetConnection.checkConnection(this)) {
@@ -159,15 +206,8 @@ public class MainActivity extends AppCompatActivity implements TriggerTabChangeL
     }
 
     @Override
-    public void setTab(int position) {
-        if (bottomBar != null) {
-            bottomBar.selectTabAtPosition(position, true);
-        }
+    public void onDBDataChanged() {
+        getSongDataFromDB();
     }
 
-    @Override
-    public void setBadgeCount(int count) {
-//        getCartItems();
-        setCartItemsBadgeCount(count);
-    }
 }

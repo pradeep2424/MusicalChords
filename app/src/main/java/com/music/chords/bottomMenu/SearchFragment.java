@@ -1,6 +1,5 @@
 package com.music.chords.bottomMenu;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -8,14 +7,12 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
@@ -26,32 +23,17 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.music.chords.R;
 import com.music.chords.activity.SongDetailsActivity;
-import com.music.chords.adapter.SearchAutoCompleteAdapter;
 import com.music.chords.adapter.SongItemAdapter;
 import com.music.chords.database.DBSongDetails;
 import com.music.chords.interfaces.Constants;
 import com.music.chords.interfaces.SongAdapterListener;
-import com.music.chords.interfaces.TriggerTabChangeListener;
-import com.music.chords.loader.OnRecyclerViewClickListener;
+import com.music.chords.interfaces.TriggerDBChangeListener;
 import com.music.chords.objects.SongObject;
-import com.music.chords.service.retrofit.ApiInterface;
-import com.music.chords.service.retrofit.RetroClient;
-import com.music.chords.utils.InternetConnection;
-import com.music.chords.utils.SimpleDividerItemDecoration;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class SearchFragment extends Fragment implements SongAdapterListener, Constants {
@@ -65,13 +47,20 @@ public class SearchFragment extends Fragment implements SongAdapterListener, Con
     private ActionModeCallback actionModeCallback;
     private ActionMode actionMode;
 
-    DBSongDetails dbSongDetails;
+    private DBSongDetails dbSongDetails;
 
+    private TriggerDBChangeListener triggerFavoritesChangeListener;
     private ArrayList<SongObject> listSearchedSongs = new ArrayList<>();
-    ArrayList<SongObject> listSelectedSongs = new ArrayList<>();
+    private ArrayList<SongObject> listSelectedSongs = new ArrayList<>();
 
 
     private final int REQUEST_CODE_PRODUCT_DETAILS = 100;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        triggerFavoritesChangeListener = (TriggerDBChangeListener) context;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -379,9 +368,29 @@ public class SearchFragment extends Fragment implements SongAdapterListener, Con
             int position = selectedItemPositions.get(i);
             listSearchedSongs.get(position).setIsFavorites(isSaved);
 //            adapter.removeData(selectedItemPositions.get(i));
+
+            updateFavoritesInDB(listSearchedSongs.get(position));
         }
+
+        triggerFavoritesChangedListener();
         adapterSearch.notifyDataSetChanged();
     }
+
+    private void updateFavoritesInDB(SongObject songObject) {
+        int songID = songObject.getSongId();
+        boolean isFavorites = songObject.getIsFavorites();
+
+        if (isFavorites) {
+            dbSongDetails.setSongToFavorites(songID);
+        } else {
+            dbSongDetails.removeSongFromFavorites(songID);
+        }
+    }
+
+    private void triggerFavoritesChangedListener() {
+        triggerFavoritesChangeListener.onDBDataChanged();
+    }
+
 
     private class ActionModeCallback implements ActionMode.Callback {
         @Override
@@ -476,12 +485,21 @@ public class SearchFragment extends Fragment implements SongAdapterListener, Con
 
     @Override
     public void onIconImportantClicked(int position) {
-        // Star icon is clicked,
-        // mark the message as important
         SongObject songObject = listSearchedSongs.get(position);
-        songObject.setIsFavorites(!songObject.getIsFavorites());
+        boolean isFavorites = !songObject.getIsFavorites();
+
+        songObject.setIsFavorites(isFavorites);
         listSearchedSongs.set(position, songObject);
         adapterSearch.notifyDataSetChanged();
+
+        updateFavoritesInDB(songObject);
+        triggerFavoritesChangedListener();
+
+//        SongObject songObject = listSearchedSongs.get(position);
+//        songObject.setIsFavorites(!songObject.getIsFavorites());
+//
+//        listSearchedSongs.set(position, songObject);
+//        adapterSearch.notifyDataSetChanged();
     }
 
     @Override

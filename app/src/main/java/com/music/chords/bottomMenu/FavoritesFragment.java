@@ -1,5 +1,6 @@
 package com.music.chords.bottomMenu;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -19,7 +20,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.music.chords.R;
 import com.music.chords.activity.SongDetailsActivity;
@@ -27,6 +27,7 @@ import com.music.chords.adapter.SongItemAdapter;
 import com.music.chords.database.DBSongDetails;
 import com.music.chords.interfaces.Constants;
 import com.music.chords.interfaces.SongAdapterListener;
+import com.music.chords.interfaces.TriggerDBChangeListener;
 import com.music.chords.objects.SongObject;
 
 import java.util.ArrayList;
@@ -42,12 +43,19 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
     private ActionModeCallback actionModeCallback;
     private ActionMode actionMode;
 
-    DBSongDetails dbSongDetails;
+    private DBSongDetails dbSongDetails;
 
+    private TriggerDBChangeListener triggerFavoritesChangeListener;
     private ArrayList<SongObject> listFavoriteSongs = new ArrayList<>();
-    ArrayList<SongObject> listSelectedSongs = new ArrayList<>();
+    private ArrayList<SongObject> listSelectedSongs = new ArrayList<>();
 
     private final int REQUEST_CODE_PRODUCT_DETAILS = 100;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        triggerFavoritesChangeListener = (TriggerDBChangeListener) context;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,6 +98,13 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
 
     private void getFavoritesItems() {
         try {
+//            for (int i = 0; i < Application.allSongsData.size(); i++) {
+//                SongObject songObject = Application.allSongsData.get(i);
+//                if (songObject.getIsFavorites()) {
+//                    listFavoriteSongs.add(songObject);
+//                }
+//            }
+
             Cursor rss = dbSongDetails.getFavoritesSongData();
             int countDBRows = rss.getCount();
             if (countDBRows > 0) {
@@ -188,12 +203,7 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
             updateFavoritesInDB(selectedSong);
         }
 
-//        List<Integer> selectedItemPositions = adapter.getSelectedItems();
-//        for (int i = 0; i < selectedItemPositions.size(); i++) {
-//            int position = selectedItemPositions.get(i);
-//            listFavoriteSongs.get(position).setIsFavorites(isSaved);
-////            adapter.removeData(selectedItemPositions.get(i));
-//        }
+        triggerFavoritesChangedListener();
         adapter.notifyDataSetChanged();
     }
 
@@ -207,6 +217,11 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
             dbSongDetails.removeSongFromFavorites(songID);
         }
     }
+
+    private void triggerFavoritesChangedListener() {
+        triggerFavoritesChangeListener.onDBDataChanged();
+    }
+
 
     private class ActionModeCallback implements ActionMode.Callback {
         @Override
@@ -296,6 +311,7 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
         adapter.notifyDataSetChanged();
 
         updateFavoritesInDB(songObject);
+        triggerFavoritesChangedListener();
     }
 
     @Override

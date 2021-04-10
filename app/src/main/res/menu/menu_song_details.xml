@@ -2,6 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.sogo.sogosurvey.main.MainActivity">
 
+<!--    <item-->
+<!--            android:id="@+id/menu_fullscreen_lyrics"-->
+<!--            android:icon="@drawable/ic_fullscreen"-->
+<!--            android:orderInCategory="100"-->
+<!--            android:title="Open Dialog" />-->
+
     <item
         android:id="@+id/menu_fullscreen_lyrics"
         android:icon="@drawable/ic_fullscreen"
@@ -26,11 +32,11 @@
         android:orderInCategory="102"
         android:title="@string/action_transpose" />
 
-    <item
-        android:id="@+id/menu_share"
-        android:icon="@drawable/ic_share"
-        android:orderInCategory="103"
-        android:title="@string/action_share">
+<!--    <item-->
+<!--        android:id="@+id/menu_share"-->
+<!--        android:icon="@drawable/ic_share"-->
+<!--        android:orderInCategory="103"-->
+<!--        android:title="@string/action_share"/>-->
 
 <!--        <menu>-->
 <!--            <item-->
@@ -44,6 +50,5 @@
 <!--                android:icon="@drawable/ic_share_pdf"-->
 <!--                android:title="@string/action_share_pdf" />-->
 <!--        </menu>-->
-    </item>
 
 </menu>
