@@ -5,7 +5,23 @@
     android:id="@+id/rl_rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/ic_launcher_round"
     tools:context=".main.SplashActivity">
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    <!--    <com.jem.easyreveal.layouts.EasyRevealLinearLayout-->
+    <!--        android:id="@+id/easyRevealLinearLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:clipPathProvider="circular"-->
+    <!--        app:hideAnimationDuration="1500"-->
+    <!--        app:revealAnimationDuration="2000">-->
+
+
+    <!--    </com.jem.easyreveal.layouts.EasyRevealLinearLayout>-->
 
 </RelativeLayout>

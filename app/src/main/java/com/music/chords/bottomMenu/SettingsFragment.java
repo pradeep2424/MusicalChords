@@ -1,4 +1,5 @@
 package com.music.chords.bottomMenu;
+
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -19,8 +20,8 @@ import com.music.chords.R;
 public class SettingsFragment extends Fragment {
 
     private View view;
-    private LinearLayout llLanguage;
-    //    private LinearLayout llTheme;
+    private LinearLayout llTheme;
+    private LinearLayout llFontSize;
     private LinearLayout llShare;
     private LinearLayout llRateUs;
     private LinearLayout llContactUs;
@@ -39,8 +40,8 @@ public class SettingsFragment extends Fragment {
     }
 
     private void init() {
-        llLanguage = (LinearLayout) view.findViewById(R.id.ll_changeLanguage);
-//        llTheme = (LinearLayout) view.findViewById(R.id.ll_changeTheme);
+        llTheme = (LinearLayout) view.findViewById(R.id.ll_theme);
+        llFontSize = (LinearLayout) view.findViewById(R.id.ll_fontSize);
         llShare = (LinearLayout) view.findViewById(R.id.ll_share);
         llRateUs = (LinearLayout) view.findViewById(R.id.ll_rateUs);
         llContactUs = (LinearLayout) view.findViewById(R.id.ll_contactUs);
@@ -61,7 +62,7 @@ public class SettingsFragment extends Fragment {
 
 
     private void componentEvents() {
-        llLanguage.setOnClickListener(new View.OnClickListener() {
+        llTheme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Intent intent = new Intent(getActivity(), ApplicationLanguageActivity.class);
@@ -71,13 +72,13 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-//        llTheme.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                DialogFragment dialogFragment = SetThemeDialogFragment.newInstance(mCurrentTheme);
-////                DialogUtils.showDialogFragment(getActivity().getSupportFragmentManager(), dialogFragment);
-//            }
-//        });
+        llFontSize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                DialogFragment dialogFragment = SetThemeDialogFragment.newInstance(mCurrentTheme);
+//                DialogUtils.showDialogFragment(getActivity().getSupportFragmentManager(), dialogFragment);
+            }
+        });
 
         llShare.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -61,7 +61,7 @@
     <string name="action_mark_unsaved">Mark unsaved</string>
     <string name="action_search">Search</string>
     <string name="action_fullscreen_lyrics">Fullscreen Lyrics</string>
-    <string name="action_text_size">Text Size</string>
+    <string name="action_font_size">Font Size</string>
     <string name="action_auto_scroll">Auto Scroll</string>
     <string name="action_transpose">Transpose</string>
     <string name="action_share">Share</string>
@@ -71,6 +71,7 @@
     <string name="confirm_chords">Confirm Chords</string>
 
     <string name="choose_text_size">Choose Text Size</string>
+    <string name="auto_scroll_setup">Auto Scroll Setup</string>
     <string name="sample_text">This is sample text. Check text size here.</string>
     <string name="done">Done</string>
 
@@ -79,4 +80,8 @@
     <string name="no_internet_connection">No internet connection.</string>
     <string name="connect_to_internet">No internet connection available, Please connect to internet and restart the application.</string>
 
+    <string name="settings_theme">Theme</string>
+    <string name="settings_font_size">Font Size</string>
+    <string name="settings_share">Share</string>
+    <string name="settings_rate_us">Rate Us</string>
 </resources>

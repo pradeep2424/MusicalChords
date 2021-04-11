@@ -1,6 +1,5 @@
 package com.music.chords.activity;
 
-import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,22 +7,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
 
 import android.os.Handler;
 import android.os.PowerManager;
@@ -33,32 +26,20 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ImageSpan;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.SubMenu;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.LinearInterpolator;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.PopupWindow;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
 import com.marcoscg.dialogsheet.DialogSheet;
 import com.music.chords.R;
 import com.music.chords.chordsReader.chords.Chord;
@@ -78,7 +59,6 @@ import com.music.chords.chordsReader.utils.UtilLogger;
 import com.music.chords.helper.FullScreenHelper;
 import com.music.chords.interfaces.Constants;
 import com.music.chords.objects.SongObject;
-import com.music.chords.utils.Application;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener;
@@ -87,13 +67,9 @@ import com.travijuu.numberpicker.library.Enums.ActionEnum;
 import com.travijuu.numberpicker.library.Listener.DefaultValueChangedListener;
 import com.travijuu.numberpicker.library.NumberPicker;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.TimerTask;
 
 public class SongDetailsActivity extends AppCompatActivity implements Constants, View.OnTouchListener {
     SongObject songObject;
@@ -104,7 +80,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     FloatingActionButton fabExitFullScreen;
     //    ImageView ivCoverPic;
 //    TextView tvToolbarTitle;
-    private FullScreenHelper fullScreenHelper;
+    FullScreenHelper fullScreenHelper;
     YouTubePlayerView youTubePlayerView;
     TextView tvTitle;
     TextView tvSubtitle;
@@ -114,6 +90,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 //    private OnMenuItemClickListener<PowerMenuItem> onOptionMenuClickListener;
 
     private PowerManager.WakeLock wakeLock;
+    private Handler autoScrollHandler;
 
     private float lastXCoordinate;
     private float lastYCoordinate;
@@ -217,7 +194,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 //        prefManagerAppData = new PrefManagerAppData(this);
 
         clRootLayout = findViewById(R.id.cl_rootLayout);
-//        appBarLayout = findViewById(R.id.appBar);
+        appBarLayout = findViewById(R.id.appBar);
 //        tvToolbarTitle = findViewById(R.id.tv_toolbarTitle);
         nestedScrollView = findViewById(R.id.nestedScrollView);
         fabExitFullScreen = findViewById(R.id.fab_exitFullScreen);
@@ -332,7 +309,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 //            OnMenuItemClickListener<PowerMenuItem> onMenuItemClickListener) {
 //
 //        String fullScreen = getString(R.string.action_fullscreen);
-//        String textSize = getString(R.string.action_text_size);
+//        String textSize = getString(R.string.action_font_size);
 //        String autoScroll = getString(R.string.action_auto_scroll);
 //        String transpose = getString(R.string.action_transpose);
 //        String share = getString(R.string.action_share);
@@ -872,7 +849,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
 //    }
 
     private void showBottomSheetDialogTextSize() {
-        View view = View.inflate(this, R.layout.layout_number_picker_text_size, null);
+        View view = View.inflate(this, R.layout.layout_sheet_text_size, null);
 
         DialogSheet dialogSheet = new DialogSheet(this, true)
                 .setView(view)
@@ -922,7 +899,7 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
     }
 
     private void showBottomSheetDialogTranspose() {
-        View view = View.inflate(this, R.layout.layout_number_picker_transpose, null);
+        View view = View.inflate(this, R.layout.layout_sheet_transpose, null);
 
         DialogSheet dialogSheet = new DialogSheet(this, true)
                 .setView(view)
@@ -949,13 +926,67 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         });
     }
 
-    private void autoScrollPage() {
-        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(nestedScrollView, "scrollY",
-                clRootLayout.getChildAt(0).getHeight() - nestedScrollView.getHeight());
-        objectAnimator.setDuration(4000);
-        objectAnimator.setInterpolator(new LinearInterpolator());
-        objectAnimator.start();
+    private void starAutoScrollPage() {
+        autoScrollHandler = new Handler();
+        Runnable timerRunnable = new Runnable() {
+            @Override
+            public void run() {
+//                nestedScrollView.smoothScrollBy(0, 5);         // 1 is how many pixels you want it to scroll vertically by
+                nestedScrollView.smoothScrollBy(0, 5);         // 1 is how many pixels you want it to scroll vertically by
+                autoScrollHandler.postDelayed(this, 100);     // 40 is how many milliseconds you want this thread to run
+            }
+        };
+        autoScrollHandler.postDelayed(timerRunnable, 0);
+
+//        Timer timer = new Timer();
+//        timer.scheduleAtFixedRate(new RemindTask(), 0, 500); // delay*/
+
+
+//        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(nestedScrollView, "scrollY",
+//                clRootLayout.getChildAt(0).getHeight() - nestedScrollView.getHeight());
+//        objectAnimator.setDuration(4000);
+//        objectAnimator.setInterpolator(new LinearInterpolator());
+//        objectAnimator.start();
     }
+
+    private void stopAutoScrollPage() {
+        autoScrollHandler.removeCallbacksAndMessages(null);
+    }
+
+    private int textViewOneLineHeight() {
+        int textViewHeight = tvLyrics.getLineHeight();
+
+        return textViewHeight;
+    }
+
+    class RemindTask extends TimerTask {
+        //        int current = nestedScrollView.getCurrentItem();
+        int position = 0;
+
+        @Override
+        public void run() {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    if (position == chordsInText.size()) {
+                        position = 0;
+                        position++;
+                    } else {
+                        position++;
+                    }
+                    nestedScrollView.smoothScrollBy(0, position);
+                }
+            });
+        }
+    }
+
+    public void expandToolbar() {
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
+        if (behavior != null) {
+            behavior.onNestedFling(clRootLayout, appBarLayout, null, 0, -10000, false);
+        }
+    }
+
 
     private void enterFullScreenMode() {
         fabExitFullScreen.setVisibility(View.VISIBLE);
@@ -1011,69 +1042,69 @@ public class SongDetailsActivity extends AppCompatActivity implements Constants,
         return false;
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_song_details, menu);
-//
-////        if (menu instanceof MenuBuilder) {
-////            MenuBuilder m = (MenuBuilder) menu;
-////            m.setOptionalIconsVisible(true);
-////        }
-//
-//        MenuItem menuItemFullscreen = menu.findItem(R.id.menu_fullscreen_lyrics);
-//        MenuItem menuItemTextSize = menu.findItem(R.id.menu_text_size);
-//        MenuItem menuItemAutoScroll = menu.findItem(R.id.menu_auto_scroll);
-//        MenuItem menuItemTranspose = menu.findItem(R.id.menu_transpose);
-//        MenuItem menuItemShare = menu.findItem(R.id.menu_share);
-//
-////        SubMenu subMenuShare = menuItemShare.getSubMenu();
-////        MenuItem submenuItemShareText = subMenuShare.findItem(R.id.submenu_share_text);
-////        MenuItem submenuItemSharePDF = subMenuShare.findItem(R.id.submenu_share_pdf);
-//
-////        int color = ContextCompat.getColor(this, R.color.gray);
-////        updateMenuWithIcon(menuItemFullscreen, color);
-////        updateMenuWithIcon(menuItemTextSize, color);
-////        updateMenuWithIcon(menuItemAutoScroll, color);
-////        updateMenuWithIcon(menuItemTranspose, color);
-////        updateMenuWithIcon(menuItemShare, color);
-//////        updateMenuWithIcon(submenuItemShareText, color);
-//////        updateMenuWithIcon(submenuItemSharePDF, color);
-//
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.menu_fullscreen_lyrics:
-//                enterFullScreenMode();
-//                return true;
-//
-//            case R.id.menu_text_size:
-//                showBottomSheetDialogTextSize();
-//                return true;
-//
-//            case R.id.menu_auto_scroll:
-//                autoScrollPage();
-//                return true;
-//
-//            case R.id.menu_transpose:
-//                showBottomSheetDialogTranspose();
-////                createTransposeDialog();
-//                return true;
-//
-//            case R.id.menu_share:
-//
-//                return true;
-//
-//            case android.R.id.home:
-//                onBackPressed();
-//                return true;
-//
-//            default:
-//                return super.onOptionsItemSelected(item);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_song_details, menu);
+
+//        if (menu instanceof MenuBuilder) {
+//            MenuBuilder m = (MenuBuilder) menu;
+//            m.setOptionalIconsVisible(true);
 //        }
-//    }
+
+        MenuItem menuItemFullscreen = menu.findItem(R.id.menu_fullscreen_lyrics);
+        MenuItem menuItemTextSize = menu.findItem(R.id.menu_text_size);
+        MenuItem menuItemAutoScroll = menu.findItem(R.id.menu_auto_scroll);
+        MenuItem menuItemTranspose = menu.findItem(R.id.menu_transpose);
+        MenuItem menuItemShare = menu.findItem(R.id.menu_share);
+
+//        SubMenu subMenuShare = menuItemShare.getSubMenu();
+//        MenuItem submenuItemShareText = subMenuShare.findItem(R.id.submenu_share_text);
+//        MenuItem submenuItemSharePDF = subMenuShare.findItem(R.id.submenu_share_pdf);
+
+//        int color = ContextCompat.getColor(this, R.color.gray);
+//        updateMenuWithIcon(menuItemFullscreen, color);
+//        updateMenuWithIcon(menuItemTextSize, color);
+//        updateMenuWithIcon(menuItemAutoScroll, color);
+//        updateMenuWithIcon(menuItemTranspose, color);
+//        updateMenuWithIcon(menuItemShare, color);
+////        updateMenuWithIcon(submenuItemShareText, color);
+////        updateMenuWithIcon(submenuItemSharePDF, color);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_fullscreen_lyrics:
+                enterFullScreenMode();
+                return true;
+
+            case R.id.menu_text_size:
+                showBottomSheetDialogTextSize();
+                return true;
+
+            case R.id.menu_auto_scroll:
+                starAutoScrollPage();
+                return true;
+
+            case R.id.menu_transpose:
+                showBottomSheetDialogTranspose();
+//                createTransposeDialog();
+                return true;
+
+            case R.id.menu_share:
+
+                return true;
+
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public void onBackPressed() {

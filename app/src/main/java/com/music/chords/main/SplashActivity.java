@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.MediaController;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.music.chords.R;
 import com.music.chords.database.CreateDB;
@@ -29,6 +32,8 @@ public class SplashActivity extends AppCompatActivity {
     CreateDB dbCreate;
     DBSongDetails dbSongDetails;
 
+    VideoView videoView;
+
     ArrayList<SongObject> listSongData;
 
     @Override
@@ -38,6 +43,7 @@ public class SplashActivity extends AppCompatActivity {
 
 //        loadNextPage();
         init();
+        setupSplashVideo();
         loadSongData();
     }
 
@@ -45,7 +51,16 @@ public class SplashActivity extends AppCompatActivity {
         listSongData = new ArrayList<>();
         dbCreate = new CreateDB(this);
         dbSongDetails = new DBSongDetails(this);
+
+        videoView = findViewById(R.id.videoView);
     }
+
+    private void setupSplashVideo() {
+        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_splash));
+        videoView.setMediaController(new MediaController(this));
+        videoView.start();
+    }
+
 
     private boolean isInternetAvailable() {
         if (InternetConnection.checkConnection(SplashActivity.this)) {

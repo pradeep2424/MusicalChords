@@ -210,4 +210,14 @@ public class MainActivity extends AppCompatActivity implements TriggerDBChangeLi
         getSongDataFromDB();
     }
 
+    @Override
+    public void onBackPressed() {
+        int selectedTab = bottomBar.getCurrentTabPosition();
+        if (selectedTab != 0) {
+            bottomBar.selectTabAtPosition(0);
+
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

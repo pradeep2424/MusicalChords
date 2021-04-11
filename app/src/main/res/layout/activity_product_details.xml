@@ -67,6 +67,7 @@
             android:id="@+id/rl_lyricsLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingBottom="40dp"
             android:background="@color/details_background"
             android:orientation="vertical">
 
@@ -209,14 +210,13 @@
         android:id="@+id/fab_exitFullScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="12dp"
         android:clickable="true"
         app:fabSize="mini"
         android:src="@drawable/ic_exit_fullscreen"
         android:tint="@color/white"
         android:visibility="gone"
         app:useCompatPadding="true"
-        android:padding="10dp"
         app:layout_anchor="@id/nestedScrollView"
         app:layout_anchorGravity="bottom|right|end"/>
 
