@@ -30,7 +30,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".activity.SongDetailsActivity"
+            android:name=".activity.ItemDetailsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/AppTheme.NoActionBar" />
 
