@@ -27,7 +27,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.music.chords.R;
-import com.music.chords.activity.SongDetailsActivity;
+import com.music.chords.activity.ItemDetailsActivity;
 import com.music.chords.adapter.SongItemAdapter;
 import com.music.chords.database.DBSongDetails;
 import com.music.chords.interfaces.Constants;
@@ -493,7 +493,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
 
         } else {
             SongObject songObject = listAllSongsData.get(position);
-            Intent intent = new Intent(getActivity(), SongDetailsActivity.class);
+            Intent intent = new Intent(getActivity(), ItemDetailsActivity.class);
             intent.putExtra(SONG_OBJECT, songObject);
             startActivity(intent);
 

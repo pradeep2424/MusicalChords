@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.music.chords.R;
-import com.music.chords.activity.SongDetailsActivity;
+import com.music.chords.activity.ItemDetailsActivity;
 import com.music.chords.adapter.SongItemAdapter;
 import com.music.chords.database.DBSongDetails;
 import com.music.chords.interfaces.Constants;
@@ -511,7 +511,7 @@ public class SearchFragment extends Fragment implements SongAdapterListener, Con
 
         } else {
             SongObject songObject = listSearchedSongs.get(position);
-            Intent intent = new Intent(getActivity(), SongDetailsActivity.class);
+            Intent intent = new Intent(getActivity(), ItemDetailsActivity.class);
             intent.putExtra(SONG_OBJECT, songObject);
             startActivityForResult(intent, REQUEST_CODE_PRODUCT_DETAILS);
         }

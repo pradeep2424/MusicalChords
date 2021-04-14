@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBar"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="100dp"
+        android:orientation="vertical">
+
+<!--        <com.music.chords.custom.MyTextViewBold-->
+<!--            android:id="@+id/tv_textSize"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:text="@string/auto_scroll_setup"-->
+<!--            android:textColor="@color/main_dark_text"-->
+<!--            android:textSize="18sp" />-->
+
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0.5dp"-->
+<!--            android:layout_margin="20dp"-->
+<!--            android:background="@color/color_divider" />-->
+
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/numberPicker_textSize"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            app:custom_layout="@layout/layout_custom_number_picker"
+            app:focusable="false"
+            app:max="22"
+            app:min="12"
+            app:unit="2" />
+
+        <com.music.chords.custom.MyTextView
+            android:id="@+id/tv_sampleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/numberPicker_textSize"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/sample_text_settings"
+            android:textColor="@color/main_dark_text"
+            android:textSize="14sp" />
+
+        <!--        <com.music.chords.custom.MyTextViewBold-->
+        <!--            android:id="@+id/tv_emtpy"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="60dp"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:textColor="@color/main_dark_text"-->
+        <!--            android:textSize="16sp" />-->
+
+        <LinearLayout
+            android:id="@+id/ll_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rectangle_blue"
+            android:gravity="right"
+            android:orientation="vertical"
+            android:paddingLeft="30dp"
+            android:paddingTop="8dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="8dp">
+
+            <com.music.chords.custom.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/done"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</RelativeLayout>

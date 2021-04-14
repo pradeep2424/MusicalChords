@@ -3,6 +3,7 @@ package com.music.chords.bottomMenu;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.fonts.Font;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,6 +16,8 @@ import android.widget.LinearLayout;
 
 import com.music.chords.BuildConfig;
 import com.music.chords.R;
+import com.music.chords.activity.FontSizeActivity;
+import com.music.chords.activity.ItemDetailsActivity;
 
 
 public class SettingsFragment extends Fragment {
@@ -27,7 +30,8 @@ public class SettingsFragment extends Fragment {
     private LinearLayout llContactUs;
 //    private ImageView ivThemeIcon;
 
-    private final int REQUEST_CODE_LANGUAGE_SELECTION = 100;
+    private final int REQUEST_CODE_THEME = 100;
+    private final int REQUEST_CODE_FONT_SIZE = 200;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,7 +71,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
 //                Intent intent = new Intent(getActivity(), ApplicationLanguageActivity.class);
 //                intent.putExtra("RedirectedFromSettings", true);
-//                startActivityForResult(intent, REQUEST_CODE_LANGUAGE_SELECTION);
+//                startActivityForResult(intent, REQUEST_CODE_THEME);
 ////                finish();
             }
         });
@@ -75,16 +79,15 @@ public class SettingsFragment extends Fragment {
         llFontSize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                DialogFragment dialogFragment = SetThemeDialogFragment.newInstance(mCurrentTheme);
-//                DialogUtils.showDialogFragment(getActivity().getSupportFragmentManager(), dialogFragment);
+                Intent intent = new Intent(getActivity(), FontSizeActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_FONT_SIZE);
             }
         });
 
         llShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), ShareActivity.class);
-//                startActivity(intent);
+                shareApp();
             }
         });
 
@@ -102,6 +105,21 @@ public class SettingsFragment extends Fragment {
 //                startActivity(intent);
             }
         });
+    }
+
+    private void shareApp() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
+        String shareMessage = "\nLet me recommend you this application\n\n";
+        shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+
+        try {
+            startActivity(Intent.createChooser(shareIntent, "choose one"));
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void rateUsPlayStore() {
@@ -125,7 +143,7 @@ public class SettingsFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
-            case REQUEST_CODE_LANGUAGE_SELECTION:
+            case REQUEST_CODE_THEME:
                 if (resultCode == Activity.RESULT_OK) {
 //                    FragmentTransaction ft = getFragmentManager().beginTransaction();
 //                    if (Build.VERSION.SDK_INT >= 26) {

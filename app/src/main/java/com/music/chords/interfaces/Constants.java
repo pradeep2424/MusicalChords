@@ -14,4 +14,5 @@ public interface Constants {
 //    String BASE_URL = "http://172.16.7.43:86/CustomerAppService1.svc/";    // chandan thakur
 
     String SONG_OBJECT = "SongObject";
+    String APP_SHARED_PREFERENCE = "SPMusicChords";
 }

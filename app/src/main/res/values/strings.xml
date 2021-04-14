@@ -73,6 +73,8 @@
     <string name="choose_text_size">Choose Text Size</string>
     <string name="auto_scroll_setup">Auto Scroll Setup</string>
     <string name="sample_text">This is sample text. Check text size here.</string>
+    <string name="sample_text_settings">This is sample text line 1. \nThis is sample text line 2. \nThis is sample text line 3. \nThis is sample text line 4. \nCheck text size here.</string>
+
     <string name="done">Done</string>
 
     <string name="transpose_chords">Transpose Chords</string>
