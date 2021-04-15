@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.music.chords.R;
+import com.music.chords.interfaces.Constants;
+import com.music.chords.sharedPreference.AppSharedPreference;
 import com.travijuu.numberpicker.library.Enums.ActionEnum;
 import com.travijuu.numberpicker.library.Listener.DefaultValueChangedListener;
 import com.travijuu.numberpicker.library.NumberPicker;
@@ -58,6 +60,9 @@ public class FontSizeActivity extends AppCompatActivity {
         llDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int fontSize = numberPicker.getValue();
+                AppSharedPreference.SSP().putInt(Constants.KEY_FONT_SIZE, fontSize);
+
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
                 finish();

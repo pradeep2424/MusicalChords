@@ -1,6 +1,7 @@
 package com.music.chords.utils;
 
 import com.music.chords.objects.SongObject;
+import com.music.chords.sharedPreference.AppSharedPreference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +39,7 @@ public class Application extends android.app.Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        AppSharedPreference.SSP().init(getApplicationContext());
 
 //        AppSignatureHelper appSignatureHelper = new AppSignatureHelper(this);
 //        appSignatureHelper.getAppSignatures();

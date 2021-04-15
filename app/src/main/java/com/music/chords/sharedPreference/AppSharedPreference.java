@@ -79,4 +79,9 @@ public class AppSharedPreference implements Constants {
         editor.commit();
     }
 
+    public int getFontSize() {
+      int fontSize =  sharedPreferences.getInt(Constants.KEY_FONT_SIZE, VALUE_DEFAULT_FONT_SIZE);
+      return fontSize;
+    }
+
 }

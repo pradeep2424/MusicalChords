@@ -58,6 +58,7 @@ import com.music.chords.chordsReader.utils.UtilLogger;
 import com.music.chords.helper.FullScreenHelper;
 import com.music.chords.interfaces.Constants;
 import com.music.chords.objects.SongObject;
+import com.music.chords.sharedPreference.AppSharedPreference;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener;
@@ -201,7 +202,8 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
         tvTitle = findViewById(R.id.tv_title);
         tvSubtitle = findViewById(R.id.tv_subtitle);
         tvLyrics = findViewById(R.id.tv_lyricsText);
-        tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, PreferenceHelper.getTextSizePreference(this));
+//        tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, PreferenceHelper.getTextSizePreference(this));
+        tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, AppSharedPreference.SSP().getFontSize());
         youTubePlayerView = findViewById(R.id.youtube_player_view);
 
 //        tvToolbarTitle.setText(songObject.getSongTitle());
@@ -1129,7 +1131,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
         super.onResume();
 
         // just in case the text size has changed
-        tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, PreferenceHelper.getTextSizePreference(this));
+//        tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, PreferenceHelper.getTextSizePreference(this));
 
         if (isInViewingMode() && !wakeLock.isHeld()) {
             log.d("Acquiring wakelock");
