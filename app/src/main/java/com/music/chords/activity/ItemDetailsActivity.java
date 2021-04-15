@@ -25,8 +25,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -66,6 +68,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import com.travijuu.numberpicker.library.Enums.ActionEnum;
 import com.travijuu.numberpicker.library.Listener.DefaultValueChangedListener;
 import com.travijuu.numberpicker.library.NumberPicker;
+import com.warkiz.widget.IndicatorSeekBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +88,11 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
     TextView tvTitle;
     TextView tvSubtitle;
     TextView tvLyrics;
+
+    View viewAutoScrollBottomSeekBar;
+    IndicatorSeekBar seekBar;
+    ImageView ivPlayPause;
+    ImageView ivCancel;
 
 //    private PowerMenu optionMenu;
 //    private OnMenuItemClickListener<PowerMenuItem> onOptionMenuClickListener;
@@ -205,6 +213,12 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
 //        tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, PreferenceHelper.getTextSizePreference(this));
         tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, AppSharedPreference.SSP().getFontSize());
         youTubePlayerView = findViewById(R.id.youtube_player_view);
+
+        viewAutoScrollBottomSeekBar = findViewById(R.id.view_autoScrollSetup);
+        seekBar = viewAutoScrollBottomSeekBar.findViewById(R.id.seekBar_speed);
+        ivPlayPause = viewAutoScrollBottomSeekBar.findViewById(R.id.iv_playPause);
+        ivCancel = viewAutoScrollBottomSeekBar.findViewById(R.id.iv_cancel);
+
 
 //        tvToolbarTitle.setText(songObject.getSongTitle());
 

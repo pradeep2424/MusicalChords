@@ -220,6 +220,15 @@
         app:layout_anchor="@id/nestedScrollView"
         app:layout_anchorGravity="bottom|right|end"/>
 
+    <include
+        android:id="@+id/view_autoScrollSetup"
+        android:layout_gravity="bottom"
+        layout="@layout/layout_auto_scroll_bottom_seekbar"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_width="match_parent"/>
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
