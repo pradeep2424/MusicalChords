@@ -39,5 +39,9 @@
             android:name=".activity.FontSizeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".activity.AutoScrollActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 </manifest>

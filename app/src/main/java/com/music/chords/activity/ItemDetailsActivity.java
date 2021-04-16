@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,6 +70,8 @@ import com.travijuu.numberpicker.library.Enums.ActionEnum;
 import com.travijuu.numberpicker.library.Listener.DefaultValueChangedListener;
 import com.travijuu.numberpicker.library.NumberPicker;
 import com.warkiz.widget.IndicatorSeekBar;
+import com.warkiz.widget.OnSeekChangeListener;
+import com.warkiz.widget.SeekParams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +110,8 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
     private int transposeHalfSteps = 0;
     private volatile String chordText;
     private List<ChordInText> chordsInText;
+
+    private boolean isPlaying = false;
 
     private static final int PROGRESS_DIALOG_MIN_TIME = 600;
     private static final int CHORD_POPUP_Y_OFFSET_IN_SP = 24;
@@ -215,10 +220,13 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
         youTubePlayerView = findViewById(R.id.youtube_player_view);
 
         viewAutoScrollBottomSeekBar = findViewById(R.id.view_autoScrollSetup);
-        seekBar = viewAutoScrollBottomSeekBar.findViewById(R.id.seekBar_speed);
         ivPlayPause = viewAutoScrollBottomSeekBar.findViewById(R.id.iv_playPause);
         ivCancel = viewAutoScrollBottomSeekBar.findViewById(R.id.iv_cancel);
+        seekBar = viewAutoScrollBottomSeekBar.findViewById(R.id.seekBar_speed);
+        seekBar.setIndicatorTextFormat("${TICK_TEXT} --");
 
+//        seekBar.min(1F);
+//        seekBar.setMax(10);
 
 //        tvToolbarTitle.setText(songObject.getSongTitle());
 
@@ -280,26 +288,63 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
             }
         });
 
-//        heartButton.setEventListener(new SparkEventListener(){
+        seekBar.setOnSeekChangeListener(new OnSeekChangeListener() {
+            @Override
+            public void onSeeking(SeekParams seekParams) {
+                stopAutoScrollPage();
+
+                double scrollSpeed = seekParams.progressFloat;
+                startAutoScrollPage(scrollSpeed);
+            }
+
+            @Override
+            public void onStartTrackingTouch(IndicatorSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(IndicatorSeekBar seekBar) {
+
+            }
+        });
+
+        ivPlayPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isPlaying) {
+                    ivPlayPause.setImageDrawable(ContextCompat.getDrawable(ItemDetailsActivity.this, R.drawable.ic_play));
+                    stopAutoScrollPage();
+
+                } else {
+                    ivPlayPause.setImageDrawable(ContextCompat.getDrawable(ItemDetailsActivity.this, R.drawable.ic_pause));
+
+                    double scrollSpeed = seekBar.getProgressFloat();
+                    startAutoScrollPage(scrollSpeed);
+                }
+            }
+        });
+
+        ivCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewAutoScrollBottomSeekBar.setVisibility(View.GONE);
+            }
+        });
+
+//        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
 //            @Override
-//            public void onEvent(ImageView button, boolean buttonState) {
-//                if (buttonState) {
-//                    // Button is active
-//                    liked();
-//                } else {
-//                    // Button is inactive
-//                    unLiked();
+//            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                if (!v.canScrollVertically(1)) {
+//                    // bottom of scroll view
+//
+//                    if(isPlaying) {
+//                        stopAutoScrollPage();
+//                        Toast.makeText(ItemDetailsActivity.this, getString(R.string.end_of_song), Toast.LENGTH_SHORT).show();
+//                    }
 //                }
-//            }
-//
-//            @Override
-//            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
-//
-//            }
-//
-//            @Override
-//            public void onEventAnimationStart(ImageView button, boolean buttonState) {
-//
+//                if (!v.canScrollVertically(-1)) {
+//                    // top of scroll view
+//                }
 //            }
 //        });
     }
@@ -941,14 +986,26 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
         });
     }
 
-    private void starAutoScrollPage() {
+    private void showAutoScrollBoomSeekBar() {
+        viewAutoScrollBottomSeekBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideAutoScrollBoomSeekBar() {
+        viewAutoScrollBottomSeekBar.setVisibility(View.GONE);
+    }
+
+    private void startAutoScrollPage(double scrollSpeed) {
+        isPlaying = true;
+
+        int pixelScroll = (int) Math.round(scrollSpeed * 5);
+
         autoScrollHandler = new Handler();
         Runnable timerRunnable = new Runnable() {
             @Override
             public void run() {
 //                nestedScrollView.smoothScrollBy(0, 5);         // 1 is how many pixels you want it to scroll vertically by
-                nestedScrollView.smoothScrollBy(0, 5);         // 1 is how many pixels you want it to scroll vertically by
-                autoScrollHandler.postDelayed(this, 100);     // 40 is how many milliseconds you want this thread to run
+                nestedScrollView.smoothScrollBy(0, pixelScroll);         // 1 is how many pixels you want it to scroll vertically by
+                autoScrollHandler.postDelayed(this, 40);     // 40 is how many milliseconds you want this thread to run
             }
         };
         autoScrollHandler.postDelayed(timerRunnable, 0);
@@ -965,6 +1022,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
     }
 
     private void stopAutoScrollPage() {
+        isPlaying = false;
         autoScrollHandler.removeCallbacksAndMessages(null);
     }
 
@@ -1100,7 +1158,8 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
                 return true;
 
             case R.id.menu_auto_scroll:
-                starAutoScrollPage();
+                showAutoScrollBoomSeekBar();
+//                startAutoScrollPage();
                 return true;
 
             case R.id.menu_transpose:

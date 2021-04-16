@@ -78,12 +78,19 @@
     <string name="done">Done</string>
 
     <string name="transpose_chords">Transpose Chords</string>
+    <string name="line_per_second">line / second</string>
+    <string name="second">second</string>
 
     <string name="no_internet_connection">No internet connection.</string>
     <string name="connect_to_internet">No internet connection available, Please connect to internet and restart the application.</string>
 
     <string name="settings_theme">Theme</string>
     <string name="settings_font_size">Font Size</string>
+    <string name="settings_auto_scroll">Auto Scroll</string>
     <string name="settings_share">Share</string>
     <string name="settings_rate_us">Rate Us</string>
+    <string name="end_of_song">End of song.</string>
+    <string name="auto_scroll_initial_delay">Auto scroll initial delay</string>
+    <string name="auto_scroll_speed">Auto scroll speed</string>
+
 </resources>

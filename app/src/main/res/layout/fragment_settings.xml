@@ -152,6 +152,77 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_autoScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/iv_autoScroll"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_bottom_menu_home" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_toLeftOf="@+id/iv_autoScrollArrow"
+                android:layout_toRightOf="@id/iv_autoScroll"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <com.music.chords.custom.MyTextView
+                    android:id="@+id/tv_autoScrollText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_auto_scroll"
+                    android:textColor="@color/setting_labels"
+                    android:textSize="16sp" />
+
+                <com.music.chords.custom.MyTextView
+                    android:id="@+id/tv_autoScrollSubtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/settings_font_size"
+                    android:textColor="@color/setting_subtitles"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_autoScrollArrow"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_chevron_right_arrow"
+                app:tint="#a9a0b0" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/color_divider" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
         android:id="@+id/ll_share"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
