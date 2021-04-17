@@ -18,6 +18,8 @@ public class CreateDB extends SQLiteOpenHelper {
     private static final String KEY_SONG_YOUTUBE_URL = "SongYouTubeURL";
     private static final String KEY_IS_FAVORITES = "IsFavorites";
     private static final String KEY_SONG_ICON_COLOR = "SongIconColor";
+    private static final String KEY_SONG_LANGUAGE = "SongLanguage";
+    private static final String KEY_SONG_IS_CONTAINS_CHORDS = "SongIsContainsChords";
 
     public CreateDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -35,10 +37,11 @@ public class CreateDB extends SQLiteOpenHelper {
                     + KEY_SONG_ARTIST + " TEXT,"
                     + KEY_SONG_YOUTUBE_URL + " TEXT,"
                     + KEY_IS_FAVORITES + " INTEGER,"
-                    + KEY_SONG_ICON_COLOR + " TEXT" + ")";
+                    + KEY_SONG_ICON_COLOR + " TEXT,"
+                    + KEY_SONG_LANGUAGE + " TEXT,"
+                    + KEY_SONG_IS_CONTAINS_CHORDS + " INTEGER" + ")";
 
             db.execSQL(CREATE_MENU);
-
 
         } catch (Exception e) {
             e.printStackTrace();

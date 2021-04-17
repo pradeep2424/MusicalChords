@@ -15,6 +15,8 @@ public class DBSongDetails extends CreateDB {
     private static final String KEY_SONG_LYRICS = "SongLyrics";
     private static final String KEY_IS_FAVORITES = "IsFavorites";
     private static final String KEY_SONG_ICON_COLOR = "SongIconColor";
+    private static final String KEY_SONG_LANGUAGE = "SongLanguage";
+    private static final String KEY_SONG_IS_CONTAINS_CHORDS = "SongIsContainsChords";
 
     public DBSongDetails(Context context) {
         super(context);
@@ -30,7 +32,8 @@ public class DBSongDetails extends CreateDB {
     }
 
     public boolean insertData(int songID, String songTitle, String songSubtitle, String songArtist,
-                              String songYouTubeURL, String songLyrics, Boolean isFavorites, int songIconColor) {
+                              String songYouTubeURL, String songLyrics, boolean isFavorites,
+                              int songIconColor, String songLanguage, boolean songIsContainsChords) {
 
         try {
             SQLiteDatabase db = this.getWritableDatabase();
@@ -44,6 +47,8 @@ public class DBSongDetails extends CreateDB {
             contentValues.put(KEY_SONG_LYRICS, songLyrics);
             contentValues.put(KEY_IS_FAVORITES, isFavorites);
             contentValues.put(KEY_SONG_ICON_COLOR, songIconColor);
+            contentValues.put(KEY_SONG_LANGUAGE, songLanguage);
+            contentValues.put(KEY_SONG_IS_CONTAINS_CHORDS, songIsContainsChords);
 
             db.insert(TABLE_SONG_DETAILS, null, contentValues);
         } catch (Exception e) {
@@ -56,6 +61,20 @@ public class DBSongDetails extends CreateDB {
     public Cursor getData() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("SELECT * from " + TABLE_SONG_DETAILS, null);
+        return res;
+    }
+
+    public Cursor getLyricsData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * from " + TABLE_SONG_DETAILS + " where "
+                + KEY_SONG_IS_CONTAINS_CHORDS + " = 0", null);
+        return res;
+    }
+
+    public Cursor getChordsData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * from " + TABLE_SONG_DETAILS + " where "
+                + KEY_SONG_IS_CONTAINS_CHORDS + " = 1", null);
         return res;
     }
 
