@@ -20,6 +20,24 @@ public class SongObject implements Serializable {
     String songYouTubeURL;
     int songIconColor;
     Boolean isFavorites;
+    String songLanguage;
+    boolean isContainsChords;
+
+    public String getSongLanguage() {
+        return songLanguage;
+    }
+
+    public void setSongLanguage(String songLanguage) {
+        this.songLanguage = songLanguage;
+    }
+
+    public boolean isContainsChords() {
+        return isContainsChords;
+    }
+
+    public void setContainsChords(boolean containsChords) {
+        isContainsChords = containsChords;
+    }
 
 //    public SongObject(int songId, String songTitle, String songSubtitle, String songLyrics,
 //                      String songArtist, String songYouTubeURL, Boolean isBookmark) {
