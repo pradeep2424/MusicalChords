@@ -71,7 +71,7 @@ public class ChordsFragment extends Fragment implements SongAdapterListener, Swi
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_chords, container, false);
+        rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         init();
 //        getDummyData();
