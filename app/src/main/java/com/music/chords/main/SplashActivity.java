@@ -34,7 +34,9 @@ public class SplashActivity extends AppCompatActivity {
 
     VideoView videoView;
 
-    ArrayList<SongObject> listSongData;
+    ArrayList<SongObject> listSongsData;
+    ArrayList<SongObject> listLyricsData;
+    ArrayList<SongObject> listChordsData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void init() {
-        listSongData = new ArrayList<>();
+        listSongsData = new ArrayList<>();
+        listLyricsData = new ArrayList<>();
+        listChordsData = new ArrayList<>();
+
         dbCreate = new CreateDB(this);
         dbSongDetails = new DBSongDetails(this);
 
@@ -100,7 +105,9 @@ public class SplashActivity extends AppCompatActivity {
 
             if (respStatus.equalsIgnoreCase("Success")) {
                 isLocalDBHasData = checkLocalDBHasData();
-                listSongData.clear();
+                listSongsData.clear();
+                listLyricsData.clear();
+                listChordsData.clear();
 
                 JSONArray jsonArrayRoot = jsonObj.getJSONArray("SongData");
                 if (jsonArrayRoot != null && jsonArrayRoot.length() > 0) {
@@ -114,6 +121,8 @@ public class SplashActivity extends AppCompatActivity {
                         String songArtist = json.getString("Artist");
                         String youTubeURL = json.getString("YouTubeURL");
                         String songLyrics = json.getString("Lyrics");
+                        String songLanguage = json.getString("SongLanguage");
+                        boolean isContainsChords = json.getBoolean("IsContainsChords");
                         int songIconColor = getRandomMaterialColor();
                         boolean isFavorites = false;
 
@@ -124,6 +133,8 @@ public class SplashActivity extends AppCompatActivity {
                         songObject.setSongArtist(songArtist);
                         songObject.setSongYouTubeURL(youTubeURL);
                         songObject.setSongLyrics(songLyrics);
+                        songObject.setSongLanguage(songLanguage);
+                        songObject.setContainsChords(isContainsChords);
                         songObject.setSongIconColor(songIconColor);
 
 //                       checking DB if song is added to favorites
@@ -131,20 +142,27 @@ public class SplashActivity extends AppCompatActivity {
                             Cursor rss = dbSongDetails.getSingleSongData(songID);
                             int countDBRows = rss.getCount();
 
-                            rss.moveToFirst();
-                            isFavorites = (rss.getInt(6) == 1);
-                            rss.close();
-
+                            if (countDBRows > 0) {
+                                rss.moveToFirst();
+                                isFavorites = (rss.getInt(6) == 1);
+                                rss.close();
+                            }
                             songObject.setIsFavorites(isFavorites);
                         } else {
                             songObject.setIsFavorites(false);
 
 //                           No data foudn in DB, hence inserting data in DB in same loop
                             insertDataIntoDB(songID, songTitle, songSubtitle, songArtist,
-                                    youTubeURL, songLyrics, isFavorites, songIconColor);
+                                    youTubeURL, songLyrics, isFavorites, songIconColor,
+                                    songLanguage, isContainsChords);
                         }
 
-                        listSongData.add(songObject);
+                        listSongsData.add(songObject);
+                        if (isContainsChords) {
+                            listChordsData.add(songObject);
+                        } else {
+                            listLyricsData.add(songObject);
+                        }
                     }
 
 //                  if DB has data then clearing and updating db
@@ -163,33 +181,39 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void insertDataIntoDB(int songID, String songTitle, String songSubtitle, String songArtist,
-                                  String songYouTubeURL, String songLyrics, Boolean isFavorites, int songIconColor) {
-        dbSongDetails.insertData(songID, songTitle, songSubtitle, songArtist,
-                songYouTubeURL, songLyrics, isFavorites, songIconColor);
+                                  String songYouTubeURL, String songLyrics, Boolean isFavorites,
+                                  int songIconColor, String songLanguage, boolean isContainsChords) {
+        dbSongDetails.insertData(songID, songTitle, songSubtitle, songArtist, songYouTubeURL,
+                songLyrics, isFavorites, songIconColor, songLanguage, isContainsChords);
     }
 
     private void deleteAllTableData() {
-        checkLocalDBHasData();
         dbSongDetails.deleteAllTableData();
-        checkLocalDBHasData();
     }
 
     private void copyDataFromArrayListToDB() {
-        for (int index = 0; index < listSongData.size(); index++) {
+        for (int index = 0; index < listSongsData.size(); index++) {
+            SongObject songObject = listSongsData.get(index);
 
-            int songID = listSongData.get(index).getSongId();
-            String songTitle = listSongData.get(index).getSongTitle();
-            String songSubtitle = listSongData.get(index).getSongSubtitle();
-            String songArtist = listSongData.get(index).getSongArtist();
-            String youTubeURL = listSongData.get(index).getSongYouTubeURL();
-            String songLyrics = listSongData.get(index).getSongLyrics();
-            boolean isFavorites = listSongData.get(index).getIsFavorites();
-            int songIconColor = listSongData.get(index).getSongIconColor();
+            int songID = songObject.getSongId();
+            String songTitle = songObject.getSongTitle();
+            String songSubtitle = songObject.getSongSubtitle();
+            String songArtist = songObject.getSongArtist();
+            String youTubeURL = songObject.getSongYouTubeURL();
+            String songLyrics = songObject.getSongLyrics();
+            boolean isFavorites = songObject.getIsFavorites();
+            int songIconColor = songObject.getSongIconColor();
+            String songLanguage = songObject.getSongLanguage();
+            boolean isContainsChords = songObject.isContainsChords();
 
-            insertDataIntoDB(songID, songTitle, songSubtitle, songArtist,
-                    youTubeURL, songLyrics, isFavorites, songIconColor);
+            insertDataIntoDB(songID, songTitle, songSubtitle, songArtist, youTubeURL,
+                    songLyrics, isFavorites, songIconColor, songLanguage, isContainsChords);
 
-            checkLocalDBHasData();
+//            if (isContainsChords) {
+//                listChordsData.add(songObject);
+//            } else {
+//                listLyricsData.add(songObject);
+//            }
         }
     }
 
@@ -207,7 +231,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getSongDataFromDB() {
         try {
-
             Cursor rss = dbSongDetails.getData();
             int countDBRows = rss.getCount();
 
@@ -220,7 +243,10 @@ public class SplashActivity extends AppCompatActivity {
                 String songLyrics = rss.getString(3);
                 String songArtist = rss.getString(4);
                 String songYouTubeURL = rss.getString(5);
-                Boolean isFavorites = (rss.getInt(6) == 1);
+                boolean isFavorites = (rss.getInt(6) == 1);
+                int songIconColor = (rss.getInt(7));
+                String songLanguage = (rss.getString(8));
+                boolean isContainsChords = (rss.getInt(9) == 1);
 
                 SongObject songObject = new SongObject();
                 songObject.setSongId(songId);
@@ -230,8 +256,17 @@ public class SplashActivity extends AppCompatActivity {
                 songObject.setSongArtist(songArtist);
                 songObject.setSongYouTubeURL(songYouTubeURL);
                 songObject.setIsFavorites(isFavorites);
-                songObject.setSongIconColor(getRandomMaterialColor());
-                listSongData.add(songObject);
+                songObject.setSongIconColor(songIconColor);
+                songObject.setSongLanguage(songLanguage);
+                songObject.setContainsChords(isContainsChords);
+
+                listSongsData.add(songObject);
+
+                if (isContainsChords) {
+                    listChordsData.add(songObject);
+                } else {
+                    listLyricsData.add(songObject);
+                }
 
                 rss.moveToNext();
             }
@@ -277,7 +312,9 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void loadNextPage() {
-        Application.allSongsData = listSongData;
+        Application.allSongsData = listSongsData;
+        Application.allLyricsData = listLyricsData;
+        Application.allChordsData = listChordsData;
 
         new Handler().postDelayed(new Runnable() {
             public void run() {

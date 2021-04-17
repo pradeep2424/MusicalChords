@@ -16,7 +16,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.snackbar.Snackbar;
 import com.music.chords.R;
 import com.music.chords.bottomMenu.FavoritesFragment;
-import com.music.chords.bottomMenu.HomeFragment;
+import com.music.chords.bottomMenu.ChordsFragment;
+import com.music.chords.bottomMenu.LyricsFragment;
 import com.music.chords.bottomMenu.SettingsFragment;
 import com.music.chords.bottomMenu.SearchFragment;
 import com.music.chords.database.DBSongDetails;
@@ -63,8 +64,12 @@ public class MainActivity extends AppCompatActivity implements TriggerDBChangeLi
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId) {
-                    case R.id.tab_home:
-                        replaceFragment(new HomeFragment());
+                    case R.id.tab_lyrics:
+                        replaceFragment(new LyricsFragment());
+                        break;
+
+                    case R.id.tab_chords:
+                        replaceFragment(new ChordsFragment());
                         break;
 
                     case R.id.tab_search:
@@ -92,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements TriggerDBChangeLi
     private void getSongDataFromDB() {
         try {
             Application.allSongsData.clear();
+            Application.allLyricsData.clear();
+            Application.allChordsData.clear();
+
             Cursor rss = dbSongDetails.getData();
             int countDBRows = rss.getCount();
 
@@ -106,6 +114,8 @@ public class MainActivity extends AppCompatActivity implements TriggerDBChangeLi
                 String songYouTubeURL = rss.getString(5);
                 Boolean isFavorites = (rss.getInt(6) == 1);
                 int iconColor = rss.getInt(7);
+                String songLanguage = (rss.getString(8));
+                boolean isContainsChords = (rss.getInt(9) == 1);
 
                 SongObject songObject = new SongObject();
                 songObject.setSongId(songId);
@@ -116,7 +126,15 @@ public class MainActivity extends AppCompatActivity implements TriggerDBChangeLi
                 songObject.setSongYouTubeURL(songYouTubeURL);
                 songObject.setIsFavorites(isFavorites);
                 songObject.setSongIconColor(iconColor);
+                songObject.setSongLanguage(songLanguage);
+                songObject.setContainsChords(isContainsChords);
+
                 Application.allSongsData.add(songObject);
+                if (isContainsChords) {
+                    Application.allChordsData.add(songObject);
+                } else {
+                    Application.allLyricsData.add(songObject);
+                }
 
                 rss.moveToNext();
             }
