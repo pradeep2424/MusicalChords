@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 
 import com.music.chords.BuildConfig;
 import com.music.chords.R;
+import com.music.chords.activity.AutoScrollActivity;
 import com.music.chords.activity.FontSizeActivity;
 import com.music.chords.activity.ItemDetailsActivity;
 
@@ -25,6 +26,7 @@ public class SettingsFragment extends Fragment {
     private View view;
     private LinearLayout llTheme;
     private LinearLayout llFontSize;
+    private LinearLayout llAutoScroll;
     private LinearLayout llShare;
     private LinearLayout llRateUs;
     private LinearLayout llContactUs;
@@ -32,6 +34,7 @@ public class SettingsFragment extends Fragment {
 
     private final int REQUEST_CODE_THEME = 100;
     private final int REQUEST_CODE_FONT_SIZE = 200;
+    private final int REQUEST_CODE_AUTO_SCROLL = 200;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,11 +47,12 @@ public class SettingsFragment extends Fragment {
     }
 
     private void init() {
-        llTheme = (LinearLayout) view.findViewById(R.id.ll_theme);
-        llFontSize = (LinearLayout) view.findViewById(R.id.ll_fontSize);
-        llShare = (LinearLayout) view.findViewById(R.id.ll_share);
-        llRateUs = (LinearLayout) view.findViewById(R.id.ll_rateUs);
-        llContactUs = (LinearLayout) view.findViewById(R.id.ll_contactUs);
+        llTheme =  view.findViewById(R.id.ll_theme);
+        llFontSize =  view.findViewById(R.id.ll_fontSize);
+        llAutoScroll =  view.findViewById(R.id.ll_autoScroll);
+        llShare =  view.findViewById(R.id.ll_share);
+        llRateUs =  view.findViewById(R.id.ll_rateUs);
+        llContactUs =  view.findViewById(R.id.ll_contactUs);
 
 //        ivThemeIcon = view.findViewById(R.id.iv_themeIndicator);
 //
@@ -81,6 +85,14 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), FontSizeActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_FONT_SIZE);
+            }
+        });
+
+        llAutoScroll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AutoScrollActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_AUTO_SCROLL);
             }
         });
 
