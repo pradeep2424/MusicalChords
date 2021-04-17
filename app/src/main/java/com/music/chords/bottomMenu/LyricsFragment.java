@@ -3,21 +3,7 @@ package com.music.chords.bottomMenu;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.core.util.Predicate;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,13 +12,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.music.chords.R;
 import com.music.chords.activity.ItemDetailsActivity;
 import com.music.chords.adapter.SongItemAdapter;
 import com.music.chords.database.DBSongDetails;
 import com.music.chords.interfaces.Constants;
 import com.music.chords.interfaces.SongAdapterListener;
-import com.music.chords.loader.OnRecyclerViewClickListener;
 import com.music.chords.objects.SongObject;
 import com.music.chords.service.retrofit.ApiInterface;
 import com.music.chords.service.retrofit.RetroClient;
@@ -40,8 +36,6 @@ import com.music.chords.utils.Application;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -49,7 +43,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class HomeFragment extends Fragment implements SongAdapterListener, SwipeRefreshLayout.OnRefreshListener,
+public class LyricsFragment extends Fragment implements SongAdapterListener, SwipeRefreshLayout.OnRefreshListener,
         Constants {
     private View rootView;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -61,7 +55,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
 
     DBSongDetails dbSongDetails;
 
-    ArrayList<SongObject> listAllSongsData = new ArrayList<>();
+    ArrayList<SongObject> listLyricsData = new ArrayList<>();
     ArrayList<SongObject> listSelectedSongs = new ArrayList<>();
 
     final public int REQUEST_CODE_AARTI_DETAILS_ACTIVITY = 100;
@@ -71,12 +65,12 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbSongDetails = new DBSongDetails(getActivity());
-        listAllSongsData = Application.allSongsData;
+        listLyricsData = Application.allLyricsData;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        rootView = inflater.inflate(R.layout.fragment_lyrics, container, false);
 
         init();
 //        getDummyData();
@@ -97,7 +91,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
     private void setupRecyclerView() {
 //        getAllSongsData();
 
-        adapter = new SongItemAdapter(getActivity(), listAllSongsData);
+        adapter = new SongItemAdapter(getActivity(), listLyricsData);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -125,7 +119,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
      * url: http://api.androidhive.info/json/inbox.json
      */
     private void getAllSongsData() {
-        listAllSongsData.addAll(Application.allSongsData);
+        listLyricsData.addAll(Application.allLyricsData);
 
 //        for (int i = 0; i < 10; i++) {
 //            String songTitle = "Title " + i;
@@ -139,7 +133,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
 //            songObject.setSongIconColor(getRandomMaterialColor("400"));
 //            songObject.setIsFavorites(false);
 //
-//            listAllSongsData.add(songObject);
+//            listLyricsData.add(songObject);
 //        }
     }
 
@@ -152,7 +146,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 // clear the inbox
-                listAllSongsData.clear();
+                listLyricsData.clear();
 
 
                 adapter.notifyDataSetChanged();
@@ -315,7 +309,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
     }
 
     private void addSelectedItems(int position) {
-        SongObject songObject = listAllSongsData.get(position);
+        SongObject songObject = listLyricsData.get(position);
         if (listSelectedSongs.contains(songObject)) {
             listSelectedSongs.remove(songObject);
 
@@ -345,10 +339,10 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
         List<Integer> selectedItemPositions = adapter.getSelectedItems();
         for (int i = 0; i < selectedItemPositions.size(); i++) {
             int position = selectedItemPositions.get(i);
-            listAllSongsData.get(position).setIsFavorites(isSaved);
+            listLyricsData.get(position).setIsFavorites(isSaved);
 //            adapter.removeData(selectedItemPositions.get(i));
 
-            updateFavoritesInDB(listAllSongsData.get(position));
+            updateFavoritesInDB(listLyricsData.get(position));
         }
         adapter.notifyDataSetChanged();
     }
@@ -438,7 +432,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
 
 //    private boolean checkAtLeastOneUnsavedItem() {
 //        List<Integer> selectedItemPositions = adapter.getSelectedItems();
-//        for (SongObject article : listAllSongsData) {
+//        for (SongObject article : listLyricsData) {
 //            if (article.getIsFavorites()) {
 //                return true;
 //            }
@@ -474,11 +468,11 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
     public void onIconImportantClicked(int position) {
         // Star icon is clicked,
         // mark the message as important
-        SongObject songObject = listAllSongsData.get(position);
+        SongObject songObject = listLyricsData.get(position);
         boolean isFavorites = !songObject.getIsFavorites();
 
         songObject.setIsFavorites(isFavorites);
-        listAllSongsData.set(position, songObject);
+        listLyricsData.set(position, songObject);
         adapter.notifyDataSetChanged();
 
         updateFavoritesInDB(songObject);
@@ -492,15 +486,15 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
             enableActionMode(position);
 
         } else {
-            SongObject songObject = listAllSongsData.get(position);
+            SongObject songObject = listLyricsData.get(position);
             Intent intent = new Intent(getActivity(), ItemDetailsActivity.class);
             intent.putExtra(SONG_OBJECT, songObject);
             startActivity(intent);
 
 //            // read the message which removes bold from the row
-//            SongObject songObject = listAllSongsData.get(position);
+//            SongObject songObject = listLyricsData.get(position);
 ////            songObject.setRead(true);
-//            listAllSongsData.set(position, songObject);
+//            listLyricsData.set(position, songObject);
 //            adapter.notifyDataSetChanged();
 //            Toast.makeText(getActivity(), "Read: " + songObject.getSongTitle(), Toast.LENGTH_SHORT).show();
         }
@@ -508,7 +502,7 @@ public class HomeFragment extends Fragment implements SongAdapterListener, Swipe
 
 //    @Override
 //    public void onClick(View view, int position) {
-//        Application.songObject = listAllSongsData.get(position);
+//        Application.songObject = listLyricsData.get(position);
 //
 //        Intent intent = new Intent(getActivity(), SongDetailsActivity.class);
 //        startActivity(intent);
