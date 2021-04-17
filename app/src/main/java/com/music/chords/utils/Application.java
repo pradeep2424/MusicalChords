@@ -28,6 +28,8 @@ public class Application extends android.app.Application {
 
 //    public static SongObject songObject;
     public static ArrayList<SongObject> allSongsData = new ArrayList<>();
+    public static ArrayList<SongObject> allLyricsData = new ArrayList<>();
+    public static ArrayList<SongObject> allChordsData = new ArrayList<>();
 
     public static HashMap<String, String> mapBannerDetails = new HashMap<>();
 
