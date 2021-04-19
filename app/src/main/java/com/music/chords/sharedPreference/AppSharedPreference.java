@@ -53,6 +53,15 @@ public class AppSharedPreference implements Constants {
         return sharedPreferences.getInt(key, 0);
     }
 
+    public void putFloat(String key, float value) {
+        editor.putFloat(key, value);
+        commit();
+    }
+
+    public float getFloat(String key) {
+        return sharedPreferences.getFloat(key, 0);
+    }
+
     public Set<String> getStringSet(String key) {
         return sharedPreferences.getStringSet(key, null);
     }
@@ -82,6 +91,11 @@ public class AppSharedPreference implements Constants {
     public int getFontSize() {
       int fontSize =  sharedPreferences.getInt(Constants.KEY_FONT_SIZE, VALUE_DEFAULT_FONT_SIZE);
       return fontSize;
+    }
+
+    public float getAutoScrollSpeed() {
+        float fontSize =  sharedPreferences.getFloat(Constants.KEY_AUTO_SCROLL_SPEED, VALUE_DEFAULT_SCROLL_SPEED);
+        return fontSize;
     }
 
 }

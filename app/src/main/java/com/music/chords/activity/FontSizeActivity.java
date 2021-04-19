@@ -30,6 +30,7 @@ public class FontSizeActivity extends AppCompatActivity {
 
         init();
         events();
+        setFontSizeToNumberPicker();
     }
 
     private void init() {
@@ -68,7 +69,11 @@ public class FontSizeActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
+    private void setFontSizeToNumberPicker() {
+        int fontSize = AppSharedPreference.SSP().getFontSize();
+        numberPicker.setValue(fontSize);
     }
 
     @Override

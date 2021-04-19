@@ -107,7 +107,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
     private float lastYCoordinate;
 
     private int capoFret = 0;
-    private int transposeHalfSteps = 0;
+    private int transposeSteps = 0;
     private volatile String chordText;
     private List<ChordInText> chordsInText;
 
@@ -130,12 +130,12 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
         }
 
         init();
-//        initYouTubeViewPlayer();
         componentEvents();
+        initYouTubeViewPlayer();
         setSongData();
+        setFontSizeToLyrics();
         initializeChordDictionary();
         applyColorScheme();
-
 
         if (songObject != null && songObject.getSongLyrics() != null) {
             chordText = songObject.getSongLyrics();
@@ -247,16 +247,21 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
     }
 
     private void initYouTubeViewPlayer() {
-        fullScreenHelper = new FullScreenHelper(this);
-
-        getLifecycle().addObserver(youTubePlayerView);
-        youTubePlayerView.getPlayerUiController().showMenuButton(false);
-        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                String videoId = "KPLWWIOCOOQ";
-                youTubePlayer.cueVideo(videoId, 0);
+            public void run() {
+                fullScreenHelper = new FullScreenHelper(ItemDetailsActivity.this);
+
+                getLifecycle().addObserver(youTubePlayerView);
+                youTubePlayerView.getPlayerUiController().showMenuButton(false);
+                youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                    @Override
+                    public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                        String videoId = "KPLWWIOCOOQ";
+                        youTubePlayer.cueVideo(videoId, 0);
 //                youTubePlayer.loadVideo(videoId, 0);
+                    }
+                });
             }
         });
 
@@ -357,6 +362,11 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
             tvSubtitle.setText(songObject.getSongSubtitle());
             tvLyrics.setText(songObject.getSongLyrics());
         }
+    }
+
+    private void setFontSizeToLyrics() {
+        int fontSize = AppSharedPreference.SSP().getFontSize();
+        tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP,fontSize);
     }
 
 //    private void initPowerMenu() {
@@ -577,7 +587,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
 //        resetDataExceptChordTextAndFilename();
 
         capoFret = 0;
-        transposeHalfSteps = 0;
+        transposeSteps = 0;
         analyzeChordsAndShowChordView();
     }
 
@@ -611,8 +621,8 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
             protected Spannable doInBackground(Void... params) {
                 long start = System.currentTimeMillis();
 
-                if (capoFret != 0 || transposeHalfSteps != 0) {
-                    updateChordsInTextForTransposition(-transposeHalfSteps, -capoFret);
+                if (capoFret != 0 || transposeSteps != 0) {
+                    updateChordsInTextForTransposition(-transposeSteps, -capoFret);
                 }
 
                 Spannable newText = buildUpChordTextToDisplay();
@@ -780,7 +790,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
     }
 
     private void createTransposeDialog() {
-        final View view = DialogHelper.createTransposeDialogView(this, capoFret, transposeHalfSteps);
+        final View view = DialogHelper.createTransposeDialogView(this, capoFret, transposeSteps);
         new AlertDialog.Builder(this)
                 .setTitle(R.string.transpose)
                 .setCancelable(true)
@@ -797,7 +807,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
                         int newTransposeHalfSteps = DialogHelper.getSeekBarValue(transposeView) + DialogHelper.TRANSPOSE_MIN;
                         int newCapoFret = DialogHelper.getSeekBarValue(capoView) + DialogHelper.CAPO_MIN;
 
-                        log.d("transposeHalfSteps is now %d", newTransposeHalfSteps);
+                        log.d("transposeSteps is now %d", newTransposeHalfSteps);
                         log.d("capoFret is now %d", newCapoFret);
 
                         changeTransposeOrCapo(newTransposeHalfSteps, newCapoFret);
@@ -841,9 +851,9 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
 
 
                 int capoDiff = capoFret - newCapoFret;
-                int transposeDiff = transposeHalfSteps - newTransposeHalfSteps;
+                int transposeDiff = transposeSteps - newTransposeHalfSteps;
                 capoFret = newCapoFret;
-                transposeHalfSteps = newTransposeHalfSteps;
+                transposeSteps = newTransposeHalfSteps;
 
                 updateChordsInTextForTransposition(transposeDiff, capoDiff);
 
@@ -896,29 +906,31 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
 //            dbHelper.close();
 //            if (transposition != null) {
 //                capoFret = transposition.getCapo();
-//                transposeHalfSteps = transposition.getTranspose();
+//                transposeSteps = transposition.getTranspose();
 //            } else {
 //                capoFret = 0;
-//                transposeHalfSteps = 0;
+//                transposeSteps = 0;
 //            }
 //        } else {
 //            capoFret = 0;
-//            transposeHalfSteps = 0;
+//            transposeSteps = 0;
 //        }
 //
 //    }
 
-    private void showBottomSheetDialogTextSize() {
-        View view = View.inflate(this, R.layout.layout_sheet_text_size, null);
+    private void showBottomSheetDialogFontSize() {
+        int fontSize = AppSharedPreference.SSP().getFontSize();
 
+        View view = View.inflate(this, R.layout.layout_sheet_text_size, null);
         DialogSheet dialogSheet = new DialogSheet(this, true)
                 .setView(view)
                 .setCancelable(true);
         dialogSheet.show();
 
-        NumberPicker numberPicker = view.findViewById(R.id.numberPicker_textSize);
         LinearLayout llDone = view.findViewById(R.id.ll_done);
         TextView tvSampleText = view.findViewById(R.id.tv_sampleText);
+        NumberPicker numberPicker = view.findViewById(R.id.numberPicker_textSize);
+        numberPicker.setValue(fontSize);
 
         numberPicker.setValueChangedListener(new DefaultValueChangedListener() {
             @Override
@@ -960,14 +972,14 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
 
     private void showBottomSheetDialogTranspose() {
         View view = View.inflate(this, R.layout.layout_sheet_transpose, null);
-
         DialogSheet dialogSheet = new DialogSheet(this, true)
                 .setView(view)
                 .setCancelable(true);
         dialogSheet.show();
 
-        NumberPicker numberPicker = view.findViewById(R.id.numberPicker_transpose);
         LinearLayout llDone = view.findViewById(R.id.ll_done);
+        NumberPicker numberPicker = view.findViewById(R.id.numberPicker_transpose);
+        numberPicker.setValue(transposeSteps);
 
         numberPicker.setValueChangedListener(new DefaultValueChangedListener() {
             @Override
@@ -987,6 +999,9 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
     }
 
     private void showAutoScrollBoomSeekBar() {
+        float scrollSpeed = AppSharedPreference.SSP().getAutoScrollSpeed();
+        seekBar.setProgress(scrollSpeed);
+
         viewAutoScrollBottomSeekBar.setVisibility(View.VISIBLE);
     }
 
@@ -1154,7 +1169,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
                 return true;
 
             case R.id.menu_text_size:
-                showBottomSheetDialogTextSize();
+                showBottomSheetDialogFontSize();
                 return true;
 
             case R.id.menu_auto_scroll:

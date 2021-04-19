@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/choose_text_size"
+            android:text="@string/transpose_chords"
             android:textColor="@color/main_dark_text"
             android:textSize="18sp" />
 
@@ -46,16 +46,6 @@
             app:max="11"
             app:unit="1" />
 
-        <com.music.chords.custom.MyTextView
-            android:id="@+id/tv_sampleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="center"
-            android:text="@string/sample_text"
-            android:textColor="@color/main_dark_text"
-            android:textSize="14sp" />
-
         <!--        <com.music.chords.custom.MyTextViewBold-->
         <!--            android:id="@+id/tv_emtpy"-->
         <!--            android:layout_width="wrap_content"-->
@@ -68,7 +58,7 @@
             android:id="@+id/ll_done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/rectangle_blue"
             android:gravity="right"
             android:orientation="vertical"

@@ -16,7 +16,9 @@ public interface Constants {
     String SONG_OBJECT = "SongObject";
     String APP_SHARED_PREFERENCE = "SPMusicChords";
     String KEY_FONT_SIZE = "FontSize";
-    int VALUE_DEFAULT_FONT_SIZE = 14;
     String KEY_AUTO_SCROLL_SPEED = "AutoScrollSpeed";
     String KEY_AUTO_SCROLL_INITIAL_DELAY = "AutoScrollInitialDelay";
+
+    int VALUE_DEFAULT_FONT_SIZE = 14;
+    float VALUE_DEFAULT_SCROLL_SPEED = 0.1f;
 }

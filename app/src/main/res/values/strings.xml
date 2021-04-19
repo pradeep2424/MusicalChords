@@ -77,7 +77,7 @@
 
     <string name="confirm_chords">Confirm Chords</string>
 
-    <string name="choose_text_size">Choose Text Size</string>
+    <string name="choose_font_size">Choose Font Size</string>
     <string name="auto_scroll_setup">Auto Scroll Setup</string>
     <string name="sample_text">This is sample text. Check text size here.</string>
     <string name="sample_text_settings">This is sample text line 1. \nThis is sample text line 2. \nThis is sample text line 3. \nThis is sample text line 4. \nCheck text size here.</string>
@@ -91,6 +91,7 @@
     <string name="no_internet_connection">No internet connection.</string>
     <string name="connect_to_internet">No internet connection available, Please connect to internet and restart the application.</string>
 
+    <string name="settings">Settings</string>
     <string name="settings_theme">Theme</string>
     <string name="settings_font_size">Font Size</string>
     <string name="settings_auto_scroll">Auto Scroll</string>
