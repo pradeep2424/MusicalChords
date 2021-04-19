@@ -3,9 +3,17 @@
             activeColor="@color/menu_active"
             badgeHidesWhenActive="true"
             icon="@drawable/ic_bottom_menu_home"
-            id="@+id/tab_home"
+            id="@+id/tab_lyrics"
             inActiveColor="@color/menu_inactive"
-            title="@string/menu_home" />
+            title="@string/menu_lyrics" />
+
+        <tab
+            activeColor="@color/menu_active"
+            badgeHidesWhenActive="true"
+            icon="@drawable/ic_bottom_menu_chords"
+            id="@+id/tab_chords"
+            inActiveColor="@color/menu_inactive"
+            title="@string/menu_chords" />
 
         <tab
             activeColor="@color/menu_active"
@@ -19,7 +27,7 @@
             icon="@drawable/ic_bottom_menu_favorite"
             id="@+id/tab_cart"
             inActiveColor="@color/menu_inactive"
-            title="@string/menu_cart" />
+            title="@string/menu_favorites" />
 
         <tab
             activeColor="@color/menu_active"
