@@ -8,20 +8,22 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
 import com.music.chords.BuildConfig;
 import com.music.chords.R;
 import com.music.chords.activity.AutoScrollActivity;
+import com.music.chords.activity.DarkModeActivity;
 import com.music.chords.activity.FontSizeActivity;
-import com.music.chords.activity.ItemDetailsActivity;
-
 
 public class SettingsFragment extends Fragment {
     private View rootView;
@@ -32,6 +34,7 @@ public class SettingsFragment extends Fragment {
     private LinearLayout llShare;
     private LinearLayout llRateUs;
     private LinearLayout llContactUs;
+    private SwitchCompat switchCompat;
 //    private ImageView ivThemeIcon;
 
     private final int REQUEST_CODE_THEME = 100;
@@ -53,12 +56,13 @@ public class SettingsFragment extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).setTitle(R.string.settings);
 
-        llTheme =  rootView.findViewById(R.id.ll_theme);
-        llFontSize =  rootView.findViewById(R.id.ll_fontSize);
-        llAutoScroll =  rootView.findViewById(R.id.ll_autoScroll);
-        llShare =  rootView.findViewById(R.id.ll_share);
-        llRateUs =  rootView.findViewById(R.id.ll_rateUs);
-        llContactUs =  rootView.findViewById(R.id.ll_contactUs);
+        llTheme = rootView.findViewById(R.id.ll_theme);
+        llFontSize = rootView.findViewById(R.id.ll_fontSize);
+        llAutoScroll = rootView.findViewById(R.id.ll_autoScroll);
+        llShare = rootView.findViewById(R.id.ll_share);
+        llRateUs = rootView.findViewById(R.id.ll_rateUs);
+        llContactUs = rootView.findViewById(R.id.ll_contactUs);
+        switchCompat = rootView.findViewById(R.id.switch_dayNight);
 
 //        ivThemeIcon = view.findViewById(R.id.iv_themeIndicator);
 //
@@ -76,15 +80,13 @@ public class SettingsFragment extends Fragment {
 
 
     private void componentEvents() {
-        llTheme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), ApplicationLanguageActivity.class);
-//                intent.putExtra("RedirectedFromSettings", true);
+//        llTheme.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), DarkModeActivity.class);
 //                startActivityForResult(intent, REQUEST_CODE_THEME);
-////                finish();
-            }
-        });
+//            }
+//        });
 
         llFontSize.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +123,21 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
 //                Intent intent = new Intent(getActivity(), AboutUsActivity.class);
 //                startActivity(intent);
+            }
+        });
+
+        switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+//                    ((AppCompatActivity) getActivity()).getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+//                    ((AppCompatActivity) getActivity()).getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
             }
         });
     }

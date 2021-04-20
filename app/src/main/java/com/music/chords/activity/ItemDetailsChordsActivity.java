@@ -142,44 +142,9 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
 
 //        showConfirmChordchartDialog();
 
-
-//        chordText = "G                     Em\n" +
-//                "Dil ka dariya beh hi gaya\n" +
-//                "  C                      D\n" +
-//                "Raahon mein yun jo tu mil gaya\n" +
-//                "     G                   Em\n" +
-//                "Mushqil se main sambhla tha haan\n" +
-//                "       C               D\n" +
-//                "Toot gaya hoon phir ek dafaa\n" +
-//                "        C            Bm\n" +
-//                "Baat bigdi hai iss qadar\n" +
-//                "        Am               D\n" +
-//                "Dil hai toota, toote hain hum\n" +
-//                " \n" +
-//                "      Am                    D\n" +
-//                "Tere bin ab na lenge ek bhi dum\n" +
-//                "       C      D          G\n" +
-//                "Tujhe kitna chaahein aur hum\n" +
-//                "     Am                    D\n" +
-//                "Tere bin ab na lenge ek bhi dum\n" +
-//                "     C         D           G\n" +
-//                "Tujhe kitna chaahein aur hum\n" +
-//                "    C                 Bm\n" +
-//                "Baat bigdi hai iss qadar\n" +
-//                "        Am                D\n" +
-//                "Dil hai toota, toote hain hum\n" +
-//                "    Am                    D\n" +
-//                "Tere bin ab na lenge ek bhi dum\n" +
-//                "C           D           G\n" +
-//                "Tujhe kitna chaahein aur hum\n" +
-//                "Am                          D\n" +
-//                "Tere bin ab na lenge ek bhi dum\n" +
-//                "C         D            G\n" +
-//                "Tujhe kitna chaahein aur hum";
-
-//		showConfirmChordchartDialog(true);
-
-        analyzeChordsAndShowChordView();
+        if (songObject.isContainsChords()) {
+            analyzeChordsAndShowChordView();
+        }
     }
 
     private void init() {
@@ -295,10 +260,12 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
         seekBar.setOnSeekChangeListener(new OnSeekChangeListener() {
             @Override
             public void onSeeking(SeekParams seekParams) {
-                stopAutoScrollPage();
+                if (isPlaying) {
+                    stopAutoScrollPage();
 
-                double scrollSpeed = seekParams.progressFloat;
-                startAutoScrollPage(scrollSpeed);
+                    double scrollSpeed = seekParams.progressFloat;
+                    startAutoScrollPage(scrollSpeed);
+                }
             }
 
             @Override
@@ -331,7 +298,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
         ivCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewAutoScrollBottomSeekBar.setVisibility(View.GONE);
+                hideAutoScrollBoomSeekBar();
             }
         });
 
@@ -1012,6 +979,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
 
     private void startAutoScrollPage(double scrollSpeed) {
         isPlaying = true;
+        expandToolbar();
 
         int pixelScroll = (int) Math.round(scrollSpeed * 5);
 

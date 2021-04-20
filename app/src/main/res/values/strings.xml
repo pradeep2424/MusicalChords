@@ -83,6 +83,9 @@
     <string name="sample_text_settings">This is sample text line 1. \nThis is sample text line 2. \nThis is sample text line 3. \nThis is sample text line 4. \nCheck text size here.</string>
 
     <string name="done">Done</string>
+    <string name="choose_mode">Choose Mode</string>
+    <string name="mode_light">Light</string>
+    <string name="mode_dark">Dark</string>
 
     <string name="transpose_chords">Transpose Chords</string>
     <string name="line_per_second">line / second</string>
