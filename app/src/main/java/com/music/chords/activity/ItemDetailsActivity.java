@@ -134,6 +134,7 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
         initYouTubeViewPlayer();
         setSongData();
         setFontSizeToLyrics();
+        setAutoScrollSpeed();
         initializeChordDictionary();
         applyColorScheme();
 
@@ -366,7 +367,12 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
 
     private void setFontSizeToLyrics() {
         int fontSize = AppSharedPreference.SSP().getFontSize();
-        tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP,fontSize);
+        tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
+    }
+
+    private void setAutoScrollSpeed() {
+        float scrollSpeed = AppSharedPreference.SSP().getAutoScrollSpeed();
+        seekBar.setProgress(scrollSpeed);
     }
 
 //    private void initPowerMenu() {
@@ -999,9 +1005,6 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
     }
 
     private void showAutoScrollBoomSeekBar() {
-        float scrollSpeed = AppSharedPreference.SSP().getAutoScrollSpeed();
-        seekBar.setProgress(scrollSpeed);
-
         viewAutoScrollBottomSeekBar.setVisibility(View.VISIBLE);
     }
 
@@ -1038,7 +1041,10 @@ public class ItemDetailsActivity extends AppCompatActivity implements Constants,
 
     private void stopAutoScrollPage() {
         isPlaying = false;
-        autoScrollHandler.removeCallbacksAndMessages(null);
+
+        if (autoScrollHandler != null) {
+            autoScrollHandler.removeCallbacksAndMessages(null);
+        }
     }
 
     private int textViewOneLineHeight() {

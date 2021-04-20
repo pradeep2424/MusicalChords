@@ -20,6 +20,7 @@
         <item name="grey_400" type="color">#bdbdbd</item>
         <item name="blue_grey_400" type="color">#78909c</item>
     </array>
+
     <array name="mdcolor_500">
         <item name="red_500" type="color">#e51c23</item>
         <item name="pink_500" type="color">#e91e63</item>

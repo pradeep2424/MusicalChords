@@ -74,6 +74,7 @@ public class FontSizeActivity extends AppCompatActivity {
     private void setFontSizeToNumberPicker() {
         int fontSize = AppSharedPreference.SSP().getFontSize();
         numberPicker.setValue(fontSize);
+        tvSampleText.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
     }
 
     @Override
