@@ -62,6 +62,8 @@ dependencies {
     implementation 'com.github.marcoscgdev:DialogSheet:2.1.2'
     implementation 'com.github.travijuu:numberpicker:1.0.7'
     implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.2'
+    implementation 'com.github.RikkaW:DayNight-Theme:v1.0.6'
+
 
 //    implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.2'
 

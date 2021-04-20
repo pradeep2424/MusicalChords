@@ -30,8 +30,18 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
 
+<!--        <activity-->
+<!--            android:name=".activity.ItemDetailsActivity"-->
+<!--            android:configChanges="orientation|screenSize|keyboardHidden"-->
+<!--            android:theme="@style/AppTheme.NoActionBar" />-->
+
+<!--        <activity-->
+<!--            android:name=".activity.ItemDetailsLyricsActivity"-->
+<!--            android:configChanges="orientation|screenSize|keyboardHidden"-->
+<!--            android:theme="@style/AppTheme.NoActionBar" />-->
+
         <activity
-            android:name=".activity.ItemDetailsActivity"
+            android:name=".activity.ItemDetailsChordsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/AppTheme.NoActionBar" />
 

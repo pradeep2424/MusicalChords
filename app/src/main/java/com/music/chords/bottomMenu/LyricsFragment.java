@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.music.chords.R;
-import com.music.chords.activity.ItemDetailsActivity;
+import com.music.chords.activity.ItemDetailsLyricsActivity;
 import com.music.chords.adapter.SongItemAdapter;
 import com.music.chords.database.DBSongDetails;
 import com.music.chords.interfaces.Constants;
@@ -487,7 +487,7 @@ public class LyricsFragment extends Fragment implements SongAdapterListener, Swi
 
         } else {
             SongObject songObject = listLyricsData.get(position);
-            Intent intent = new Intent(getActivity(), ItemDetailsActivity.class);
+            Intent intent = new Intent(getActivity(), ItemDetailsLyricsActivity.class);
             intent.putExtra(SONG_OBJECT, songObject);
             startActivity(intent);
 

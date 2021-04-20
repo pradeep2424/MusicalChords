@@ -28,9 +28,7 @@
 //import android.widget.ImageView;
 //import android.widget.LinearLayout;
 //import android.widget.PopupWindow;
-//import android.widget.SeekBar;
 //import android.widget.TextView;
-//import android.widget.Toast;
 //
 //import androidx.annotation.NonNull;
 //import androidx.appcompat.app.AppCompatActivity;
@@ -77,7 +75,7 @@
 //import java.util.List;
 //import java.util.TimerTask;
 //
-//public class ItemDetailsActivity extends AppCompatActivity implements Constants, View.OnTouchListener {
+//public class ItemDetailsLyricsActivity extends AppCompatActivity implements Constants {
 //    SongObject songObject;
 //
 //    CoordinatorLayout clRootLayout;
@@ -97,27 +95,12 @@
 //    ImageView ivPlayPause;
 //    ImageView ivCancel;
 //
-////    private PowerMenu optionMenu;
-////    private OnMenuItemClickListener<PowerMenuItem> onOptionMenuClickListener;
-//
 //    private PowerManager.WakeLock wakeLock;
 //    private Handler autoScrollHandler;
 //
-//    private float lastXCoordinate;
-//    private float lastYCoordinate;
-//
-//    private int capoFret = 0;
-//    private int transposeSteps = 0;
-//    private volatile String chordText;
-//    private List<ChordInText> chordsInText;
-//
 //    private boolean isPlaying = false;
 //
-//    private static final int PROGRESS_DIALOG_MIN_TIME = 600;
-//    private static final int CHORD_POPUP_Y_OFFSET_IN_SP = 24;
-//
-//    private UtilLogger log = new UtilLogger(ItemDetailsActivity.class);
-////    SparkButton heartButton;
+//    private UtilLogger log = new UtilLogger(ItemDetailsChordsActivity.class);
 //
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -135,53 +118,7 @@
 //        setSongData();
 //        setFontSizeToLyrics();
 //        setAutoScrollSpeed();
-//        initializeChordDictionary();
 //        applyColorScheme();
-//
-//        if (songObject != null && songObject.getSongLyrics() != null) {
-//            chordText = songObject.getSongLyrics();
-//        }
-//
-////        showConfirmChordchartDialog();
-//
-//
-////        chordText = "G                     Em\n" +
-////                "Dil ka dariya beh hi gaya\n" +
-////                "  C                      D\n" +
-////                "Raahon mein yun jo tu mil gaya\n" +
-////                "     G                   Em\n" +
-////                "Mushqil se main sambhla tha haan\n" +
-////                "       C               D\n" +
-////                "Toot gaya hoon phir ek dafaa\n" +
-////                "        C            Bm\n" +
-////                "Baat bigdi hai iss qadar\n" +
-////                "        Am               D\n" +
-////                "Dil hai toota, toote hain hum\n" +
-////                " \n" +
-////                "      Am                    D\n" +
-////                "Tere bin ab na lenge ek bhi dum\n" +
-////                "       C      D          G\n" +
-////                "Tujhe kitna chaahein aur hum\n" +
-////                "     Am                    D\n" +
-////                "Tere bin ab na lenge ek bhi dum\n" +
-////                "     C         D           G\n" +
-////                "Tujhe kitna chaahein aur hum\n" +
-////                "    C                 Bm\n" +
-////                "Baat bigdi hai iss qadar\n" +
-////                "        Am                D\n" +
-////                "Dil hai toota, toote hain hum\n" +
-////                "    Am                    D\n" +
-////                "Tere bin ab na lenge ek bhi dum\n" +
-////                "C           D           G\n" +
-////                "Tujhe kitna chaahein aur hum\n" +
-////                "Am                          D\n" +
-////                "Tere bin ab na lenge ek bhi dum\n" +
-////                "C         D            G\n" +
-////                "Tujhe kitna chaahein aur hum";
-//
-////		showConfirmChordchartDialog(true);
-//
-//        analyzeChordsAndShowChordView();
 //    }
 //
 //    private void init() {
@@ -225,33 +162,13 @@
 //        ivCancel = viewAutoScrollBottomSeekBar.findViewById(R.id.iv_cancel);
 //        seekBar = viewAutoScrollBottomSeekBar.findViewById(R.id.seekBar_speed);
 //        seekBar.setIndicatorTextFormat("${TICK_TEXT} --");
-//
-////        seekBar.min(1F);
-////        seekBar.setMax(10);
-//
-////        tvToolbarTitle.setText(songObject.getSongTitle());
-//
-////        heartButton = (SparkButton) findViewById(R.id.heart_button);
-////        btnAudio = (Button) findViewById(R.id.btn_audio);
-////        btnPictures = (Button) findViewById(R.id.btn_pictures);
-//
-////        final Handler handler = new Handler();
-////        handler.postDelayed(new Runnable() {
-////            @Override
-////            public void run() {
-////                if (songObject.getIsFavourites()) {
-////                    heartButton.setChecked(true);
-////                    heartButton.playAnimation();
-////                }
-////            }
-////        }, 500);
 //    }
 //
 //    private void initYouTubeViewPlayer() {
 //        AsyncTask.execute(new Runnable() {
 //            @Override
 //            public void run() {
-//                fullScreenHelper = new FullScreenHelper(ItemDetailsActivity.this);
+//                fullScreenHelper = new FullScreenHelper(ItemDetailsLyricsActivity.this);
 //
 //                getLifecycle().addObserver(youTubePlayerView);
 //                youTubePlayerView.getPlayerUiController().showMenuButton(false);
@@ -318,11 +235,11 @@
 //            @Override
 //            public void onClick(View v) {
 //                if (isPlaying) {
-//                    ivPlayPause.setImageDrawable(ContextCompat.getDrawable(ItemDetailsActivity.this, R.drawable.ic_play));
+//                    ivPlayPause.setImageDrawable(ContextCompat.getDrawable(ItemDetailsLyricsActivity.this, R.drawable.ic_play));
 //                    stopAutoScrollPage();
 //
 //                } else {
-//                    ivPlayPause.setImageDrawable(ContextCompat.getDrawable(ItemDetailsActivity.this, R.drawable.ic_pause));
+//                    ivPlayPause.setImageDrawable(ContextCompat.getDrawable(ItemDetailsLyricsActivity.this, R.drawable.ic_pause));
 //
 //                    double scrollSpeed = seekBar.getProgressFloat();
 //                    startAutoScrollPage(scrollSpeed);
@@ -520,409 +437,9 @@
 ////        messageSecondaryView.setBackgroundResource(colorScheme.getSelectorResource());
 //    }
 //
-//
-//    private void initializeChordDictionary() {
-//        // do in the background to avoid jank
-//        new AsyncTask<Void, Void, Void>() {
-//
-//            @Override
-//            protected Void doInBackground(Void... params) {
-//                ChordDictionary.initialize(ItemDetailsActivity.this);
-//                return null;
-//            }
-//        }.execute((Void) null);
-//
-//    }
-//
-//    private void showConfirmChordchartDialog() {
-//        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        final EditText editText = (EditText) inflater.inflate(R.layout.confirm_chords_edit_text, null);
-//        editText.setText(chordText);
-//
-//        new AlertDialog.Builder(ItemDetailsActivity.this)
-//                .setTitle(R.string.confirm_chords)
-//                .setView(editText)
-//                .setCancelable(true)
-//                .setNegativeButton(android.R.string.cancel, null)
-//                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        chordText = editText.getText().toString();
-//                        switchToViewingMode();
-//
-////                        analyzeHtml();
-//                    }
-//                })
-//                .create()
-//                .show();
-//    }
-//
-//    private void analyzeHtml() {
-//
-////        if (chordWebpage != null) {
-////            // known webpage
-////
-////            log.d("known web page: %s", chordWebpage);
-////
-////            chordText = WebPageExtractionHelper.extractChordChart(
-////                    chordWebpage, html, getNoteNaming());
-////        } else {
-////            // unknown webpage
-//
-//        log.d("unknown webpage");
-//
-//        chordText = WebPageExtractionHelper.extractLikelyChordChart(chordText, getNoteNaming());
-//
-//
-//        if (chordText == null) { // didn't find a good extraction, so use the entire html
-//
-//            log.d("didn't find a good chord chart using the <pre> tag");
-//
-//            chordText = WebPageExtractionHelper.convertHtmlToText(chordText);
-//        }
-////        }
-//
-////        showConfirmChordchartDialog();
-//        switchToViewingMode();
-//    }
-//
-//
-//    private void switchToViewingMode() {
-//        wakeLock.acquire();
-////        resetDataExceptChordTextAndFilename();
-//
-//        capoFret = 0;
-//        transposeSteps = 0;
-//        analyzeChordsAndShowChordView();
-//    }
-//
-//    private void analyzeChordsAndShowChordView() {
-//        chordsInText = ChordParser.findChordsInText(chordText, getNoteNaming());
-//
-//        log.d("found %d chords", chordsInText.size());
-//        showChordView();
-//    }
-//
-//    private NoteNaming getNoteNaming() {
-//        return PreferenceHelper.getNoteNaming(this);
-//    }
-//
-//    private void showChordView() {
-//        // do in the background to avoid jankiness
-//        final ProgressDialog progressDialog = new ProgressDialog(this);
-//        progressDialog.setTitle(R.string.loading_title);
-//        progressDialog.setMessage(getText(R.string.please_wait));
-//        progressDialog.setIndeterminate(true);
-//
-//        AsyncTask<Void, Void, Spannable> task = new AsyncTask<Void, Void, Spannable>() {
-//
-//            @Override
-//            protected void onPreExecute() {
-//                super.onPreExecute();
-//                progressDialog.show();
-//            }
-//
-//            @Override
-//            protected Spannable doInBackground(Void... params) {
-//                long start = System.currentTimeMillis();
-//
-//                if (capoFret != 0 || transposeSteps != 0) {
-//                    updateChordsInTextForTransposition(-transposeSteps, -capoFret);
-//                }
-//
-//                Spannable newText = buildUpChordTextToDisplay();
-//
-//                long elapsed = System.currentTimeMillis() - start;
-//
-//                if (elapsed < PROGRESS_DIALOG_MIN_TIME) {
-//                    // show progressdialog for at least 1 second, or else it goes by too fast
-//                    // XXX: this is a weird UI hack, but I don't know what else to do
-//                    try {
-//                        Thread.sleep(PROGRESS_DIALOG_MIN_TIME - elapsed);
-//                    } catch (InterruptedException e) {
-//                        log.e(e, "unexpected exception");
-//                    }
-//                }
-//                return newText;
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Spannable newText) {
-//                super.onPostExecute(newText);
-//
-//                applyLinkifiedChordsTextToTextView(newText);
-//                progressDialog.dismiss();
-//            }
-//        };
-//
-//        task.execute((Void) null);
-//    }
-//
-//    private void updateChordsInTextForTransposition(int transposeDiff, int capoDiff) {
-//        for (ChordInText chordInText : chordsInText) {
-//
-//            chordInText.setChord(TransposeHelper.transposeChord(
-//                    chordInText.getChord(), capoDiff, transposeDiff));
-//        }
-//    }
-//
-//    private Spannable buildUpChordTextToDisplay() {
-//        // have to build up a new string, because some of the chords may have different string lengths
-//        // than in the original text (e.g. if they are transposed)
-//        int lastEndIndex = 0;
-//        StringBuilder sb = new StringBuilder();
-//
-//        List<Pair<Integer, Integer>> newStartAndEndPositions =
-//                new ArrayList<Pair<Integer, Integer>>(chordsInText.size());
-//
-//        for (ChordInText chordInText : chordsInText) {
-//
-//            //log.d("chordInText is %s", chordInText);
-//
-//            sb.append(chordText.substring(lastEndIndex, chordInText.getStartIndex()));
-//
-//            String chordAsString = chordInText.getChord().toPrintableString(getNoteNaming());
-//            sb.append(chordAsString);
-//
-//            newStartAndEndPositions.add(new Pair<Integer, Integer>(
-//                    sb.length() - chordAsString.length(), sb.length()));
-//
-//            lastEndIndex = chordInText.getEndIndex();
-//        }
-//
-//        // append the last bit of text after the last chord
-//        sb.append(chordText.substring(lastEndIndex, chordText.length()));
-//
-//        Spannable spannable = new Spannable.Factory().newSpannable(sb.toString());
-//
-//        //log.d("new start and end positions are: %s", newStartAndEndPositions);
-//
-//        // add a hyperlink to each chord
-//        for (int i = 0; i < newStartAndEndPositions.size(); i++) {
-//
-//            Pair<Integer, Integer> newStartAndEndPosition = newStartAndEndPositions.get(i);
-//
-//            //log.d("pair is %s", newStartAndEndPosition);
-//            //log.d("substr is '%s'", sb.substring(
-//            //		newStartAndEndPosition.getFirst(), newStartAndEndPosition.getSecond()));
-//
-//            final Chord chord = chordsInText.get(i).getChord();
-//
-//            InternalURLSpan urlSpan = new InternalURLSpan(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View v) {
-//                    showChordPopup(chord);
-//                }
-//            });
-//
-//            spannable.setSpan(urlSpan,
-//                    newStartAndEndPosition.getFirst(),
-//                    newStartAndEndPosition.getSecond(),
-//                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        }
-//
-//        return spannable;
-//    }
-//
-//    private void applyLinkifiedChordsTextToTextView(Spannable newText) {
-//        tvLyrics.setMovementMethod(LinkMovementMethod.getInstance());
-//        tvLyrics.setText(newText);
-//    }
-//
-//    private void showChordPopup(Chord chord) {
-//        if (!ChordDictionary.isInitialized()) {
-//            // it could take a second or two to initialize, so just wait until then...
-//            return;
-//        }
-//
-//        final PopupWindow window = PopupHelper.newBasicPopupWindow(this);
-//
-//
-//        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//
-//        View view = inflater.inflate(R.layout.chord_popup, null);
-//        TextView textView = (TextView) view.findViewById(android.R.id.text1);
-//        textView.setText(chord.toPrintableString(getNoteNaming()));
-//
-//        TextView textView2 = (TextView) view.findViewById(android.R.id.text2);
-//        textView2.setText(createGuitarChordText(chord));
-//
-//        window.setContentView(view);
-//
-//        int[] textViewLocation = new int[2];
-//        tvLyrics.getLocationOnScreen(textViewLocation);
-//
-//        int chordPopupOffset = Math.round(TypedValue.applyDimension(
-//                TypedValue.COMPLEX_UNIT_SP, CHORD_POPUP_Y_OFFSET_IN_SP, getResources().getDisplayMetrics()));
-//
-//        int offsetX = Math.round(lastXCoordinate - textViewLocation[0]);
-//        int offsetY = Math.max(0, Math.round(lastYCoordinate - textViewLocation[1]) - chordPopupOffset);
-//
-//        int heightOverride = getResources().getDimensionPixelSize(R.dimen.popup_height);
-//
-//        PopupHelper.showLikeQuickAction(window, view, tvLyrics, getWindowManager(), offsetX, offsetY, heightOverride);
-//
-//    }
-//
-//    private CharSequence createGuitarChordText(Chord chord) {
-//        // TODO: have a better interface for switching between alternative ways of playing the same chord.
-//        // For now, just build up a list and show everything at once.
-//
-//        List<String> guitarChords = ChordDictionary.getGuitarChordsForChord(chord);
-//        // Given how the dictionary is read in, these chords should have the simplest ones first
-//        // Just separate each with a number, if there is more than one
-//
-//        switch (guitarChords.size()) {
-//            case 0:
-//                return getString(R.string.no_guitar_chord_available);
-//            case 1:
-//                return guitarChords.get(0);
-//            default:
-//                // create a list
-//                StringBuilder stringBuilder = new StringBuilder();
-//                for (int i = 0; i < guitarChords.size(); i++) {
-//                    stringBuilder
-//                            .append(getString(R.string.variation))
-//                            .append(' ')
-//                            .append(i + 1)
-//                            .append(": ")
-//                            .append(guitarChords.get(i))
-//                            .append('\n');
-//                }
-//                return stringBuilder.substring(0, stringBuilder.length() - 1); // cut off final newline
-//        }
-//    }
-//
-//    private void createTransposeDialog() {
-//        final View view = DialogHelper.createTransposeDialogView(this, capoFret, transposeSteps);
-//        new AlertDialog.Builder(this)
-//                .setTitle(R.string.transpose)
-//                .setCancelable(true)
-//                .setNegativeButton(android.R.string.cancel, null)
-//                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // grab the user's chosen values for the capo and the transposition
-//
-//                        View transposeView = view.findViewById(R.id.transpose_include);
-//                        View capoView = view.findViewById(R.id.capo_include);
-//
-//                        int newTransposeHalfSteps = DialogHelper.getSeekBarValue(transposeView) + DialogHelper.TRANSPOSE_MIN;
-//                        int newCapoFret = DialogHelper.getSeekBarValue(capoView) + DialogHelper.CAPO_MIN;
-//
-//                        log.d("transposeSteps is now %d", newTransposeHalfSteps);
-//                        log.d("capoFret is now %d", newCapoFret);
-//
-//                        changeTransposeOrCapo(newTransposeHalfSteps, newCapoFret);
-//
-//                        dialog.dismiss();
-//
-//                    }
-//                })
-//                .setView(view)
-//                .show();
-//    }
-//
-//    protected void changeTransposeOrCapo(final int newTransposeHalfSteps, final int newCapoFret) {
-//
-////        // persist
-////        if (filename != null) {
-////            ChordReaderDBHelper dbHelper = new ChordReaderDBHelper(this);
-////            dbHelper.saveTransposition(filename, newTransposeHalfSteps, newCapoFret);
-////            dbHelper.close();
-////        }
-//
-//        final ProgressDialog progressDialog = new ProgressDialog(this);
-//        progressDialog.setTitle(R.string.transposing);
-//        progressDialog.setMessage(getText(R.string.please_wait));
-//        progressDialog.setIndeterminate(true);
-//
-//        // transpose in background to avoid jankiness
-//        AsyncTask<Void, Void, Spannable> task = new AsyncTask<Void, Void, Spannable>() {
-//
-//
-//            @Override
-//            protected void onPreExecute() {
-//                super.onPreExecute();
-//                progressDialog.show();
-//            }
-//
-//            @Override
-//            protected Spannable doInBackground(Void... params) {
-//
-//                long start = System.currentTimeMillis();
-//
-//
-//                int capoDiff = capoFret - newCapoFret;
-//                int transposeDiff = transposeSteps - newTransposeHalfSteps;
-//                capoFret = newCapoFret;
-//                transposeSteps = newTransposeHalfSteps;
-//
-//                updateChordsInTextForTransposition(transposeDiff, capoDiff);
-//
-//                Spannable chordTextSpannable = buildUpChordTextToDisplay();
-//
-//                long elapsed = System.currentTimeMillis() - start;
-//
-//                if (elapsed < PROGRESS_DIALOG_MIN_TIME) {
-//                    // show progressdialog for at least 1 second, or else it goes by too fast
-//                    // XXX: this is a weird UI hack, but I don't know what else to do
-//                    try {
-//                        Thread.sleep(PROGRESS_DIALOG_MIN_TIME - elapsed);
-//                    } catch (InterruptedException e) {
-//                        log.e(e, "unexpected exception");
-//                    }
-//                }
-//
-//
-//                return chordTextSpannable;
-//
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Spannable chordText) {
-//                super.onPostExecute(chordText);
-//
-//                applyLinkifiedChordsTextToTextView(chordText);
-//                progressDialog.dismiss();
-//            }
-//
-//
-//        };
-//
-//        task.execute((Void) null);
-//    }
-//
-//
 //    private boolean isInViewingMode() {
 //        return nestedScrollView.getVisibility() == View.VISIBLE;
 //    }
-//
-//
-////    private void resetDataExceptChordTextAndFilename() {
-////
-////
-////        chordsInText = null;
-////        if (filename != null) {
-////            ChordReaderDBHelper dbHelper = new ChordReaderDBHelper(this);
-////            Transposition transposition = dbHelper.findTranspositionByFilename(filename);
-////            dbHelper.close();
-////            if (transposition != null) {
-////                capoFret = transposition.getCapo();
-////                transposeSteps = transposition.getTranspose();
-////            } else {
-////                capoFret = 0;
-////                transposeSteps = 0;
-////            }
-////        } else {
-////            capoFret = 0;
-////            transposeSteps = 0;
-////        }
-////
-////    }
 //
 //    private void showBottomSheetDialogFontSize() {
 //        int fontSize = AppSharedPreference.SSP().getFontSize();
@@ -945,54 +462,6 @@
 //
 //                tvSampleText.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
 //                tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, value);
-//            }
-//        });
-//
-//        llDone.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialogSheet.dismiss();
-//            }
-//        });
-//
-//
-////        val dialogSheet = DialogSheet(this)
-////                .setTitle(R.string.app_name)
-////                .setMessage(R.string.lorem)
-////                .setColoredNavigationBar(true)
-////                .setTitleTextSize(20) // In SP
-////                .setCancelable(false)
-////                .setPositiveButton(android.R.string.ok) {
-////            // Your action
-////        }
-////    .setNegativeButton(android.R.string.cancel) {
-////            // Your action
-////        }
-////    .setNeutralButton("Neutral")
-////                .setRoundedCorners(false) // Default value is true
-////                .setBackgroundColor(Color.BLACK) // Your custom background color
-////                .setButtonsColorRes(R.color.colorAccent) // You can use dialogSheetAccent style attribute instead
-////                .setNeutralButtonColor(Color.WHITE)
-////                .show()
-//    }
-//
-//    private void showBottomSheetDialogTranspose() {
-//        View view = View.inflate(this, R.layout.layout_sheet_transpose, null);
-//        DialogSheet dialogSheet = new DialogSheet(this, true)
-//                .setView(view)
-//                .setCancelable(true);
-//        dialogSheet.show();
-//
-//        LinearLayout llDone = view.findViewById(R.id.ll_done);
-//        NumberPicker numberPicker = view.findViewById(R.id.numberPicker_transpose);
-//        numberPicker.setValue(transposeSteps);
-//
-//        numberPicker.setValueChangedListener(new DefaultValueChangedListener() {
-//            @Override
-//            public void valueChanged(int value, ActionEnum action) {
-//                super.valueChanged(value, action);
-//
-//                changeTransposeOrCapo(value, DialogHelper.CAPO_MIN);
 //            }
 //        });
 //
@@ -1027,16 +496,6 @@
 //            }
 //        };
 //        autoScrollHandler.postDelayed(timerRunnable, 0);
-//
-////        Timer timer = new Timer();
-////        timer.scheduleAtFixedRate(new RemindTask(), 0, 500); // delay*/
-//
-//
-////        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(nestedScrollView, "scrollY",
-////                clRootLayout.getChildAt(0).getHeight() - nestedScrollView.getHeight());
-////        objectAnimator.setDuration(4000);
-////        objectAnimator.setInterpolator(new LinearInterpolator());
-////        objectAnimator.start();
 //    }
 //
 //    private void stopAutoScrollPage() {
@@ -1047,32 +506,6 @@
 //        }
 //    }
 //
-//    private int textViewOneLineHeight() {
-//        int textViewHeight = tvLyrics.getLineHeight();
-//
-//        return textViewHeight;
-//    }
-//
-//    class RemindTask extends TimerTask {
-//        //        int current = nestedScrollView.getCurrentItem();
-//        int position = 0;
-//
-//        @Override
-//        public void run() {
-//            runOnUiThread(new Runnable() {
-//                public void run() {
-//                    if (position == chordsInText.size()) {
-//                        position = 0;
-//                        position++;
-//                    } else {
-//                        position++;
-//                    }
-//                    nestedScrollView.smoothScrollBy(0, position);
-//                }
-//            });
-//        }
-//    }
-//
 //    public void expandToolbar() {
 //        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
 //        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
@@ -1080,7 +513,6 @@
 //            behavior.onNestedFling(clRootLayout, appBarLayout, null, 0, -10000, false);
 //        }
 //    }
-//
 //
 //    private void enterFullScreenMode() {
 //        fabExitFullScreen.setVisibility(View.VISIBLE);
@@ -1126,17 +558,6 @@
 //    }
 //
 //    @Override
-//    public boolean onTouch(View v, MotionEvent event) {
-//
-//        // record where the user touched so we know where to place the window, so it will be out of the way
-//
-//        lastXCoordinate = event.getRawX();
-//        lastYCoordinate = event.getRawY();
-//
-//        return false;
-//    }
-//
-//    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.menu_song_details, menu);
 //
@@ -1150,19 +571,7 @@
 //        MenuItem menuItemAutoScroll = menu.findItem(R.id.menu_auto_scroll);
 //        MenuItem menuItemTranspose = menu.findItem(R.id.menu_transpose);
 //        MenuItem menuItemShare = menu.findItem(R.id.menu_share);
-//
-////        SubMenu subMenuShare = menuItemShare.getSubMenu();
-////        MenuItem submenuItemShareText = subMenuShare.findItem(R.id.submenu_share_text);
-////        MenuItem submenuItemSharePDF = subMenuShare.findItem(R.id.submenu_share_pdf);
-//
-////        int color = ContextCompat.getColor(this, R.color.gray);
-////        updateMenuWithIcon(menuItemFullscreen, color);
-////        updateMenuWithIcon(menuItemTextSize, color);
-////        updateMenuWithIcon(menuItemAutoScroll, color);
-////        updateMenuWithIcon(menuItemTranspose, color);
-////        updateMenuWithIcon(menuItemShare, color);
-//////        updateMenuWithIcon(submenuItemShareText, color);
-//////        updateMenuWithIcon(submenuItemSharePDF, color);
+//        menuItemTranspose.setVisible(false);
 //
 //        return true;
 //    }
@@ -1183,13 +592,11 @@
 ////                startAutoScrollPage();
 //                return true;
 //
-//            case R.id.menu_transpose:
-//                showBottomSheetDialogTranspose();
-////                createTransposeDialog();
-//                return true;
+////            case R.id.menu_transpose:
+////                showBottomSheetDialogTranspose();
+////                return true;
 //
 //            case R.id.menu_share:
-//
 //                return true;
 //
 //            case android.R.id.home:
@@ -1213,7 +620,6 @@
 //    @Override
 //    protected void onPause() {
 //        super.onPause();
-//
 //        if (wakeLock.isHeld()) {
 //            log.d("Releasing wakelock");
 //            wakeLock.release();
@@ -1223,7 +629,6 @@
 //    @Override
 //    protected void onResume() {
 //        super.onResume();
-//
 //        // just in case the text size has changed
 ////        tvLyrics.setTextSize(TypedValue.COMPLEX_UNIT_SP, PreferenceHelper.getTextSizePreference(this));
 //
