@@ -11,6 +11,11 @@
     <color name="primaryBackgroundColor">#303030</color>
     <color name="primaryCardBackgroundColor">#424242</color>
 
+    <color name="colorAccentDark">#d32f2f</color>
+
+    <color name="picker_border">#f44336</color>
+    <color name="button_color">#d32f2f</color>
+
     <color name="main_text">#CCFFFFFF</color>
     <color name="main_dark_text">#FFFFFF</color>
     <color name="subtext">#99FFFFFF</color>
@@ -19,6 +24,10 @@
     <color name="menu_active">#FFF</color>
     <color name="menu_inactive">#7a7a7a</color>
 
+<!--    <color name="setting_labels">#717171</color>-->
+<!--    <color name="setting_subtitles">#a9a9b0</color>-->
+
+<!--    <color name="switchColor">#f44336</color>-->
 
 <!--    <color name="colorPrimary">#f44336</color>-->
 <!--    <color name="colorPrimaryDark">#d32f2f</color>-->

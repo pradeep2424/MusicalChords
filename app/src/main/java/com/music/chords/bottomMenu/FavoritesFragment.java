@@ -78,6 +78,7 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
     private void init() {
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).setTitle(R.string.favorites);
 
 //        viewToolbar = rootView.findViewById(R.id.view_toolbar);
         recyclerView = rootView.findViewById(R.id.rv_productItems);

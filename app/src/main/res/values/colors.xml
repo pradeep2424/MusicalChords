@@ -4,7 +4,10 @@
     <!--Light Color-->
     <color name="colorPrimary">#f44336</color>
     <color name="colorPrimaryDark">#d32f2f</color>
-    <color name="colorAccent">#009688</color>
+    <color name="colorAccent">#2979ff</color>
+
+    <color name="colorAccentDark">#1c54b2</color>
+<!--    <color name="colorAccent">#009688</color>-->
 
 <!--    <color name="colorPrimary">#3f51b5</color>-->
 <!--    <color name="colorPrimaryDark">#2c387e</color>-->
@@ -15,6 +18,11 @@
     <color name="primaryDateColor">#8C000000</color>
     <color name="primaryBackgroundColor">#FAFAFA</color>
     <color name="primaryCardBackgroundColor">#F5F5F5</color>
+
+    <color name="picker_border">#f44336</color>
+    <color name="button_color">#d32f2f</color>
+
+<!--    <color name="switchColor">#f44336</color>-->
 
 <!--    <color name="colorPrimary">#4caf50</color>-->
 <!--    <color name="colorPrimaryDark">#388e3c</color>-->
@@ -53,11 +61,11 @@
 <!--    <color name="menu_active1">#2A313B</color>-->
     <color name="subtext">#7a7a7a</color>
 
-    <color name="setting_labels">#717171</color>
-    <color name="setting_subtitles">#a9a9b0</color>
+<!--    <color name="setting_labels">#717171</color>-->
+<!--    <color name="setting_subtitles">#a9a9b0</color>-->
 
 <!--    <color name="menu_active">#f44336</color>-->
-    <color name="menu_active">#b71c1c</color>
+    <color name="menu_active">#c62828</color>
     <color name="menu_inactive">#c7c7cc</color>
 
     <color name="green">#00a306</color>
@@ -81,6 +89,7 @@
     <color name="color_divider">#1A4b4b4b</color>
     <color name="transparent">#00000000</color>
     <color name="hint_gray">#9b9b9b</color>
+    <color name="light_gray">#D8D8D8</color>
 
     <color name="icon_tint_normal">#7a7a7a</color>
     <color name="icon_tint_selected">#fed776</color>

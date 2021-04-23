@@ -101,7 +101,7 @@ public class DarkModeActivity extends AppCompatActivity {
         toggleSwitch.setActiveTextColor(R.color.white);
 
         toggleSwitch.setInactiveBgColor(R.color.color_divider);
-        toggleSwitch.setInactiveTextColor(R.color.setting_subtitles);
+        toggleSwitch.setInactiveTextColor(R.color.subtext);
 
         rlRootLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.main_text));
     }

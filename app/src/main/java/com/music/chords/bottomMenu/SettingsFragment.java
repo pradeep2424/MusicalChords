@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.music.chords.BuildConfig;
 import com.music.chords.R;
@@ -39,7 +40,9 @@ public class SettingsFragment extends Fragment {
     private LinearLayout llAutoScroll;
     private LinearLayout llShare;
     private LinearLayout llRateUs;
-    private LinearLayout llContactUs;
+
+    private TextView tvDarkThemeSubtext;
+
     private SwitchCompat switchDarkTheme;
 //    private ImageView ivThemeIcon;
 
@@ -68,8 +71,10 @@ public class SettingsFragment extends Fragment {
         llAutoScroll = rootView.findViewById(R.id.ll_autoScroll);
         llShare = rootView.findViewById(R.id.ll_share);
         llRateUs = rootView.findViewById(R.id.ll_rateUs);
-        llContactUs = rootView.findViewById(R.id.ll_contactUs);
+//        llContactUs = rootView.findViewById(R.id.ll_contactUs);
         switchDarkTheme = rootView.findViewById(R.id.switch_darkTheme);
+
+        tvDarkThemeSubtext = rootView.findViewById(R.id.tv_darkThemeSubtext);
 
 //        ivThemeIcon = view.findViewById(R.id.iv_themeIndicator);
 //
@@ -125,13 +130,13 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        llContactUs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), AboutUsActivity.class);
-//                startActivity(intent);
-            }
-        });
+//        llContactUs.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Intent intent = new Intent(getActivity(), AboutUsActivity.class);
+////                startActivity(intent);
+//            }
+//        });
 
         switchDarkTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -151,8 +156,10 @@ public class SettingsFragment extends Fragment {
     private void setNightModeSwitch() {
         if (isNightModeEnabled()) {
             switchDarkTheme.setChecked(true);
+            tvDarkThemeSubtext.setText(getString(R.string.dark_mode_active));
         } else {
             switchDarkTheme.setChecked(false);
+            tvDarkThemeSubtext.setText(getString(R.string.light_mode_active));
         }
     }
 

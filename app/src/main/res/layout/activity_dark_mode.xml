@@ -62,7 +62,7 @@
             app:activeBgColor="@color/white"
             app:activeTextColor="@color/main_dark_text"
             app:inactiveBgColor="@color/color_divider"
-            app:inactiveTextColor="@color/setting_subtitles"
+            app:inactiveTextColor="@color/subtext"
             app:separatorColor="@color/gray_very_light"
             app:textToggleLeft="@string/mode_light"
             app:textToggleRight="@string/mode_dark"

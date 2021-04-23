@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/primaryBackgroundColor">
 
     <!--<ScrollView-->
     <!--android:id="@+id/myProfileScroll"-->
@@ -61,8 +62,8 @@
                     android:id="@+id/tv_darkThemeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/settings_theme"
-                    android:textColor="@color/setting_labels"
+                    android:text="@string/settings_dark_theme"
+                    android:textColor="@color/main_text"
                     android:textSize="16sp" />
 
                 <com.music.chords.custom.MyTextView
@@ -70,8 +71,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@string/settings_theme"
-                    android:textColor="@color/setting_subtitles"
+                    android:text="@string/settings_dark_theme"
+                    android:textColor="@color/subtext"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -140,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_font_size"
-                    android:textColor="@color/setting_labels"
+                    android:textColor="@color/main_text"
                     android:textSize="16sp" />
 
                 <com.music.chords.custom.MyTextView
@@ -149,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="@string/settings_font_size"
-                    android:textColor="@color/setting_subtitles"
+                    android:textColor="@color/subtext"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -209,7 +210,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_auto_scroll"
-                    android:textColor="@color/setting_labels"
+                    android:textColor="@color/main_text"
                     android:textSize="16sp" />
 
                 <com.music.chords.custom.MyTextView
@@ -218,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="@string/settings_font_size"
-                    android:textColor="@color/setting_subtitles"
+                    android:textColor="@color/subtext"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -280,7 +281,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_share"
-                    android:textColor="@color/setting_labels"
+                    android:textColor="@color/main_text"
                     android:textSize="16sp" />
 
                 <com.music.chords.custom.MyTextView
@@ -289,7 +290,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="@string/settings_share"
-                    android:textColor="@color/setting_subtitles"
+                    android:textColor="@color/subtext"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -350,7 +351,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_rate_us"
-                    android:textColor="@color/setting_labels"
+                    android:textColor="@color/main_text"
                     android:textSize="16sp" />
 
                 <com.music.chords.custom.MyTextView
@@ -359,7 +360,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="@string/settings_rate_us"
-                    android:textColor="@color/setting_subtitles"
+                    android:textColor="@color/subtext"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -383,75 +384,75 @@
             android:background="@color/color_divider" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_contactUs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/ll_contactUs"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical">-->
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="10dp">
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="10dp">-->
 
-            <ImageView
-                android:id="@+id/iv_iconContactUs"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_bottom_menu_home" />
+<!--            <ImageView-->
+<!--                android:id="@+id/iv_iconContactUs"-->
+<!--                android:layout_width="20dp"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:layout_alignParentLeft="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:src="@drawable/ic_bottom_menu_home" />-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:layout_toLeftOf="@+id/iv_contactUsArrow"
-                android:layout_toRightOf="@+id/iv_iconContactUs"
-                android:orientation="vertical"
-                android:padding="10dp">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:layout_toLeftOf="@+id/iv_contactUsArrow"-->
+<!--                android:layout_toRightOf="@+id/iv_iconContactUs"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="10dp">-->
 
-                <com.music.chords.custom.MyTextView
-                    android:id="@+id/tv_contactUsText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="/settings_contact_us_title"
-                    android:textColor="@color/setting_labels"
-                    android:textSize="16sp" />
+<!--                <com.music.chords.custom.MyTextView-->
+<!--                    android:id="@+id/tv_contactUsText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="/settings_contact_us_title"-->
+<!--                    android:textColor="@color/main_text"-->
+<!--                    android:textSize="16sp" />-->
 
-                <com.music.chords.custom.MyTextView
-                    android:id="@+id/tv_contactUsSubtext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="/settings_contact_us_subtitle"
-                    android:textColor="@color/setting_subtitles"
-                    android:textSize="12sp" />
+<!--                <com.music.chords.custom.MyTextView-->
+<!--                    android:id="@+id/tv_contactUsSubtext"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:text="/settings_contact_us_subtitle"-->
+<!--                    android:textColor="@color/subtext"-->
+<!--                    android:textSize="12sp" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <ImageView
-                android:id="@+id/iv_contactUsArrow"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/ic_chevron_right_arrow"
-                app:tint="#a9a0b0" />
+<!--            <ImageView-->
+<!--                android:id="@+id/iv_contactUsArrow"-->
+<!--                android:layout_width="20dp"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:src="@drawable/ic_chevron_right_arrow"-->
+<!--                app:tint="#a9a0b0" />-->
 
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.7dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@color/color_divider" />
-    </LinearLayout>
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0.7dp"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginRight="20dp"-->
+<!--            android:background="@color/color_divider" />-->
+<!--    </LinearLayout>-->
 
     <!--<LinearLayout-->
     <!--android:layout_width="match_parent"-->
