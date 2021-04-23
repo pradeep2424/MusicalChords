@@ -8,7 +8,7 @@
 
 <!--    <color name="colorPrimary">#3f51b5</color>-->
 <!--    <color name="colorPrimaryDark">#2c387e</color>-->
-<!--    <color name="colorAccent">#ffc400</color>-->
+<!--    <color name="colorAccent">#2979ff</color>-->
 
     <color name="primaryTitleColor">#D9000000</color>
     <color name="primaryDescriptionColor">#8C000000</color>
@@ -50,13 +50,14 @@
 
     <color name="main_text">#4a4a4a</color>
     <color name="main_dark_text">#2f2f39</color>
-    <color name="menu_active1">#2A313B</color>
+<!--    <color name="menu_active1">#2A313B</color>-->
     <color name="subtext">#7a7a7a</color>
 
     <color name="setting_labels">#717171</color>
     <color name="setting_subtitles">#a9a9b0</color>
 
-    <color name="menu_active">#2e7d32</color>
+<!--    <color name="menu_active">#f44336</color>-->
+    <color name="menu_active">#b71c1c</color>
     <color name="menu_inactive">#c7c7cc</color>
 
     <color name="green">#00a306</color>

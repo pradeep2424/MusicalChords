@@ -98,4 +98,8 @@ public class AppSharedPreference implements Constants {
         return fontSize;
     }
 
+    public boolean getIsDarkThemeEnabled() {
+        boolean isDarkThemeEnabled =  sharedPreferences.getBoolean(Constants.KEY_IS_DARK_THEME_ENABLED, false);
+        return isDarkThemeEnabled;
+    }
 }

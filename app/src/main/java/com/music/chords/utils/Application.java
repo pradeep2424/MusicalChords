@@ -45,8 +45,8 @@ public class Application extends android.app.Application {
         mInstance = this;
         AppSharedPreference.SSP().init(getApplicationContext());
 
-        AppCompatDelegate.setDefaultNightMode(
-                AppCompatDelegate.MODE_NIGHT_YES);
+//        AppCompatDelegate.setDefaultNightMode(
+//                AppCompatDelegate.MODE_NIGHT_YES);
 
 //        AppSignatureHelper appSignatureHelper = new AppSignatureHelper(this);
 //        appSignatureHelper.getAppSignatures();

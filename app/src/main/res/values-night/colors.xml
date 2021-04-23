@@ -11,6 +11,13 @@
     <color name="primaryBackgroundColor">#303030</color>
     <color name="primaryCardBackgroundColor">#424242</color>
 
+    <color name="main_text">#CCFFFFFF</color>
+    <color name="main_dark_text">#FFFFFF</color>
+    <color name="subtext">#99FFFFFF</color>
+<!--    <color name="subtext">#B3FFFFFF</color>-->
+
+    <color name="menu_active">#FFF</color>
+    <color name="menu_inactive">#7a7a7a</color>
 
 
 <!--    <color name="colorPrimary">#f44336</color>-->

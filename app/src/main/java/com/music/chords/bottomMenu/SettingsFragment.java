@@ -28,17 +28,19 @@ import com.music.chords.R;
 import com.music.chords.activity.AutoScrollActivity;
 import com.music.chords.activity.DarkModeActivity;
 import com.music.chords.activity.FontSizeActivity;
+import com.music.chords.interfaces.Constants;
+import com.music.chords.sharedPreference.AppSharedPreference;
 
 public class SettingsFragment extends Fragment {
     private View rootView;
 
-    private LinearLayout llTheme;
+    private LinearLayout llDarkTheme;
     private LinearLayout llFontSize;
     private LinearLayout llAutoScroll;
     private LinearLayout llShare;
     private LinearLayout llRateUs;
     private LinearLayout llContactUs;
-    private SwitchCompat switchCompat;
+    private SwitchCompat switchDarkTheme;
 //    private ImageView ivThemeIcon;
 
     private final int REQUEST_CODE_THEME = 100;
@@ -51,6 +53,7 @@ public class SettingsFragment extends Fragment {
 
         init();
         componentEvents();
+        setNightModeSwitch();
 
         return rootView;
     }
@@ -60,13 +63,13 @@ public class SettingsFragment extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).setTitle(R.string.settings);
 
-        llTheme = rootView.findViewById(R.id.ll_theme);
+        llDarkTheme = rootView.findViewById(R.id.ll_darkTheme);
         llFontSize = rootView.findViewById(R.id.ll_fontSize);
         llAutoScroll = rootView.findViewById(R.id.ll_autoScroll);
         llShare = rootView.findViewById(R.id.ll_share);
         llRateUs = rootView.findViewById(R.id.ll_rateUs);
         llContactUs = rootView.findViewById(R.id.ll_contactUs);
-        switchCompat = rootView.findViewById(R.id.switch_dayNight);
+        switchDarkTheme = rootView.findViewById(R.id.switch_darkTheme);
 
 //        ivThemeIcon = view.findViewById(R.id.iv_themeIndicator);
 //
@@ -130,7 +133,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        switchDarkTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -139,8 +142,23 @@ public class SettingsFragment extends Fragment {
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
+
+                AppSharedPreference.SSP().putBoolean(Constants.KEY_IS_DARK_THEME_ENABLED, isChecked);
             }
         });
+    }
+
+    private void setNightModeSwitch() {
+        if (isNightModeEnabled()) {
+            switchDarkTheme.setChecked(true);
+        } else {
+            switchDarkTheme.setChecked(false);
+        }
+    }
+
+    private boolean isNightModeEnabled() {
+        boolean isDarkThemeEnabled = AppSharedPreference.SSP().getIsDarkThemeEnabled();
+        return isDarkThemeEnabled;
     }
 
     private void shareApp() {
