@@ -1,5 +1,7 @@
 package com.music.chords.utils;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.music.chords.objects.SongObject;
 import com.music.chords.sharedPreference.AppSharedPreference;
 
@@ -26,7 +28,7 @@ public class Application extends android.app.Application {
 //    public static AppSetting appSetting;
 ////    public static int MINIMUM_FREE_DELIVERY_AMOUNT;
 
-//    public static SongObject songObject;
+    //    public static SongObject songObject;
     public static ArrayList<SongObject> allSongsData = new ArrayList<>();
     public static ArrayList<SongObject> allLyricsData = new ArrayList<>();
     public static ArrayList<SongObject> allChordsData = new ArrayList<>();
@@ -42,6 +44,9 @@ public class Application extends android.app.Application {
         super.onCreate();
         mInstance = this;
         AppSharedPreference.SSP().init(getApplicationContext());
+
+        AppCompatDelegate.setDefaultNightMode(
+                AppCompatDelegate.MODE_NIGHT_YES);
 
 //        AppSignatureHelper appSignatureHelper = new AppSignatureHelper(this);
 //        appSignatureHelper.getAppSignatures();
