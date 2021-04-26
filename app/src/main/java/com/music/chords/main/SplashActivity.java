@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +35,9 @@ public class SplashActivity extends AppCompatActivity {
 
     VideoView videoView;
 
+    boolean isServiceDataDownloadFinished = false;
+    Handler autoCheckDataDownload;
+
     ArrayList<SongObject> listSongsData;
     ArrayList<SongObject> listLyricsData;
     ArrayList<SongObject> listChordsData;
@@ -45,6 +49,7 @@ public class SplashActivity extends AppCompatActivity {
 
 //        loadNextPage();
         init();
+        componentEvents();
         setupSplashVideo();
         loadSongData();
     }
@@ -60,12 +65,38 @@ public class SplashActivity extends AppCompatActivity {
         videoView = findViewById(R.id.videoView);
     }
 
+    private void componentEvents() {
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                loadNextPage();
+//                checkIfServiceDataDownloadFinish();
+            }
+        });
+    }
+
     private void setupSplashVideo() {
         videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_splash));
         videoView.setMediaController(new MediaController(this));
         videoView.start();
     }
 
+//    private void checkIfServiceDataDownloadFinish() {
+//        autoCheckDataDownload = new Handler();
+//        Runnable timerRunnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                if (isServiceDataDownloadFinished) {
+//                    if (autoCheckDataDownload != null) {
+//                        autoCheckDataDownload.removeCallbacksAndMessages(null);
+//                    }
+//                    loadNextPage();
+//                }
+//                autoCheckDataDownload.postDelayed(this, 1000);     // 40 is how many milliseconds you want this thread to run
+//            }
+//        };
+//        autoCheckDataDownload.postDelayed(timerRunnable, 0);
+//    }
 
     private boolean isInternetAvailable() {
         if (InternetConnection.checkConnection(SplashActivity.this)) {
@@ -85,7 +116,7 @@ public class SplashActivity extends AppCompatActivity {
             if (checkLocalDBHasData()) {
 //                fetching data from local DB
                 getSongDataFromDB();
-                loadNextPage();
+//                loadNextPage();
             } else {
 //              no data available in local db also
 //        Toasty.warning(SplashActivity.this, getString(R.string.connect_to_internet), Toast.LENGTH_LONG, true).show();
@@ -172,7 +203,8 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 }
 
-                loadNextPage();
+                isServiceDataDownloadFinished = true;
+//                loadNextPage();
             }
 
         } catch (Exception e) {
@@ -271,6 +303,7 @@ public class SplashActivity extends AppCompatActivity {
                 rss.moveToNext();
             }
             rss.close();
+            isServiceDataDownloadFinished = true;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -312,18 +345,16 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void loadNextPage() {
+        isServiceDataDownloadFinished = false;
         Application.allSongsData = listSongsData;
         Application.allLyricsData = listLyricsData;
         Application.allChordsData = listChordsData;
 
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
 //                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        }, 2000);
+        startActivity(intent);
+        finish();
+
     }
 
 

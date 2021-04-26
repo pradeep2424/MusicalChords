@@ -95,6 +95,8 @@
 
     <string name="no_internet_connection">No internet connection.</string>
     <string name="connect_to_internet">No internet connection available, Please connect to internet and restart the application.</string>
+    <string name="song_data_not_found">Song data not found.</string>
+    <string name="app_not_found_for_sharing">Suitable app not found for sharing.</string>
 
     <string name="lyrics">Lyrics</string>
     <string name="lyrics_and_chords">Lyrics &amp; Chords</string>
@@ -108,5 +110,6 @@
     <string name="end_of_song">End of song.</string>
     <string name="auto_scroll_initial_delay">Auto scroll initial delay</string>
     <string name="auto_scroll_speed">Auto scroll speed</string>
+    <string name="share_using">Share using"</string>
 
 </resources>

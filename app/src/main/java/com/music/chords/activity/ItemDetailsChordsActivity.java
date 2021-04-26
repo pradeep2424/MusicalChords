@@ -2,6 +2,7 @@ package com.music.chords.activity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,9 +57,11 @@ import com.music.chords.chordsReader.helper.TransposeHelper;
 import com.music.chords.chordsReader.helper.WebPageExtractionHelper;
 import com.music.chords.chordsReader.utils.InternalURLSpan;
 import com.music.chords.chordsReader.utils.Pair;
+import com.music.chords.chordsReader.utils.StringUtil;
 import com.music.chords.chordsReader.utils.UtilLogger;
 import com.music.chords.helper.FullScreenHelper;
 import com.music.chords.interfaces.Constants;
+import com.music.chords.main.SplashActivity;
 import com.music.chords.objects.SongObject;
 import com.music.chords.sharedPreference.AppSharedPreference;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
@@ -74,6 +78,8 @@ import com.warkiz.widget.SeekParams;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
+
+import es.dmoral.toasty.Toasty;
 
 public class ItemDetailsChordsActivity extends AppCompatActivity implements Constants, View.OnTouchListener {
     SongObject songObject;
@@ -110,6 +116,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
     private List<ChordInText> chordsInText;
 
     private boolean isPlaying = false;
+    private boolean isContainsChords = false;
 
     private static final int PROGRESS_DIALOG_MIN_TIME = 600;
     private static final int CHORD_POPUP_Y_OFFSET_IN_SP = 24;
@@ -143,6 +150,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
 //        showConfirmChordchartDialog();
 
         if (songObject.isContainsChords()) {
+            isContainsChords = true;
             analyzeChordsAndShowChordView();
         }
     }
@@ -1070,6 +1078,38 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
         appBarLayout.setLayoutParams(params);
     }
 
+    private void shareLyricsText() {
+        if (songObject != null) {
+            String songTitle = songObject.getSongTitle();
+            String songSubtitle = songObject.getSongSubtitle();
+            String songLyrics = songObject.getSongLyrics();
+            String artist = songObject.getSongArtist();
+            String shareText = songObject.getSongTitle() + "\n"
+                    + songObject.getSongSubtitle() + "\n\n"
+                    + songObject.getSongLyrics() + "\n\n";
+
+            if (artist.length() > 0) {
+                shareText = shareText + " - By " + artist;
+            }
+
+//            if (songObject.getSongArtist() != null && songObject.getSongArtist())
+
+            Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+            intent.setType("text/plain");
+//        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.share_subject));
+            intent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
+
+            try {
+                startActivity(Intent.createChooser(intent, getString(R.string.share_using)));
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+                Toasty.normal(ItemDetailsChordsActivity.this, getString(R.string.app_not_found_for_sharing), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toasty.normal(ItemDetailsChordsActivity.this, getString(R.string.song_data_not_found), Toast.LENGTH_LONG).show();
+        }
+    }
+
     private void updateMenuWithIcon(@NonNull final MenuItem item, final int color) {
         SpannableStringBuilder builder = new SpannableStringBuilder()
                 .append("*") // the * will be replaced with the icon via ImageSpan
@@ -1117,6 +1157,12 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
         MenuItem menuItemTranspose = menu.findItem(R.id.menu_transpose);
         MenuItem menuItemShare = menu.findItem(R.id.menu_share);
 
+        if (isContainsChords) {
+            menuItemTranspose.setVisible(true);
+        } else {
+            menuItemTranspose.setVisible(false);
+        }
+
 //        SubMenu subMenuShare = menuItemShare.getSubMenu();
 //        MenuItem submenuItemShareText = subMenuShare.findItem(R.id.submenu_share_text);
 //        MenuItem submenuItemSharePDF = subMenuShare.findItem(R.id.submenu_share_pdf);
@@ -1155,7 +1201,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
                 return true;
 
             case R.id.menu_share:
-
+                shareLyricsText();
                 return true;
 
             case android.R.id.home:

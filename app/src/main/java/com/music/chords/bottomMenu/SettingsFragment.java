@@ -23,14 +23,18 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.music.chords.BuildConfig;
 import com.music.chords.R;
 import com.music.chords.activity.AutoScrollActivity;
 import com.music.chords.activity.DarkModeActivity;
 import com.music.chords.activity.FontSizeActivity;
+import com.music.chords.activity.ItemDetailsChordsActivity;
 import com.music.chords.interfaces.Constants;
 import com.music.chords.sharedPreference.AppSharedPreference;
+
+import es.dmoral.toasty.Toasty;
 
 public class SettingsFragment extends Fragment {
     private View rootView;
@@ -180,6 +184,7 @@ public class SettingsFragment extends Fragment {
             startActivity(Intent.createChooser(shareIntent, "choose one"));
         } catch (ActivityNotFoundException e) {
             e.printStackTrace();
+            Toasty.normal(getActivity(), getString(R.string.app_not_found_for_sharing), Toast.LENGTH_LONG).show();
         }
     }
 
