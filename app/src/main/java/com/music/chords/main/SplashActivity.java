@@ -34,6 +34,22 @@ import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
 
+//{
+//        "Status": "Success",
+//        "songMasters": [
+//        {
+//        "S_ARTIST": "ganesh",
+//        "S_ID": 6,
+//        "S_ISCHORDS": "True",
+//        "S_LANGUAGE": "English",
+//        "S_LYRICS": "tetsttst t",
+//        "S_SUBTITLE": "mera dil",
+//        "S_TITLE": "gata rahe",
+//        "S_YOUTUBE_URL": "www.change.com"
+//        }
+//        ]
+//        }
+
 public class SplashActivity extends AppCompatActivity {
     CreateDB dbCreate;
     DBSongDetails dbSongDetails;
