@@ -9,8 +9,13 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.MediaController;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -34,9 +39,12 @@ public class SplashActivity extends AppCompatActivity {
     DBSongDetails dbSongDetails;
 
     VideoView videoView;
+    TextView tvAppName;
 
     boolean isServiceDataDownloadFinished = false;
-    Handler autoCheckDataDownload;
+    CountDownTimer countDownTimer;
+
+    Animation fadeOut;
 
     ArrayList<SongObject> listSongsData;
     ArrayList<SongObject> listLyricsData;
@@ -50,7 +58,8 @@ public class SplashActivity extends AppCompatActivity {
 //        loadNextPage();
         init();
         componentEvents();
-        setupSplashVideo();
+        initSplashVideo();
+        initAppNameHandler();
         loadSongData();
     }
 
@@ -63,40 +72,75 @@ public class SplashActivity extends AppCompatActivity {
         dbSongDetails = new DBSongDetails(this);
 
         videoView = findViewById(R.id.videoView);
+        tvAppName = findViewById(R.id.tv_appName);
+
+        fadeOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
     }
 
     private void componentEvents() {
         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
-                loadNextPage();
-//                checkIfServiceDataDownloadFinish();
+                checkIfServiceDataDownloadFinish();
+
+//                loadSongData();
+
+//                final Handler handler = new Handler();
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        loadSongData();
+//                    }
+//                }, 2000);
+
+//                loadNextPage();
+            }
+        });
+
+        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+                checkIfServiceDataDownloadFinish();
+                return false;
             }
         });
     }
 
-    private void setupSplashVideo() {
-        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_splash));
-        videoView.setMediaController(new MediaController(this));
+
+    private void initSplashVideo() {
+        Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_splash);
+
+        videoView.setVideoURI(video);
+//        videoView.setMediaController(new MediaController(this));
         videoView.start();
     }
 
-//    private void checkIfServiceDataDownloadFinish() {
-//        autoCheckDataDownload = new Handler();
-//        Runnable timerRunnable = new Runnable() {
-//            @Override
-//            public void run() {
-//                if (isServiceDataDownloadFinished) {
-//                    if (autoCheckDataDownload != null) {
-//                        autoCheckDataDownload.removeCallbacksAndMessages(null);
-//                    }
-//                    loadNextPage();
-//                }
-//                autoCheckDataDownload.postDelayed(this, 1000);     // 40 is how many milliseconds you want this thread to run
-//            }
-//        };
-//        autoCheckDataDownload.postDelayed(timerRunnable, 0);
-//    }
+    private void initAppNameHandler() {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                tvAppName.setVisibility(View.VISIBLE);
+                tvAppName.startAnimation(fadeOut);
+            }
+        }, 7500);
+    }
+
+    private void checkIfServiceDataDownloadFinish() {
+        countDownTimer = new CountDownTimer(Long.MAX_VALUE, 1000) {
+
+            // This is called after every 10 sec interval.
+            public void onTick(long millisUntilFinished) {
+                if (isServiceDataDownloadFinished) {
+                    loadNextPage();
+                }
+            }
+
+            public void onFinish() {
+                start();
+            }
+        }.start();
+    }
 
     private boolean isInternetAvailable() {
         if (InternetConnection.checkConnection(SplashActivity.this)) {
@@ -204,6 +248,16 @@ public class SplashActivity extends AppCompatActivity {
                 }
 
                 isServiceDataDownloadFinished = true;
+
+//                final Handler handler = new Handler();
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        isServiceDataDownloadFinished = true;
+//                    }
+//                }, 15000);
+
+
 //                loadNextPage();
             }
 
@@ -344,11 +398,21 @@ public class SplashActivity extends AppCompatActivity {
         return returnColor;
     }
 
+    private void stopCountDownTimer() {
+        try {
+            countDownTimer.cancel();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void loadNextPage() {
         isServiceDataDownloadFinished = false;
         Application.allSongsData = listSongsData;
         Application.allLyricsData = listLyricsData;
         Application.allChordsData = listChordsData;
+
+        stopCountDownTimer();
 
         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
 //                Intent intent = new Intent(SplashActivity.this, MainActivity.class);

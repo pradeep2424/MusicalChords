@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -141,7 +142,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
         setFontSizeToLyrics();
         setAutoScrollSpeed();
         initializeChordDictionary();
-        applyColorScheme();
+//        applyColorScheme();
 
         if (songObject != null && songObject.getSongLyrics() != null) {
             chordText = songObject.getSongLyrics();
@@ -306,6 +307,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
         ivCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                removeMarginFAB();
                 hideAutoScrollBoomSeekBar();
             }
         });
@@ -482,16 +484,16 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
 //        return true;
 //    }
 
-    private void applyColorScheme() {
-        ColorScheme colorScheme = PreferenceHelper.getColorScheme(this);
-
-//        messageTextView.setTextColor(colorScheme.getForegroundColor(this));
-        tvLyrics.setTextColor(colorScheme.getForegroundColor(this));
-        clRootLayout.setBackgroundColor(colorScheme.getBackgroundColor(this));
-        tvLyrics.setLinkTextColor(ColorStateList.valueOf(colorScheme.getLinkColor(this)));
-
-//        messageSecondaryView.setBackgroundResource(colorScheme.getSelectorResource());
-    }
+//    private void applyColorScheme() {
+//        ColorScheme colorScheme = PreferenceHelper.getColorScheme(this);
+//
+////        messageTextView.setTextColor(colorScheme.getForegroundColor(this));
+//        tvLyrics.setTextColor(colorScheme.getForegroundColor(this));
+//        clRootLayout.setBackgroundColor(colorScheme.getBackgroundColor(this));
+//        tvLyrics.setLinkTextColor(ColorStateList.valueOf(colorScheme.getLinkColor(this)));
+//
+////        messageSecondaryView.setBackgroundResource(colorScheme.getSelectorResource());
+//    }
 
 
     private void initializeChordDictionary() {
@@ -1048,15 +1050,38 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
     }
 
     public void expandToolbar() {
-        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
-        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
-        if (behavior != null) {
-            behavior.onNestedFling(clRootLayout, appBarLayout, null, 0, -10000, false);
+        appBarLayout.setExpanded(false);
+
+//        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+//        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
+//        if (behavior != null) {
+//            behavior.onNestedFling(clRootLayout, appBarLayout, null, 0, -10000, false);
+//        }
+    }
+
+    private void setMargins (View view, int left, int top, int right, int bottom) {
+        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            p.setMargins(left, top, right, bottom);
+            view.requestLayout();
         }
     }
 
+    private void addMarginFAB() {
+        if (viewAutoScrollBottomSeekBar.getVisibility() == View.VISIBLE) {
+            int height = viewAutoScrollBottomSeekBar.getHeight() + 12;
+            setMargins(fabExitFullScreen, 12, 12, 12, height);
+        }
+    }
+
+    private void removeMarginFAB() {
+        if (viewAutoScrollBottomSeekBar.getVisibility() == View.VISIBLE) {
+            setMargins(fabExitFullScreen, 12, 12, 12, 12);
+        }
+    }
 
     private void enterFullScreenMode() {
+        addMarginFAB();
         fabExitFullScreen.setVisibility(View.VISIBLE);
 
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
@@ -1068,6 +1093,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
     }
 
     private void exitFullScreenMode() {
+        removeMarginFAB();
         fabExitFullScreen.setVisibility(View.GONE);
 
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);

@@ -15,10 +15,10 @@ public class FlipAnimator {
      * Performs flip animation on two views
      */
     public static void flipView(Context context, final View back, final View front, boolean showFront) {
-        leftIn = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.card_flip_left_in);
-        rightOut = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.card_flip_right_out);
-        leftOut = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.card_flip_left_out);
-        rightIn = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.animator.card_flip_right_in);
+        leftIn = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.anim.card_flip_left_in);
+        rightOut = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.anim.card_flip_right_out);
+        leftOut = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.anim.card_flip_left_out);
+        rightIn = (AnimatorSet) AnimatorInflater.loadAnimator(context, R.anim.card_flip_right_in);
 
         final AnimatorSet showFrontAnim = new AnimatorSet();
         final AnimatorSet showBackAnim = new AnimatorSet();
