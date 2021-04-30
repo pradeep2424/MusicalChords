@@ -13,7 +13,7 @@
             icon="@drawable/ic_bottom_menu_chords"
             id="@+id/tab_chords"
             inActiveColor="@color/menu_inactive"
-            title="@string/menu_chords" />
+            title="@string/menu_chordsheets" />
 
         <tab
             activeColor="@color/menu_active"

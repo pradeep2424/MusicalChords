@@ -83,7 +83,7 @@ public class ChordsFragment extends Fragment implements SongAdapterListener, Swi
     private void init() {
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).setTitle(R.string.lyrics_and_chords);
+        ((AppCompatActivity) getActivity()).setTitle(R.string.chordsheets);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
@@ -163,18 +163,18 @@ public class ChordsFragment extends Fragment implements SongAdapterListener, Swi
         });
     }
 
-    private int getRandomMaterialColor(String typeColor) {
-        int returnColor = Color.GRAY;
-        int arrayId = getResources().getIdentifier("mdcolor_" + typeColor, "array", getActivity().getPackageName());
-
-        if (arrayId != 0) {
-            TypedArray colors = getResources().obtainTypedArray(arrayId);
-            int index = (int) (Math.random() * colors.length());
-            returnColor = colors.getColor(index, Color.GRAY);
-            colors.recycle();
-        }
-        return returnColor;
-    }
+//    private int getRandomMaterialColor(String typeColor) {
+//        int returnColor = Color.GRAY;
+//        int arrayId = getResources().getIdentifier("mdcolor_" + typeColor, "array", getActivity().getPackageName());
+//
+//        if (arrayId != 0) {
+//            TypedArray colors = getResources().obtainTypedArray(arrayId);
+//            int index = (int) (Math.random() * colors.length());
+//            returnColor = colors.getColor(index, Color.GRAY);
+//            colors.recycle();
+//        }
+//        return returnColor;
+//    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

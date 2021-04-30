@@ -2,8 +2,16 @@
 <resources>
 
     <!--Light Color-->
-    <color name="colorPrimary">#f44336</color>
-    <color name="colorPrimaryDark">#d32f2f</color>
+<!--    <color name="colorPrimary">#f44336</color>-->
+<!--    <color name="colorPrimaryDark">#d32f2f</color>-->
+<!--    <color name="colorAccent">#FF9800</color>-->
+<!--    <color name="colorAccentDark">#EF6C00</color>-->
+
+    <color name="colorPrimary">#4caf50</color>
+    <color name="colorPrimaryDark">#388e3c</color>
+    <color name="colorAccent">#ffc107</color>
+    <color name="colorAccentDark">#FF8F00</color>
+
 <!--    <color name="colorAccent">#2979ff</color>-->
 <!--    <color name="colorAccentDark">#1c54b2</color>-->
 <!--    <color name="colorAccent">#009688</color>-->
@@ -11,8 +19,7 @@
 
 <!--    <color name="colorAccent">#03a9f4</color>-->
 <!--    <color name="colorAccentDark">#0277bd</color>-->
-    <color name="colorAccent">#FF9800</color>
-    <color name="colorAccentDark">#EF6C00</color>
+
 
 <!--    <color name="colorPrimary">#3f51b5</color>-->
 <!--    <color name="colorPrimaryDark">#2c387e</color>-->
@@ -24,8 +31,16 @@
     <color name="primaryBackgroundColor">#FAFAFA</color>
     <color name="primaryCardBackgroundColor">#F5F5F5</color>
 
-    <color name="picker_border">#f44336</color>
-    <color name="button_color">#d32f2f</color>
+    <color name="picker_border">#4caf50</color>
+    <color name="button_color">#388e3c</color>
+
+    <color name="lyrics_icon" >#ab47bc</color>
+    <color name="chords_icon" >#8d6e63</color>
+
+    <color name="view_cart_strip">#7bc242</color>  <!--  5fb709 -->
+    <color name="view_cart_strip1">#5fb709</color>
+    <color name="light_green_500">#8bc34a</color>
+    <color name="light_green_700">#689F38</color>
 
 <!--    <color name="switchColor">#f44336</color>-->
 
@@ -69,13 +84,12 @@
 <!--    <color name="setting_labels">#717171</color>-->
 <!--    <color name="setting_subtitles">#a9a9b0</color>-->
 
-<!--    <color name="menu_active">#f44336</color>-->
-    <color name="menu_active">#c62828</color>
+<!--    <color name="menu_active">#c62828</color>-->
+<!--    <color name="menu_inactive">#c7c7cc</color>-->
+    <color name="menu_active">#2e7d32</color>
     <color name="menu_inactive">#c7c7cc</color>
 
     <color name="green">#00a306</color>
-    <color name="light_green_500">#8bc34a</color>
-    <color name="light_green_700">#689F38</color>
 
     <color name="deep_orange_500">#ff5722</color>
     <color name="orange_500">#ff9800</color>

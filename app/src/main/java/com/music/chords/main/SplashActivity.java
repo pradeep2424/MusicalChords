@@ -214,7 +214,13 @@ public class SplashActivity extends AppCompatActivity {
                         String songLyrics = json.getString("Lyrics");
                         String songLanguage = json.getString("SongLanguage");
                         boolean isContainsChords = json.getBoolean("IsContainsChords");
-                        int songIconColor = getRandomMaterialColor();
+//                        int songIconColor = getRandomMaterialColor();
+                        int songIconColor;
+                        if (isContainsChords) {
+                            songIconColor = getColor(R.color.chords_icon);
+                        } else {
+                            songIconColor = getColor(R.color.lyrics_icon);
+                        }
                         boolean isFavorites = false;
 
                         SongObject songObject = new SongObject();
@@ -400,19 +406,19 @@ public class SplashActivity extends AppCompatActivity {
         return json;
     }
 
-    private int getRandomMaterialColor() {
-        String typeColor = "400";
-        int returnColor = Color.GRAY;
-        int arrayId = getResources().getIdentifier("mdcolor_" + typeColor, "array", getPackageName());
-
-        if (arrayId != 0) {
-            TypedArray colors = getResources().obtainTypedArray(arrayId);
-            int index = (int) (Math.random() * colors.length());
-            returnColor = colors.getColor(index, Color.GRAY);
-            colors.recycle();
-        }
-        return returnColor;
-    }
+//    private int getRandomMaterialColor() {
+//        String typeColor = "400";
+//        int returnColor = Color.GRAY;
+//        int arrayId = getResources().getIdentifier("mdcolor_" + typeColor, "array", getPackageName());
+//
+//        if (arrayId != 0) {
+//            TypedArray colors = getResources().obtainTypedArray(arrayId);
+//            int index = (int) (Math.random() * colors.length());
+//            returnColor = colors.getColor(index, Color.GRAY);
+//            colors.recycle();
+//        }
+//        return returnColor;
+//    }
 
     private void stopCountDownTimer() {
         try {

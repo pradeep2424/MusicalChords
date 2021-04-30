@@ -179,19 +179,19 @@ public class SearchFragment extends Fragment implements SongAdapterListener, Con
         }
     }
 
-    private int getRandomMaterialColor( ) {
-        String typeColor = "400";
-        int returnColor = Color.GRAY;
-        int arrayId = getResources().getIdentifier("mdcolor_" + typeColor, "array", getActivity().getPackageName());
-
-        if (arrayId != 0) {
-            TypedArray colors = getResources().obtainTypedArray(arrayId);
-            int index = (int) (Math.random() * colors.length());
-            returnColor = colors.getColor(index, Color.GRAY);
-            colors.recycle();
-        }
-        return returnColor;
-    }
+//    private int getRandomMaterialColor( ) {
+//        String typeColor = "400";
+//        int returnColor = Color.GRAY;
+//        int arrayId = getResources().getIdentifier("mdcolor_" + typeColor, "array", getActivity().getPackageName());
+//
+//        if (arrayId != 0) {
+//            TypedArray colors = getResources().obtainTypedArray(arrayId);
+//            int index = (int) (Math.random() * colors.length());
+//            returnColor = colors.getColor(index, Color.GRAY);
+//            colors.recycle();
+//        }
+//        return returnColor;
+//    }
 
 
 //    private void getSearchItems(final String searchText) {

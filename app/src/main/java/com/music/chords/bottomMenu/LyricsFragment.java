@@ -162,18 +162,18 @@ public class LyricsFragment extends Fragment implements SongAdapterListener, Swi
         });
     }
 
-    private int getRandomMaterialColor(String typeColor) {
-        int returnColor = Color.GRAY;
-        int arrayId = getResources().getIdentifier("mdcolor_" + typeColor, "array", getActivity().getPackageName());
-
-        if (arrayId != 0) {
-            TypedArray colors = getResources().obtainTypedArray(arrayId);
-            int index = (int) (Math.random() * colors.length());
-            returnColor = colors.getColor(index, Color.GRAY);
-            colors.recycle();
-        }
-        return returnColor;
-    }
+//    private int getRandomMaterialColor(String typeColor) {
+//        int returnColor = Color.GRAY;
+//        int arrayId = getResources().getIdentifier("mdcolor_" + typeColor, "array", getActivity().getPackageName());
+//
+//        if (arrayId != 0) {
+//            TypedArray colors = getResources().obtainTypedArray(arrayId);
+//            int index = (int) (Math.random() * colors.length());
+//            returnColor = colors.getColor(index, Color.GRAY);
+//            colors.recycle();
+//        }
+//        return returnColor;
+//    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

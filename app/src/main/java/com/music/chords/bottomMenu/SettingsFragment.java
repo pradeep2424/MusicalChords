@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.music.chords.BuildConfig;
 import com.music.chords.R;
+import com.music.chords.activity.AboutUsActivity;
 import com.music.chords.activity.AutoScrollActivity;
 import com.music.chords.activity.DarkModeActivity;
 import com.music.chords.activity.FontSizeActivity;
@@ -44,6 +45,7 @@ public class SettingsFragment extends Fragment {
     private LinearLayout llAutoScroll;
     private LinearLayout llShare;
     private LinearLayout llRateUs;
+    private LinearLayout llAboutUs;
 
     private TextView tvDarkThemeSubtext;
 
@@ -75,7 +77,7 @@ public class SettingsFragment extends Fragment {
         llAutoScroll = rootView.findViewById(R.id.ll_autoScroll);
         llShare = rootView.findViewById(R.id.ll_share);
         llRateUs = rootView.findViewById(R.id.ll_rateUs);
-//        llContactUs = rootView.findViewById(R.id.ll_contactUs);
+        llAboutUs = rootView.findViewById(R.id.ll_aboutUs);
         switchDarkTheme = rootView.findViewById(R.id.switch_darkTheme);
 
         tvDarkThemeSubtext = rootView.findViewById(R.id.tv_darkThemeSubtext);
@@ -134,13 +136,13 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-//        llContactUs.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                Intent intent = new Intent(getActivity(), AboutUsActivity.class);
-////                startActivity(intent);
-//            }
-//        });
+        llAboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AboutUsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         switchDarkTheme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

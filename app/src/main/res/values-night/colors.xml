@@ -4,109 +4,111 @@
     <!--Night Color-->
     <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#f44336</color>
+    <color name="colorAccent">#4caf50</color>
     <color name="primaryTitleColor">#FFFFFF</color>
     <color name="primaryDescriptionColor">#B3FFFFFF</color>
     <color name="primaryDateColor">#B3FFFFFF</color>
     <color name="primaryBackgroundColor">#303030</color>
     <color name="primaryCardBackgroundColor">#424242</color>
 
-    <color name="colorAccentDark">#d32f2f</color>
+    <color name="colorAccentDark">#388e3c</color>
 
-    <color name="picker_border">#f44336</color>
-    <color name="button_color">#d32f2f</color>
+    <color name="picker_border">#4caf50</color>
+    <color name="button_color">#388e3c</color>
+
+    <color name="lyrics_icon">#ab47bc</color>
+    <color name="chords_icon">#8d6e63</color>
 
     <color name="main_text">#CCFFFFFF</color>
     <color name="main_dark_text">#FFFFFF</color>
     <color name="subtext">#99FFFFFF</color>
-<!--    <color name="subtext">#B3FFFFFF</color>-->
+    <!--    <color name="subtext">#B3FFFFFF</color>-->
 
     <color name="menu_active">#FFF</color>
     <color name="menu_inactive">#7a7a7a</color>
 
     <color name="color_divider">#734b4b4b</color>
 
-<!--    <color name="setting_labels">#717171</color>-->
-<!--    <color name="setting_subtitles">#a9a9b0</color>-->
+    <!--    <color name="setting_labels">#717171</color>-->
+    <!--    <color name="setting_subtitles">#a9a9b0</color>-->
 
-<!--    <color name="switchColor">#f44336</color>-->
+    <!--    <color name="switchColor">#f44336</color>-->
 
-<!--    <color name="colorPrimary">#f44336</color>-->
-<!--    <color name="colorPrimaryDark">#d32f2f</color>-->
-<!--    <color name="colorAccent">#009688</color>-->
-<!--    <color name="primaryTitleColor">#D9000000</color>-->
-<!--    <color name="primaryDescriptionColor">#8C000000</color>-->
-<!--    <color name="primaryDateColor">#8C000000</color>-->
-<!--    <color name="primaryBackgroundColor">#FAFAFA</color>-->
-<!--    <color name="primaryCardBackgroundColor">#F5F5F5</color>-->
+    <!--    <color name="colorPrimary">#f44336</color>-->
+    <!--    <color name="colorPrimaryDark">#d32f2f</color>-->
+    <!--    <color name="colorAccent">#009688</color>-->
+    <!--    <color name="primaryTitleColor">#D9000000</color>-->
+    <!--    <color name="primaryDescriptionColor">#8C000000</color>-->
+    <!--    <color name="primaryDateColor">#8C000000</color>-->
+    <!--    <color name="primaryBackgroundColor">#FAFAFA</color>-->
+    <!--    <color name="primaryCardBackgroundColor">#F5F5F5</color>-->
 
 
+    <!--    <color name="scheme_dark_foreground">@android:color/darker_gray</color>-->
+    <!--    <color name="scheme_dark_background">@android:color/background_dark</color>-->
+    <!--    <color name="scheme_dark_bubble">#FF333333</color>-->
+    <!--    <color name="scheme_dark_link">#0099dd</color>-->
+    <!--    <color name="blue_light_shade">#00c3dd</color>-->
 
-<!--    <color name="scheme_dark_foreground">@android:color/darker_gray</color>-->
-<!--    <color name="scheme_dark_background">@android:color/background_dark</color>-->
-<!--    <color name="scheme_dark_bubble">#FF333333</color>-->
-<!--    <color name="scheme_dark_link">#0099dd</color>-->
-<!--    <color name="blue_light_shade">#00c3dd</color>-->
+    <!--    <color name="scheme_light_foreground">@android:color/primary_text_light_nodisable</color>-->
+    <!--    <color name="scheme_light_background">@android:color/background_light</color>-->
+    <!--    <color name="scheme_light_bubble">#330000BB</color>-->
+    <!--    <color name="scheme_light_link">#0099dd</color>-->
 
-<!--    <color name="scheme_light_foreground">@android:color/primary_text_light_nodisable</color>-->
-<!--    <color name="scheme_light_background">@android:color/background_light</color>-->
-<!--    <color name="scheme_light_bubble">#330000BB</color>-->
-<!--    <color name="scheme_light_link">#0099dd</color>-->
+    <!--    <color name="orange1">#FFf26700</color>-->
+    <!--    <color name="orange2">#FFff9000</color>-->
+    <!--    <color name="yellow1">#FFfbad00</color>-->
+    <!--    <color name="yellow2">#FFffc600</color>-->
 
-<!--    <color name="orange1">#FFf26700</color>-->
-<!--    <color name="orange2">#FFff9000</color>-->
-<!--    <color name="yellow1">#FFfbad00</color>-->
-<!--    <color name="yellow2">#FFffc600</color>-->
+    <!--    <color name="purple_200">#FFBB86FC</color>-->
+    <!--    <color name="purple_500">#FF6200EE</color>-->
+    <!--    <color name="purple_700">#FF3700B3</color>-->
+    <!--    <color name="teal_200">#FF03DAC5</color>-->
+    <!--    <color name="teal_700">#FF018786</color>-->
+    <!--    <color name="black">#FF000000</color>-->
+    <!--    <color name="white">#FFFFFFFF</color>-->
 
-<!--    <color name="purple_200">#FFBB86FC</color>-->
-<!--    <color name="purple_500">#FF6200EE</color>-->
-<!--    <color name="purple_700">#FF3700B3</color>-->
-<!--    <color name="teal_200">#FF03DAC5</color>-->
-<!--    <color name="teal_700">#FF018786</color>-->
-<!--    <color name="black">#FF000000</color>-->
-<!--    <color name="white">#FFFFFFFF</color>-->
+    <!--    <color name="activity_bg">#f6f6f6</color>-->
+    <!--    <color name="view_light">#f5f5f5</color>-->
+    <!--    <color name="gray">#6f7279</color>-->
 
-<!--    <color name="activity_bg">#f6f6f6</color>-->
-<!--    <color name="view_light">#f5f5f5</color>-->
-<!--    <color name="gray">#6f7279</color>-->
+    <!--    <color name="main_text">#4a4a4a</color>-->
+    <!--    <color name="main_dark_text">#2f2f39</color>-->
+    <!--    <color name="menu_active1">#2A313B</color>-->
+    <!--    <color name="subtext">#7a7a7a</color>-->
 
-<!--    <color name="main_text">#4a4a4a</color>-->
-<!--    <color name="main_dark_text">#2f2f39</color>-->
-<!--    <color name="menu_active1">#2A313B</color>-->
-<!--    <color name="subtext">#7a7a7a</color>-->
+    <!--    <color name="setting_labels">#717171</color>-->
+    <!--    <color name="setting_subtitles">#a9a9b0</color>-->
 
-<!--    <color name="setting_labels">#717171</color>-->
-<!--    <color name="setting_subtitles">#a9a9b0</color>-->
+    <!--    <color name="menu_active">#2e7d32</color>-->
+    <!--    <color name="menu_inactive">#c7c7cc</color>-->
 
-<!--    <color name="menu_active">#2e7d32</color>-->
-<!--    <color name="menu_inactive">#c7c7cc</color>-->
+    <!--    <color name="green">#00a306</color>-->
+    <!--    <color name="light_green_500">#8bc34a</color>-->
+    <!--    <color name="light_green_700">#689F38</color>-->
 
-<!--    <color name="green">#00a306</color>-->
-<!--    <color name="light_green_500">#8bc34a</color>-->
-<!--    <color name="light_green_700">#689F38</color>-->
+    <!--    <color name="deep_orange_500">#ff5722</color>-->
+    <!--    <color name="orange_500">#ff9800</color>-->
 
-<!--    <color name="deep_orange_500">#ff5722</color>-->
-<!--    <color name="orange_500">#ff9800</color>-->
+    <!--    <color name="orange_50">#fff3e0</color>-->
+    <!--    <color name="deep_orange">#ff3d00</color>-->
+    <!--    <color name="dark_orange">#f05421</color>-->
+    <!--    <color name="light_orange">#FF9E80</color>-->
+    <!--    <color name="light_orange_50">#fff8e1</color>-->
+    <!--    <color name="light_orange_card">#fffcf3</color>-->
+    <!--    <color name="timestamp">#4285f4</color>-->
 
-<!--    <color name="orange_50">#fff3e0</color>-->
-<!--    <color name="deep_orange">#ff3d00</color>-->
-<!--    <color name="dark_orange">#f05421</color>-->
-<!--    <color name="light_orange">#FF9E80</color>-->
-<!--    <color name="light_orange_50">#fff8e1</color>-->
-<!--    <color name="light_orange_card">#fffcf3</color>-->
-<!--    <color name="timestamp">#4285f4</color>-->
+    <!--    <color name="divider_light">#f5f5f5</color>-->
+    <!--    <color name="divider_dark">#e2e2e2</color>-->
+    <!--    <color name="smokegray">#f2f2f2</color>-->
+    <!--    <color name="color_divider">#1A4b4b4b</color>-->
+    <!--    <color name="transparent">#00000000</color>-->
+    <!--    <color name="hint_gray">#9b9b9b</color>-->
 
-<!--    <color name="divider_light">#f5f5f5</color>-->
-<!--    <color name="divider_dark">#e2e2e2</color>-->
-<!--    <color name="smokegray">#f2f2f2</color>-->
-<!--    <color name="color_divider">#1A4b4b4b</color>-->
-<!--    <color name="transparent">#00000000</color>-->
-<!--    <color name="hint_gray">#9b9b9b</color>-->
-
-<!--    <color name="icon_tint_normal">#7a7a7a</color>-->
-<!--    <color name="icon_tint_selected">#fed776</color>-->
-<!--    <color name="row_activated">#e0e0e0</color>-->
-<!--    <color name="bg_circle_default">#666666</color>-->
-<!--    <color name="bg_action_mode">#757575</color>-->
-<!--    <color name="details_background">#fbfbfb</color>-->
+    <!--    <color name="icon_tint_normal">#7a7a7a</color>-->
+    <!--    <color name="icon_tint_selected">#fed776</color>-->
+    <!--    <color name="row_activated">#e0e0e0</color>-->
+    <!--    <color name="bg_circle_default">#666666</color>-->
+    <!--    <color name="bg_action_mode">#757575</color>-->
+    <!--    <color name="details_background">#fbfbfb</color>-->
 </resources>

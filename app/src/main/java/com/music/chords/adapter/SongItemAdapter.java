@@ -226,18 +226,18 @@ public class SongItemAdapter extends RecyclerView.Adapter<SongItemAdapter.MyView
 //        }
     }
 
-    private int getRandomMaterialColor(String typeColor) {
-        int returnColor = Color.GRAY;
-        int arrayId = context.getResources().getIdentifier("mdcolor_" + typeColor, "array", context.getPackageName());
-
-        if (arrayId != 0) {
-            TypedArray colors = context.getResources().obtainTypedArray(arrayId);
-            int index = (int) (Math.random() * colors.length());
-            returnColor = colors.getColor(index, Color.GRAY);
-            colors.recycle();
-        }
-        return returnColor;
-    }
+//    private int getRandomMaterialColor(String typeColor) {
+//        int returnColor = Color.GRAY;
+//        int arrayId = context.getResources().getIdentifier("mdcolor_" + typeColor, "array", context.getPackageName());
+//
+//        if (arrayId != 0) {
+//            TypedArray colors = context.getResources().obtainTypedArray(arrayId);
+//            int index = (int) (Math.random() * colors.length());
+//            returnColor = colors.getColor(index, Color.GRAY);
+//            colors.recycle();
+//        }
+//        return returnColor;
+//    }
 
 
     private void applyIconAnimation(MyViewHolder holder, int position) {
