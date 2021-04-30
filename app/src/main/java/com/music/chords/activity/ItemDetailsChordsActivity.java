@@ -114,6 +114,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
     private int capoFret = 0;
     private int transposeSteps = 0;
     private volatile String chordText;
+    private String transposeChordsText;
     private List<ChordInText> chordsInText;
 
     private boolean isPlaying = false;
@@ -702,6 +703,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
     }
 
     private void applyLinkifiedChordsTextToTextView(Spannable newText) {
+        transposeChordsText = newText.toString();
         tvLyrics.setMovementMethod(LinkMovementMethod.getInstance());
         tvLyrics.setText(newText);
     }
@@ -1059,7 +1061,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
 //        }
     }
 
-    private void setMargins (View view, int left, int top, int right, int bottom) {
+    private void setMargins(View view, int left, int top, int right, int bottom) {
         if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
             ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
             p.setMargins(left, top, right, bottom);
@@ -1108,11 +1110,16 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
         if (songObject != null) {
             String songTitle = songObject.getSongTitle();
             String songSubtitle = songObject.getSongSubtitle();
-            String songLyrics = songObject.getSongLyrics();
             String artist = songObject.getSongArtist();
-            String shareText = songObject.getSongTitle() + "\n"
-                    + songObject.getSongSubtitle() + "\n\n"
-                    + songObject.getSongLyrics() + "\n\n";
+
+            String songLyrics;
+            if (isContainsChords) {
+                songLyrics = transposeChordsText;
+            } else {
+                songLyrics = songObject.getSongLyrics();
+            }
+
+            String shareText = songTitle + "\n" + songSubtitle + "\n\n" + songLyrics + "\n\n";
 
             if (artist.length() > 0) {
                 shareText = shareText + " - By " + artist;

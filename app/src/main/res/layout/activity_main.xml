@@ -33,9 +33,10 @@
         app:bb_activeTabColor="@color/menu_active"
         app:bb_badgeBackgroundColor="@color/colorAccent"
         app:bb_badgesHideWhenActive="false"
-        app:bb_behavior="iconsOnly"
+        app:bb_behavior="underNavbar"
         app:bb_inActiveTabColor="@color/menu_inactive"
         app:bb_showShadow="true"
+        app:bb_titleTextAppearance="@style/MyTextAppearance"
         app:bb_tabXmlResource="@xml/tab"
         app:bb_titleTypeFace="fonts/Lato-Regular.ttf"
         app:paddingStart="10dp" />
