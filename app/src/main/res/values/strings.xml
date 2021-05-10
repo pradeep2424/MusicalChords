@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RehobotGeet</string>
+    <string name="app_name">Rehobot Geet</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -119,9 +119,10 @@
     <string name="share_using">Share using"</string>
 
     <string name="who_we_are_title">WHO WE ARE</string>
-    <string name="who_we_are_description">We are startup Software Development firm. \nWe were working on this idea to develop paperless Aarti Sangrah.
-            Along with this Aarti Sangrah, we are introducing a lot of handy features which other application lacks.
-            We hope that these features will enhance the user experience. </string>
+    <string name="who_we_are_description">Worship Lyrics &amp; Transposable Chord Sheets
+        \n\nDeveloped By \nIndian Christian Resources \n\n Powered By \nBethel AG Hindi Church \nDoha, Qatar
+        \n\n\nPraise and glory and wisdom and thanks and honor and power and strength be to our God for ever and ever. ... Rev 7:1</string>
+
 
     <string name="contact_us_title">CONTACT US</string>
     <string name="contact_us_description">For any issues, concerns or questions related to this application, you can contact us on below mentioned Email Id.</string>

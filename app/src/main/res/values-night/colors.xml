@@ -4,20 +4,22 @@
     <!--Night Color-->
     <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#4caf50</color>
+    <color name="colorAccent">#ffc107</color>
+    <color name="colorAccentDark">#FF8F00</color>
+
     <color name="primaryTitleColor">#FFFFFF</color>
     <color name="primaryDescriptionColor">#B3FFFFFF</color>
     <color name="primaryDateColor">#B3FFFFFF</color>
     <color name="primaryBackgroundColor">#303030</color>
     <color name="primaryCardBackgroundColor">#424242</color>
 
-    <color name="colorAccentDark">#388e3c</color>
-
-    <color name="picker_border">#4caf50</color>
-    <color name="button_color">#388e3c</color>
+<!--    <color name="picker_border">#4caf50</color>-->
+<!--    <color name="button_color">#388e3c</color>-->
+    <color name="picker_border">#3f51b5</color>
+    <color name="button_color">#303f9f</color>
 
     <color name="lyrics_icon">#ab47bc</color>
-    <color name="chords_icon">#8d6e63</color>
+    <color name="chords_icon">#26a69a</color>
 
     <color name="main_text">#CCFFFFFF</color>
     <color name="main_dark_text">#FFFFFF</color>

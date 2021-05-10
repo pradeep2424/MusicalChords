@@ -54,6 +54,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".activity.AboutUsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".activity.DarkModeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

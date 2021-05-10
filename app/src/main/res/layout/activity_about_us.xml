@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fafafa">
+    android:background="@color/primaryBackgroundColor">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/appBar"
         android:scrollbars="none">
 
         <RelativeLayout
@@ -16,40 +31,48 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp">
 
-            <FrameLayout
-                android:id="@+id/pic1"
+            <ImageView
+                android:id="@+id/iv_pic1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
-                android:padding="16dp">
+                android:background="@mipmap/cover_about_us"
+                android:scaleType="centerCrop" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/ic_launcher_round"
-                    android:scaleType="centerCrop" />
-            </FrameLayout>
+
+            <!--            <FrameLayout-->
+<!--                android:id="@+id/pic1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="56dp"-->
+<!--                android:padding="16dp">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@mipmap/cover_about_us"-->
+<!--                    android:scaleType="centerCrop" />-->
+<!--            </FrameLayout>-->
 
             <LinearLayout
                 android:id="@+id/linear1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/pic1"
+                android:layout_below="@+id/iv_pic1"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
-<!--                <ImageView-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    android:layout_marginBottom="16dp"-->
-<!--                    android:layout_marginTop="15dp"-->
-<!--                    android:gravity="center"-->
-<!--                    android:src="@drawable/rect_red" />-->
+                <!--                <ImageView-->
+                <!--                    android:layout_width="50dp"-->
+                <!--                    android:layout_height="50dp"-->
+                <!--                    android:layout_marginBottom="16dp"-->
+                <!--                    android:layout_marginTop="15dp"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:src="@drawable/rect_red" />-->
 
-                <com.music.chords.custom.MyTextView
+                <com.music.chords.custom.MyTextViewBold
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
                     android:gravity="center"
                     android:text="@string/who_we_are_title"
                     android:textColor="@color/main_text"
@@ -58,59 +81,68 @@
                 <com.music.chords.custom.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginLeft="33dp"
-                    android:layout_marginRight="33dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="33dp"
+                    android:layout_marginBottom="16dp"
                     android:gravity="center"
                     android:lineSpacingExtra="4dp"
                     android:text="@string/who_we_are_description"
                     android:textColor="@color/subtext"
                     android:textSize="14.5sp" />
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/iv_zigzag"-->
-<!--                    android:layout_width="60dp"-->
-<!--                    android:layout_height="16dp"-->
-<!--                    android:layout_marginBottom="20dp"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    android:gravity="center"-->
-<!--                    android:src="@mipmap/zigzag" />-->
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/iv_zigzag"-->
+                <!--                    android:layout_width="60dp"-->
+                <!--                    android:layout_height="16dp"-->
+                <!--                    android:layout_marginBottom="20dp"-->
+                <!--                    android:layout_marginTop="20dp"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:src="@mipmap/zigzag" />-->
 
             </LinearLayout>
 
 
-            <FrameLayout
-                android:id="@+id/linear2"
+<!--            <FrameLayout-->
+<!--                android:id="@+id/linear2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/linear1"-->
+<!--                android:padding="16dp">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@mipmap/cover_about_us"-->
+<!--                    android:scaleType="centerCrop" />-->
+<!--            </FrameLayout>-->
+
+            <ImageView
+                android:id="@+id/iv_pic2"
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linear1"
-                android:padding="16dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/ic_launcher_round"
-                    android:scaleType="centerCrop" />
-            </FrameLayout>
-
+                android:background="@mipmap/cover_about_us"
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/linear2"
+                android:layout_below="@+id/iv_pic2"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
-<!--                <ImageView-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    android:layout_marginBottom="16dp"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    android:gravity="center"-->
-<!--                    android:src="@drawable/circle" />-->
+                <!--                <ImageView-->
+                <!--                    android:layout_width="50dp"-->
+                <!--                    android:layout_height="50dp"-->
+                <!--                    android:layout_marginBottom="16dp"-->
+                <!--                    android:layout_marginTop="16dp"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:src="@drawable/circle" />-->
 
-                <com.music.chords.custom.MyTextView
+                <com.music.chords.custom.MyTextViewBold
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
@@ -123,8 +155,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="33dp"
-                    android:layout_marginRight="33dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="33dp"
                     android:gravity="center"
                     android:lineSpacingExtra="4dp"
                     android:text="@string/contact_us_description"
@@ -134,12 +166,12 @@
                 <com.music.chords.custom.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
                     android:layout_marginLeft="33dp"
-                    android:layout_marginRight="33dp"
                     android:layout_marginTop="5dp"
-                    android:gravity="center"
+                    android:layout_marginRight="33dp"
+                    android:layout_marginBottom="30dp"
                     android:autoLink="web|email"
+                    android:gravity="center"
                     android:lineSpacingExtra="4dp"
                     android:text="@string/contact_us_email_id"
                     android:textColor="@color/subtext"

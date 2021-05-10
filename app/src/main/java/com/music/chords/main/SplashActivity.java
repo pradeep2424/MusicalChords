@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.MediaController;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -55,6 +56,7 @@ public class SplashActivity extends AppCompatActivity {
     DBSongDetails dbSongDetails;
 
     VideoView videoView;
+    RelativeLayout rlAppNameLayout;
     TextView tvAppName;
 
     boolean isServiceDataDownloadFinished = false;
@@ -88,6 +90,7 @@ public class SplashActivity extends AppCompatActivity {
         dbSongDetails = new DBSongDetails(this);
 
         videoView = findViewById(R.id.videoView);
+        rlAppNameLayout = findViewById(R.id.rl_appNameLayout);
         tvAppName = findViewById(R.id.tv_appName);
 
         fadeOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
@@ -136,8 +139,10 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                tvAppName.setVisibility(View.VISIBLE);
-                tvAppName.startAnimation(fadeOut);
+                rlAppNameLayout.setVisibility(View.VISIBLE);
+                rlAppNameLayout.startAnimation(fadeOut);
+//                tvAppName.setVisibility(View.VISIBLE);
+//                tvAppName.startAnimation(fadeOut);
             }
         }, 7500);
     }
