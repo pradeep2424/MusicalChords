@@ -33,7 +33,6 @@
         app:bb_activeTabColor="@color/menu_active"
         app:bb_badgeBackgroundColor="@color/colorAccent"
         app:bb_badgesHideWhenActive="false"
-        app:bb_behavior="underNavbar"
         app:bb_inActiveTabColor="@color/menu_inactive"
         app:bb_showShadow="true"
         app:bb_titleTextAppearance="@style/MyTextAppearance"
