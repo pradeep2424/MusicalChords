@@ -27,7 +27,7 @@
             <ImageView
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:src="@mipmap/ic_launcher_round" />
+                android:src="@mipmap/ic_launcher" />
 
             <com.music.chords.custom.MyTextView
                 android:id="@+id/tv_toolbarTitle"

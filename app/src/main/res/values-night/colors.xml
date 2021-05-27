@@ -18,6 +18,9 @@
     <color name="picker_border">#3f51b5</color>
     <color name="button_color">#303f9f</color>
 
+    <color name="button_border">#FFFFFF</color>
+    <color name="button_text">#FFFFFF</color>
+
     <color name="lyrics_icon" >#2196F3</color>
     <color name="chords_icon">#009688</color>
 

@@ -22,6 +22,7 @@ import com.music.chords.bottomMenu.SettingsFragment;
 import com.music.chords.bottomMenu.SearchFragment;
 import com.music.chords.database.DBSongDetails;
 import com.music.chords.interfaces.TriggerDBChangeListener;
+import com.music.chords.interfaces.TriggerTabChangeListener;
 import com.music.chords.objects.SongObject;
 import com.music.chords.utils.Application;
 import com.roughike.bottombar.BottomBar;
@@ -29,7 +30,7 @@ import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
 
 
-public class MainActivity extends AppCompatActivity implements TriggerDBChangeListener {
+public class MainActivity extends AppCompatActivity implements TriggerDBChangeListener, TriggerTabChangeListener {
     CoordinatorLayout clRootLayout;
     FrameLayout frameLayout;
     BottomBar bottomBar;
@@ -226,6 +227,18 @@ public class MainActivity extends AppCompatActivity implements TriggerDBChangeLi
     @Override
     public void onDBDataChanged() {
         getSongDataFromDB();
+    }
+
+    @Override
+    public void setTab(int position) {
+        if (bottomBar != null) {
+            bottomBar.selectTabAtPosition(position, true);
+        }
+    }
+
+    @Override
+    public void setBadgeCount(int count) {
+
     }
 
     @Override

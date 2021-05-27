@@ -15,12 +15,20 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary" />
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <include
+        android:id="@+id/view_emptyFavorites"
+        layout="@layout/empty_view_favorites"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/view_toolbar"
+        android:visibility="visible" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible"></androidx.recyclerview.widget.RecyclerView>
+            android:visibility="visible" />
     </LinearLayout>
 
     <include

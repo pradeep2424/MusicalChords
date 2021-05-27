@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">Rehobot Geet</string>
+    <string name="app_name">Rehoboth Geet</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="app_name_subtext">Bethel AG Hindi Service \nDoha, Qatar</string>
 
     <string name="pref_note_naming_english">English</string>
     <string name="pref_note_naming_northern">Northern European</string>
@@ -49,12 +51,12 @@
     <string name="menu_favorites">Favorites</string>
     <string name="menu_settings">Settings</string>
 
-<!--    <string name="menu_home">HOME</string>-->
-<!--    <string name="menu_lyrics">LYRICS</string>-->
-<!--    <string name="menu_chordsheets">CHORDS</string>-->
-<!--    <string name="menu_search">SEARCH</string>-->
-<!--    <string name="menu_favorites">FAVORITES</string>-->
-<!--    <string name="menu_settings">SETTINGS</string>-->
+    <!--    <string name="menu_home">HOME</string>-->
+    <!--    <string name="menu_lyrics">LYRICS</string>-->
+    <!--    <string name="menu_chordsheets">CHORDS</string>-->
+    <!--    <string name="menu_search">SEARCH</string>-->
+    <!--    <string name="menu_favorites">FAVORITES</string>-->
+    <!--    <string name="menu_settings">SETTINGS</string>-->
 
     <string name="no_internet">No internet connection</string>
     <string name="something_went_wrong">Something went wrong, Please try again.</string>
@@ -119,13 +121,27 @@
     <string name="share_using">Share using"</string>
 
     <string name="who_we_are_title">WHO WE ARE</string>
-    <string name="who_we_are_description">Worship Lyrics &amp; Transposable Chord Sheets
-        \n\nDeveloped By \nIndian Christian Resources \n\n Powered By \nBethel AG Hindi Church \nDoha, Qatar
-        \n\n\nPraise and glory and wisdom and thanks and honor and power and strength be to our God for ever and ever. ... Rev 7:1</string>
+    <string name="who_we_are_description">‘Rehoboth’ the title used for this song book is taken from Genesis 26:22,
+        which means that Lord has broadened our space &amp; the enemy can no longer claim our blessings.
+        I thank the Lord for enabling Bethel AG Hindi Service, Qatar to release an application called ‘Rehoboth Geet’ for the glory of God.
+        \n\nExodus 15:2 – The Lord is my strength and my song and He has become my salvation. Worship is all about singing His due praise.
+        Songs have always uplifted &amp; strengthened our souls. Let the word dwell within us in its full richness that when we admonish each
+        other with songs we serve the very purpose of our creation.
+        \n\nMartin Luther said, ‘The gift of language combined with the gift of song was given to man that he should proclaim the word of God through music.’
+        \n\nMay the songs compiled in this APP be used to bring deeper connection with our God &amp; be used to proclaim Him;
+</string>
 
+    <string name="senior_pastor">Pr. P M George \nSenior Pastor:</string>
+    <string name="pastor">Pr.Anish Babu \nPastor: Bethel AG Hindi Service</string>
 
     <string name="contact_us_title">CONTACT US</string>
-    <string name="contact_us_description">For any issues, concerns or questions related to this application, you can contact us on below mentioned Email Id.</string>
-    <string name="contact_us_email_id">test.testemail@gmail.com</string>
+    <string name="contact_us_description">For any issues, concerns or questions related to this application,
+        you can contact us via below mentioned details.</string>
+    <string name="contact_us_address">Pr Anish Babu \nBethel AG Hindi Service \nDoha, State of Qatar \nP.O Box no: 9102</string>
+    <string name="contact_us_email_id">aghindiservice@yahoo.com</string>
+    <string name="contact_us_mobile_no">+974-55977683</string>
 
+    <string name="favorites_empty_title">Oops! Your favorites list is empty</string>
+    <string name="favorites_empty_text">Looks like you haven\'t added anything to your favorites list yet</string>
+    <string name="browse_lyrics">Browse Lyrics</string>
 </resources>

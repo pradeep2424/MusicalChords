@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,6 +30,7 @@ import com.music.chords.database.DBSongDetails;
 import com.music.chords.interfaces.Constants;
 import com.music.chords.interfaces.SongAdapterListener;
 import com.music.chords.interfaces.TriggerDBChangeListener;
+import com.music.chords.interfaces.TriggerTabChangeListener;
 import com.music.chords.objects.SongObject;
 
 import java.util.ArrayList;
@@ -40,13 +42,17 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
     //    private View viewToolbar;
     private RecyclerView recyclerView;
     private SongItemAdapter adapter;
+    private View viewEmptyFavorites;
+    private LinearLayout llBrowseLyrics;
 
     private ActionModeCallback actionModeCallback;
     private ActionMode actionMode;
 
     private DBSongDetails dbSongDetails;
 
+    private TriggerTabChangeListener triggerTabChangeListener;
     private TriggerDBChangeListener triggerFavoritesChangeListener;
+
     private ArrayList<SongObject> listFavoriteSongs = new ArrayList<>();
     private ArrayList<SongObject> listSelectedSongs = new ArrayList<>();
 
@@ -55,6 +61,7 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        triggerTabChangeListener = (TriggerTabChangeListener) context;
         triggerFavoritesChangeListener = (TriggerDBChangeListener) context;
     }
 
@@ -69,7 +76,7 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
         rootView = inflater.inflate(R.layout.fragment_favorites, container, false);
 
         init();
-//        events();
+        events();
         setupRecyclerView();
 
         return rootView;
@@ -82,6 +89,17 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
 
 //        viewToolbar = rootView.findViewById(R.id.view_toolbar);
         recyclerView = rootView.findViewById(R.id.rv_productItems);
+        viewEmptyFavorites = rootView.findViewById(R.id.view_emptyFavorites);
+        llBrowseLyrics = rootView.findViewById(R.id.ll_browseLyrics);
+    }
+
+    private void events() {
+        llBrowseLyrics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                triggerTabChangeListener.setTab(0);
+            }
+        });
     }
 
     private void setupRecyclerView() {
@@ -137,8 +155,10 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
                 }
                 rss.close();
 
+                hideEmptyView();
             } else {
 //                empty recyclerview no search results
+                showEmptyView();
             }
 
             adapter.notifyDataSetChanged();
@@ -146,6 +166,16 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void showEmptyView() {
+        viewEmptyFavorites.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+    }
+
+    private void hideEmptyView() {
+        viewEmptyFavorites.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 
     private void enableActionMode(int position) {

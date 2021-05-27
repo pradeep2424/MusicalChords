@@ -9,15 +9,15 @@
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifImageView"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_gravity="center"
+        android:layout_height="250dp"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_gravity="center"
+        android:src="@mipmap/empty_favourites" />
 
     <LinearLayout
+        android:layout_below="@+id/gifImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/gifImageView"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:gravity="center"
@@ -30,12 +30,13 @@
         <!--            android:layout_gravity="center"-->
         <!--            android:src="@mipmap/empty_cart" />-->
 
+
         <com.music.chords.custom.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:gravity="center"
-            android:text="cart_empty_title"
+            android:text="@string/favorites_empty_title"
             android:textColor="@color/main_dark_text"
             android:textSize="20sp" />
 
@@ -46,12 +47,12 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
             android:gravity="center"
-            android:text="cart_empty_text"
-            android:textColor="@color/main_dark_text"
+            android:text="@string/favorites_empty_text"
+            android:textColor="@color/main_text"
             android:textSize="16sp" />
 
         <LinearLayout
-            android:id="@+id/ll_browseMenu"
+            android:id="@+id/ll_browseLyrics"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -67,9 +68,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="browse_menu"
+                android:text="@string/browse_lyrics"
                 android:textAllCaps="false"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/button_text"
                 android:textSize="16sp" />
         </LinearLayout>
 

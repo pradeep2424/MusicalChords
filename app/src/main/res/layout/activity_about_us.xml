@@ -29,29 +29,30 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
+            android:layout_margin="20dp">
 
             <ImageView
                 android:id="@+id/iv_pic1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/cover_about_us"
-                android:scaleType="centerCrop" />
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:background="@mipmap/about_us_cover" />
 
 
             <!--            <FrameLayout-->
-<!--                android:id="@+id/pic1"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="56dp"-->
-<!--                android:padding="16dp">-->
+            <!--                android:id="@+id/pic1"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="56dp"-->
+            <!--                android:padding="16dp">-->
 
-<!--                <ImageView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:background="@mipmap/cover_about_us"-->
-<!--                    android:scaleType="centerCrop" />-->
-<!--            </FrameLayout>-->
+            <!--                <ImageView-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:background="@mipmap/cover_about_us"-->
+            <!--                    android:scaleType="centerCrop" />-->
+            <!--            </FrameLayout>-->
 
             <LinearLayout
                 android:id="@+id/linear1"
@@ -81,11 +82,8 @@
                 <com.music.chords.custom.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="33dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="33dp"
-                    android:layout_marginBottom="16dp"
-                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:gravity="fill_horizontal"
                     android:lineSpacingExtra="4dp"
                     android:text="@string/who_we_are_description"
                     android:textColor="@color/subtext"
@@ -102,35 +100,145 @@
 
             </LinearLayout>
 
-
-<!--            <FrameLayout-->
-<!--                android:id="@+id/linear2"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/linear1"-->
-<!--                android:padding="16dp">-->
-
-<!--                <ImageView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:background="@mipmap/cover_about_us"-->
-<!--                    android:scaleType="centerCrop" />-->
-<!--            </FrameLayout>-->
-
-            <ImageView
-                android:id="@+id/iv_pic2"
-                android:layout_marginTop="15dp"
+            <LinearLayout
+                android:id="@+id/ll_photosLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linear1"
-                android:background="@mipmap/cover_about_us"
-                android:scaleType="centerCrop" />
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <ImageView
+                        android:id="@+id/iv_seniorPastor"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/about_us_photo1" />
+
+                    <ImageView
+                        android:id="@+id/iv_pastor"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:layout_weight="1"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/about_us_photo2" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <com.music.chords.custom.MyTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/senior_pastor"
+                        android:textColor="@color/subtext"
+                        android:textSize="15sp" />
+
+                    <com.music.chords.custom.MyTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/senior_pastor"
+                        android:textColor="@color/subtext"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="15dp"-->
+            <!--                android:layout_below="@+id/linear1"-->
+            <!--                android:weightSum="2"-->
+            <!--                android:orientation="horizontal">-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="vertical"-->
+            <!--                    android:layout_weight="1">-->
+
+            <!--                    <ImageView-->
+            <!--                        android:id="@+id/iv_seniorPastor"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_gravity="left"-->
+            <!--                        android:layout_height="match_parent"-->
+            <!--                        android:src="@mipmap/about_us_photo1"-->
+            <!--                        android:scaleType="centerCrop" />-->
+
+            <!--                    <com.music.chords.custom.MyTextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:padding="20dp"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:text="@string/senior_pastor"-->
+            <!--                        android:textColor="@color/subtext"-->
+            <!--                        android:textSize="15sp" />-->
+
+            <!--                </LinearLayout>-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="vertical"-->
+            <!--                    android:layout_weight="1">-->
+
+            <!--                    <ImageView-->
+            <!--                        android:id="@+id/iv_pastor"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_gravity="left"-->
+            <!--                        android:layout_height="match_parent"-->
+            <!--                        android:src="@mipmap/about_us_photo2"-->
+            <!--                        android:scaleType="fitXY" />-->
+
+            <!--                    <com.music.chords.custom.MyTextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:padding="20dp"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:text="@string/pastor"-->
+            <!--                        android:textColor="@color/subtext"-->
+            <!--                        android:textSize="15sp" />-->
+
+            <!--                </LinearLayout>-->
+            <!--            </LinearLayout>-->
+
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/iv_pic2"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_below="@+id/linear1"-->
+            <!--                android:layout_marginTop="15dp"-->
+            <!--                android:background="@mipmap/cover_about_us"-->
+            <!--                android:scaleType="centerCrop" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_pic2"
+                android:layout_below="@+id/ll_photosLayout"
                 android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -142,44 +250,62 @@
                 <!--                    android:gravity="center"-->
                 <!--                    android:src="@drawable/circle" />-->
 
-                <com.music.chords.custom.MyTextViewBold
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:gravity="center"
-                    android:text="@string/contact_us_title"
-                    android:textColor="@color/main_text"
-                    android:textSize="19sp" />
-
-                <com.music.chords.custom.MyTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="33dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="33dp"
-                    android:gravity="center"
-                    android:lineSpacingExtra="4dp"
-                    android:text="@string/contact_us_description"
-                    android:textColor="@color/subtext"
-                    android:textSize="14.5sp" />
-
-                <com.music.chords.custom.MyTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="33dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginRight="33dp"
-                    android:layout_marginBottom="30dp"
-                    android:autoLink="web|email"
-                    android:gravity="center"
-                    android:lineSpacingExtra="4dp"
-                    android:text="@string/contact_us_email_id"
-                    android:textColor="@color/subtext"
-                    android:textSize="16sp" />
+                    android:orientation="vertical"
+                    android:gravity="center">
 
+                    <com.music.chords.custom.MyTextViewBold
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contact_us_title"
+                        android:gravity="center"
+                        android:textColor="@color/main_text"
+                        android:textSize="19sp" />
+
+                    <com.music.chords.custom.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@string/contact_us_description"
+                        android:textColor="@color/subtext"
+                        android:textSize="15sp" />
+
+                    <com.music.chords.custom.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="@string/contact_us_address"
+                        android:textColor="@color/subtext"
+                        android:textSize="15sp" />
+
+                    <com.music.chords.custom.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:autoLink="email|web"
+                        android:text="@string/contact_us_email_id"
+                        android:textColor="@color/subtext"
+                        android:textSize="15sp" />
+
+                    <com.music.chords.custom.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_marginBottom="30dp"
+                        android:autoLink="phone"
+                        android:gravity="center"
+                        android:text="@string/contact_us_mobile_no"
+                        android:textColor="@color/subtext"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
             </LinearLayout>
-
-
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
