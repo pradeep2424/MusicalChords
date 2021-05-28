@@ -157,7 +157,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="@string/senior_pastor"
+                        android:text="@string/pastor"
                         android:textColor="@color/subtext"
                         android:textSize="15sp" />
                 </LinearLayout>

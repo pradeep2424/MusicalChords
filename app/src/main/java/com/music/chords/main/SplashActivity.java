@@ -1,6 +1,7 @@
 package com.music.chords.main;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -20,10 +22,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.music.chords.R;
 import com.music.chords.database.CreateDB;
 import com.music.chords.database.DBSongDetails;
 import com.music.chords.objects.SongObject;
+import com.music.chords.service.retrofit.ApiInterface;
+import com.music.chords.service.retrofit.RetroClient;
 import com.music.chords.utils.Application;
 import com.music.chords.utils.InternetConnection;
 
@@ -34,24 +39,14 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import es.dmoral.toasty.Toasty;
-
-//{
-//        "Status": "Success",
-//        "songMasters": [
-//        {
-//        "S_ARTIST": "ganesh",
-//        "S_ID": 6,
-//        "S_ISCHORDS": "True",
-//        "S_LANGUAGE": "English",
-//        "S_LYRICS": "tetsttst t",
-//        "S_SUBTITLE": "mera dil",
-//        "S_TITLE": "gata rahe",
-//        "S_YOUTUBE_URL": "www.change.com"
-//        }
-//        ]
-//        }
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
+    RelativeLayout rlRootLayout;
+
     CreateDB dbCreate;
     DBSongDetails dbSongDetails;
 
@@ -89,6 +84,7 @@ public class SplashActivity extends AppCompatActivity {
         dbCreate = new CreateDB(this);
         dbSongDetails = new DBSongDetails(this);
 
+        rlRootLayout = findViewById(R.id.rl_rootLayout);
         videoView = findViewById(R.id.videoView);
         rlAppNameLayout = findViewById(R.id.rl_appNameLayout);
         tvAppName = findViewById(R.id.tv_appName);
@@ -150,7 +146,7 @@ public class SplashActivity extends AppCompatActivity {
     private void checkIfServiceDataDownloadFinish() {
         countDownTimer = new CountDownTimer(Long.MAX_VALUE, 1000) {
 
-            // This is called after every 10 sec interval.
+            // This is called after every 1 sec interval.
             public void onTick(long millisUntilFinished) {
                 if (isServiceDataDownloadFinished) {
                     loadNextPage();
@@ -191,90 +187,100 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void downloadNewSongDataFromServer() {
-        boolean isLocalDBHasData;
+        if (InternetConnection.checkConnection(getApplicationContext())) {
 
-        try {
-            String responseString = loadJSONFromAsset();
+            ApiInterface apiService = RetroClient.getApiService(this);
+            Call<ResponseBody> call = apiService.getSongDetails();
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    try {
+                        boolean isLocalDBHasData;
 
-            JSONObject jsonObj = new JSONObject(responseString);
-            String respStatus = jsonObj.getString("Status");
+                        int statusCode = response.code();
+                        if (response.isSuccessful()) {
 
-            if (respStatus.equalsIgnoreCase("Success")) {
-                isLocalDBHasData = checkLocalDBHasData();
-                listSongsData.clear();
-                listLyricsData.clear();
-                listChordsData.clear();
+                            String responseString = response.body().string();
+                            JSONObject jsonObj = new JSONObject(responseString);
+                            String respStatus = jsonObj.getString("Status");
 
-                JSONArray jsonArrayRoot = jsonObj.getJSONArray("SongData");
-                if (jsonArrayRoot != null && jsonArrayRoot.length() > 0) {
+                            if (respStatus.equalsIgnoreCase("Success")) {
+                                isLocalDBHasData = checkLocalDBHasData();
+                                listSongsData.clear();
+                                listLyricsData.clear();
+                                listChordsData.clear();
 
-                    for (int index = 0; index < jsonArrayRoot.length(); index++) {
-                        JSONObject json = jsonArrayRoot.getJSONObject(index);
+//                                JSONArray jsonArrayRoot = jsonObj.getJSONArray("SongData");
+                                JSONArray jsonArrayRoot = jsonObj.getJSONArray("songMasters");
+                                if (jsonArrayRoot != null && jsonArrayRoot.length() > 0) {
 
-                        int songID = json.getInt("ID");
-                        String songTitle = json.getString("Title");
-                        String songSubtitle = json.getString("Subtitle");
-                        String songArtist = json.getString("Artist");
-                        String youTubeURL = json.getString("YouTubeURL");
-                        String songLyrics = json.getString("Lyrics");
-                        String songLanguage = json.getString("SongLanguage");
-                        boolean isContainsChords = json.getBoolean("IsContainsChords");
+                                    for (int index = 0; index < jsonArrayRoot.length(); index++) {
+                                        JSONObject json = jsonArrayRoot.getJSONObject(index);
+
+                                        int songID = json.getInt("SongID");
+                                        String songTitle = json.getString("SongTitle");
+                                        String songSubtitle = json.getString("SongSubtitle");
+                                        String songArtist = json.getString("SongArtist");
+                                        String youTubeURL = json.getString("SongYouTubeURL");
+                                        String songLyrics = json.getString("SongLyrics");
+                                        String songLanguage = json.getString("SongLanguage");
+                                        boolean isContainsChords = json.getBoolean("IsContainsChords");
 //                        int songIconColor = getRandomMaterialColor();
-                        int songIconColor;
-                        if (isContainsChords) {
-                            songIconColor = getColor(R.color.chords_icon);
-                        } else {
-                            songIconColor = getColor(R.color.lyrics_icon);
-                        }
-                        boolean isFavorites = false;
+                                        int songIconColor;
+                                        if (isContainsChords) {
+                                            songIconColor = ContextCompat.getColor(SplashActivity.this, R.color.chords_icon);
+                                        } else {
+                                            songIconColor = ContextCompat.getColor(SplashActivity.this, R.color.lyrics_icon);
+                                        }
+                                        boolean isFavorites = false;
 
-                        SongObject songObject = new SongObject();
-                        songObject.setSongId(songID);
-                        songObject.setSongTitle(songTitle);
-                        songObject.setSongSubtitle(songSubtitle);
-                        songObject.setSongArtist(songArtist);
-                        songObject.setSongYouTubeURL(youTubeURL);
-                        songObject.setSongLyrics(songLyrics);
-                        songObject.setSongLanguage(songLanguage);
-                        songObject.setContainsChords(isContainsChords);
-                        songObject.setSongIconColor(songIconColor);
+                                        SongObject songObject = new SongObject();
+                                        songObject.setSongId(songID);
+                                        songObject.setSongTitle(songTitle);
+                                        songObject.setSongSubtitle(songSubtitle);
+                                        songObject.setSongArtist(songArtist);
+                                        songObject.setSongYouTubeURL(youTubeURL);
+                                        songObject.setSongLyrics(songLyrics);
+                                        songObject.setSongLanguage(songLanguage);
+                                        songObject.setContainsChords(isContainsChords);
+                                        songObject.setSongIconColor(songIconColor);
 
 //                       checking DB if song is added to favorites
-                        if (isLocalDBHasData) {
-                            Cursor rss = dbSongDetails.getSingleSongData(songID);
-                            int countDBRows = rss.getCount();
+                                        if (isLocalDBHasData) {
+                                            Cursor rss = dbSongDetails.getSingleSongData(songID);
+                                            int countDBRows = rss.getCount();
 
-                            if (countDBRows > 0) {
-                                rss.moveToFirst();
-                                isFavorites = (rss.getInt(6) == 1);
-                                rss.close();
-                            }
-                            songObject.setIsFavorites(isFavorites);
-                        } else {
-                            songObject.setIsFavorites(false);
+                                            if (countDBRows > 0) {
+                                                rss.moveToFirst();
+                                                isFavorites = (rss.getInt(6) == 1);
+                                                rss.close();
+                                            }
+                                            songObject.setIsFavorites(isFavorites);
+                                        } else {
+                                            songObject.setIsFavorites(false);
 
 //                           No data foudn in DB, hence inserting data in DB in same loop
-                            insertDataIntoDB(songID, songTitle, songSubtitle, songArtist,
-                                    youTubeURL, songLyrics, isFavorites, songIconColor,
-                                    songLanguage, isContainsChords);
-                        }
+                                            insertDataIntoDB(songID, songTitle, songSubtitle, songArtist,
+                                                    youTubeURL, songLyrics, isFavorites, songIconColor,
+                                                    songLanguage, isContainsChords);
+                                        }
 
-                        listSongsData.add(songObject);
-                        if (isContainsChords) {
-                            listChordsData.add(songObject);
-                        } else {
-                            listLyricsData.add(songObject);
-                        }
-                    }
+                                        listSongsData.add(songObject);
+                                        if (isContainsChords) {
+                                            listChordsData.add(songObject);
+                                        } else {
+                                            listLyricsData.add(songObject);
+                                        }
+                                    }
 
 //                  if DB has data then clearing and updating db
-                    if (isLocalDBHasData) {
-                        deleteAllTableData();
-                        copyDataFromArrayListToDB();
-                    }
-                }
+                                    if (isLocalDBHasData) {
+                                        deleteAllTableData();
+                                        copyDataFromArrayListToDB();
+                                    }
+                                }
 
-                isServiceDataDownloadFinished = true;
+                                isServiceDataDownloadFinished = true;
 
 //                final Handler handler = new Handler();
 //                handler.postDelayed(new Runnable() {
@@ -286,12 +292,164 @@ public class SplashActivity extends AppCompatActivity {
 
 
 //                loadNextPage();
-            }
+                            }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+                        } else {
+
+                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    try {
+                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
+                        Log.e("Error onFailure : ", t.toString());
+                        t.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+
+            Toast.makeText(SplashActivity.this, getResources().getString(R.string.no_internet),
+                    Toast.LENGTH_LONG).show();
+
+            Snackbar.make(rlRootLayout, getResources().getString(R.string.no_internet),
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            downloadNewSongDataFromServer();
+                        }
+                    })
+                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+                    .show();
         }
     }
+
+    public void showSnackbarErrorMsg(String erroMsg) {
+        Snackbar.make(rlRootLayout, erroMsg, Snackbar.LENGTH_LONG).show();
+    }
+
+    public void showSnackbarErrorMsgWithButton(String erroMsg) {
+        Snackbar.make(rlRootLayout, erroMsg, Snackbar.LENGTH_INDEFINITE)
+                .setAction("OK", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    }
+                })
+                .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+                .show();
+    }
+
+//    private void downloadNewSongDataFromServer() {
+//        boolean isLocalDBHasData;
+//
+//        try {
+//            String responseString = loadJSONFromAsset();
+//
+//            JSONObject jsonObj = new JSONObject(responseString);
+//            String respStatus = jsonObj.getString("Status");
+//
+//            if (respStatus.equalsIgnoreCase("Success")) {
+//                isLocalDBHasData = checkLocalDBHasData();
+//                listSongsData.clear();
+//                listLyricsData.clear();
+//                listChordsData.clear();
+//
+//                JSONArray jsonArrayRoot = jsonObj.getJSONArray("SongData");
+//                if (jsonArrayRoot != null && jsonArrayRoot.length() > 0) {
+//
+//                    for (int index = 0; index < jsonArrayRoot.length(); index++) {
+//                        JSONObject json = jsonArrayRoot.getJSONObject(index);
+//
+//                        int songID = json.getInt("ID");
+//                        String songTitle = json.getString("Title");
+//                        String songSubtitle = json.getString("Subtitle");
+//                        String songArtist = json.getString("Artist");
+//                        String youTubeURL = json.getString("YouTubeURL");
+//                        String songLyrics = json.getString("Lyrics");
+//                        String songLanguage = json.getString("SongLanguage");
+//                        boolean isContainsChords = json.getBoolean("IsContainsChords");
+////                        int songIconColor = getRandomMaterialColor();
+//                        int songIconColor;
+//                        if (isContainsChords) {
+//                            songIconColor = getColor(R.color.chords_icon);
+//                        } else {
+//                            songIconColor = getColor(R.color.lyrics_icon);
+//                        }
+//                        boolean isFavorites = false;
+//
+//                        SongObject songObject = new SongObject();
+//                        songObject.setSongId(songID);
+//                        songObject.setSongTitle(songTitle);
+//                        songObject.setSongSubtitle(songSubtitle);
+//                        songObject.setSongArtist(songArtist);
+//                        songObject.setSongYouTubeURL(youTubeURL);
+//                        songObject.setSongLyrics(songLyrics);
+//                        songObject.setSongLanguage(songLanguage);
+//                        songObject.setContainsChords(isContainsChords);
+//                        songObject.setSongIconColor(songIconColor);
+//
+////                       checking DB if song is added to favorites
+//                        if (isLocalDBHasData) {
+//                            Cursor rss = dbSongDetails.getSingleSongData(songID);
+//                            int countDBRows = rss.getCount();
+//
+//                            if (countDBRows > 0) {
+//                                rss.moveToFirst();
+//                                isFavorites = (rss.getInt(6) == 1);
+//                                rss.close();
+//                            }
+//                            songObject.setIsFavorites(isFavorites);
+//                        } else {
+//                            songObject.setIsFavorites(false);
+//
+////                           No data foudn in DB, hence inserting data in DB in same loop
+//                            insertDataIntoDB(songID, songTitle, songSubtitle, songArtist,
+//                                    youTubeURL, songLyrics, isFavorites, songIconColor,
+//                                    songLanguage, isContainsChords);
+//                        }
+//
+//                        listSongsData.add(songObject);
+//                        if (isContainsChords) {
+//                            listChordsData.add(songObject);
+//                        } else {
+//                            listLyricsData.add(songObject);
+//                        }
+//                    }
+//
+////                  if DB has data then clearing and updating db
+//                    if (isLocalDBHasData) {
+//                        deleteAllTableData();
+//                        copyDataFromArrayListToDB();
+//                    }
+//                }
+//
+//                isServiceDataDownloadFinished = true;
+//
+////                final Handler handler = new Handler();
+////                handler.postDelayed(new Runnable() {
+////                    @Override
+////                    public void run() {
+////                        isServiceDataDownloadFinished = true;
+////                    }
+////                }, 15000);
+//
+//
+////                loadNextPage();
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void insertDataIntoDB(int songID, String songTitle, String songSubtitle, String songArtist,
                                   String songYouTubeURL, String songLyrics, Boolean isFavorites,

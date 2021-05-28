@@ -88,6 +88,7 @@ public class ChordsFragment extends Fragment implements SongAdapterListener, Swi
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setEnabled(false);
     }
 
     private void setupRecyclerView() {
@@ -143,7 +144,7 @@ public class ChordsFragment extends Fragment implements SongAdapterListener, Swi
         swipeRefreshLayout.setRefreshing(true);
 
         ApiInterface apiService = RetroClient.getApiService(getActivity());
-        Call<ResponseBody> call = apiService.getInbox();
+        Call<ResponseBody> call = apiService.getSongDetails();
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
