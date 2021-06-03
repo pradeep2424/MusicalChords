@@ -293,7 +293,6 @@ public class SplashActivity extends AppCompatActivity {
 
 //                loadNextPage();
                             }
-
                         } else {
 
                             showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));

@@ -2,6 +2,7 @@ package com.music.chords.bottomMenu;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,16 +26,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.music.chords.R;
 import com.music.chords.activity.ItemDetailsChordsActivity;
 import com.music.chords.adapter.SongItemAdapter;
 import com.music.chords.database.DBSongDetails;
 import com.music.chords.interfaces.Constants;
 import com.music.chords.interfaces.SongAdapterListener;
+import com.music.chords.main.SplashActivity;
 import com.music.chords.objects.SongObject;
 import com.music.chords.service.retrofit.ApiInterface;
 import com.music.chords.service.retrofit.RetroClient;
 import com.music.chords.utils.Application;
+import com.music.chords.utils.InternetConnection;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +64,8 @@ public class ChordsFragment extends Fragment implements SongAdapterListener, Swi
 
     DBSongDetails dbSongDetails;
 
+    ArrayList<SongObject> listSongsData = new ArrayList<>();
+    ArrayList<SongObject> listLyricsData = new ArrayList<>();
     ArrayList<SongObject> listChordsData = new ArrayList<>();
     ArrayList<SongObject> listSelectedSongs = new ArrayList<>();
 
@@ -75,6 +85,7 @@ public class ChordsFragment extends Fragment implements SongAdapterListener, Swi
 
         init();
 //        getDummyData();
+        events();
         setupRecyclerView();
 
         return rootView;
@@ -91,6 +102,15 @@ public class ChordsFragment extends Fragment implements SongAdapterListener, Swi
         swipeRefreshLayout.setEnabled(false);
     }
 
+    private void events() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getSongListData();
+            }
+        });
+    }
+
     private void setupRecyclerView() {
 //        getAllSongsData();
 
@@ -103,65 +123,196 @@ public class ChordsFragment extends Fragment implements SongAdapterListener, Swi
         adapter.setSongAdapterListener(this);
 
         actionModeCallback = new ActionModeCallback();
+    }
 
-        // show loader and fetch messages
-        swipeRefreshLayout.post(
-                new Runnable() {
-                    @Override
-                    public void run() {
-//                        getInbox();
+    private void getSongListData() {
+        if (InternetConnection.checkConnection(getActivity())) {
+
+            ApiInterface apiService = RetroClient.getApiService(getActivity());
+            Call<ResponseBody> call = apiService.getSongDetails();
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    try {
+                        boolean isLocalDBHasData;
+
+                        int statusCode = response.code();
+                        if (response.isSuccessful()) {
+
+                            String responseString = response.body().string();
+                            JSONObject jsonObj = new JSONObject(responseString);
+                            String respStatus = jsonObj.getString("Status");
+
+                            if (respStatus.equalsIgnoreCase("Success")) {
+                                isLocalDBHasData = checkLocalDBHasData();
+                                listSongsData.clear();
+                                listLyricsData.clear();
+                                listChordsData.clear();
+
+//                                JSONArray jsonArrayRoot = jsonObj.getJSONArray("SongData");
+                                JSONArray jsonArrayRoot = jsonObj.getJSONArray("songMasters");
+                                if (jsonArrayRoot != null && jsonArrayRoot.length() > 0) {
+
+                                    for (int index = 0; index < jsonArrayRoot.length(); index++) {
+                                        JSONObject json = jsonArrayRoot.getJSONObject(index);
+
+                                        int songID = json.getInt("SongID");
+                                        String songTitle = json.getString("SongTitle");
+                                        String songSubtitle = json.getString("SongSubtitle");
+                                        String songArtist = json.getString("SongArtist");
+                                        String youTubeURL = json.getString("SongYouTubeURL");
+                                        String songLyrics = json.getString("SongLyrics");
+                                        String songLanguage = json.getString("SongLanguage");
+                                        boolean isContainsChords = json.getBoolean("IsContainsChords");
+//                        int songIconColor = getRandomMaterialColor();
+                                        int songIconColor;
+                                        if (isContainsChords) {
+                                            songIconColor = ContextCompat.getColor(getActivity(), R.color.chords_icon);
+                                        } else {
+                                            songIconColor = ContextCompat.getColor(getActivity(), R.color.lyrics_icon);
+                                        }
+                                        boolean isFavorites = false;
+
+                                        SongObject songObject = new SongObject();
+                                        songObject.setSongId(songID);
+                                        songObject.setSongTitle(songTitle);
+                                        songObject.setSongSubtitle(songSubtitle);
+                                        songObject.setSongArtist(songArtist);
+                                        songObject.setSongYouTubeURL(youTubeURL);
+                                        songObject.setSongLyrics(songLyrics);
+                                        songObject.setSongLanguage(songLanguage);
+                                        songObject.setContainsChords(isContainsChords);
+                                        songObject.setSongIconColor(songIconColor);
+
+//                       checking DB if song is added to favorites
+                                        if (isLocalDBHasData) {
+                                            Cursor rss = dbSongDetails.getSingleSongData(songID);
+                                            int countDBRows = rss.getCount();
+
+                                            if (countDBRows > 0) {
+                                                rss.moveToFirst();
+                                                isFavorites = (rss.getInt(6) == 1);
+                                                rss.close();
+                                            }
+                                            songObject.setIsFavorites(isFavorites);
+                                        } else {
+                                            songObject.setIsFavorites(false);
+
+//                           No data foudn in DB, hence inserting data in DB in same loop
+                                            insertDataIntoDB(songID, songTitle, songSubtitle, songArtist,
+                                                    youTubeURL, songLyrics, isFavorites, songIconColor,
+                                                    songLanguage, isContainsChords);
+                                        }
+
+                                        listSongsData.add(songObject);
+                                        if (isContainsChords) {
+                                            listChordsData.add(songObject);
+                                        } else {
+                                            listLyricsData.add(songObject);
+                                        }
+                                    }
+
+//                  if DB has data then clearing and updating db
+                                    if (isLocalDBHasData) {
+                                        deleteAllTableData();
+                                        copyDataFromArrayListToDB();
+                                    }
+                                }
+
+                                Application.allSongsData = listSongsData;
+                                Application.allLyricsData = listLyricsData;
+                                Application.allChordsData = listChordsData;
+
+                                swipeRefreshLayout.setRefreshing(false);
+                                adapter.notifyDataSetChanged();
+                            }
+                        } else {
+                            showSnackbarErrorMsg(getResources().getString(R.string.something_went_wrong));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
-        );
 
-//        prepareFavouriteContactsData();
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    try {
+                        showSnackbarErrorMsg(getResources().getString(R.string.server_conn_lost));
+                        Log.e("Error onFailure : ", t.toString());
+                        t.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+
+            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet),
+                    Toast.LENGTH_LONG).show();
+
+            Snackbar.make(rootView, getResources().getString(R.string.no_internet),
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            getSongListData();
+                        }
+                    })
+                    .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+                    .show();
+        }
     }
 
-    /**
-     * Fetches mail messages by making HTTP request
-     * url: http://api.androidhive.info/json/inbox.json
-     */
-    private void getAllSongsData() {
-        listChordsData.addAll(Application.allLyricsData);
+    private boolean checkLocalDBHasData() {
+        Cursor rss = dbSongDetails.getData();
+        int rows = rss.getCount();
+        rss.close();
 
-//        for (int i = 0; i < 10; i++) {
-//            String songTitle = "Title " + i;
-//            String songSubtitle = "Subtitle" + i;
-//            String songArtist = "Artist" + i;
-//
-//            SongObject songObject = new SongObject();
-//            songObject.setSongTitle(songTitle);
-//            songObject.setSongSubtitle(songSubtitle);
-//            songObject.setSongArtist(songArtist);
-//            songObject.setSongIconColor(getRandomMaterialColor("400"));
-//            songObject.setIsFavorites(false);
-//
-//            listChordsData.add(songObject);
-//        }
+        if (rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    private void getInbox() {
-        swipeRefreshLayout.setRefreshing(true);
-
-        ApiInterface apiService = RetroClient.getApiService(getActivity());
-        Call<ResponseBody> call = apiService.getSongDetails();
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                // clear the inbox
-                listChordsData.clear();
+    private void insertDataIntoDB(int songID, String songTitle, String songSubtitle, String songArtist,
+                                  String songYouTubeURL, String songLyrics, Boolean isFavorites,
+                                  int songIconColor, String songLanguage, boolean isContainsChords) {
+        dbSongDetails.insertData(songID, songTitle, songSubtitle, songArtist, songYouTubeURL,
+                songLyrics, isFavorites, songIconColor, songLanguage, isContainsChords);
 
 
-                adapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
+    }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(getActivity(), "Unable to fetch json: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+    private void deleteAllTableData() {
+        dbSongDetails.deleteAllTableData();
+    }
+
+    private void copyDataFromArrayListToDB() {
+        for (int index = 0; index < listSongsData.size(); index++) {
+            SongObject songObject = listSongsData.get(index);
+
+            int songID = songObject.getSongId();
+            String songTitle = songObject.getSongTitle();
+            String songSubtitle = songObject.getSongSubtitle();
+            String songArtist = songObject.getSongArtist();
+            String youTubeURL = songObject.getSongYouTubeURL();
+            String songLyrics = songObject.getSongLyrics();
+            boolean isFavorites = songObject.getIsFavorites();
+            int songIconColor = songObject.getSongIconColor();
+            String songLanguage = songObject.getSongLanguage();
+            boolean isContainsChords = songObject.isContainsChords();
+
+            insertDataIntoDB(songID, songTitle, songSubtitle, songArtist, youTubeURL,
+                    songLyrics, isFavorites, songIconColor, songLanguage, isContainsChords);
+
+//            if (isContainsChords) {
+//                listChordsData.add(songObject);
+//            } else {
+//                listLyricsData.add(songObject);
+//            }
+        }
     }
 
 //    private int getRandomMaterialColor(String typeColor) {
@@ -521,5 +672,20 @@ public class ChordsFragment extends Fragment implements SongAdapterListener, Swi
     @Override
     public void onRefresh() {
 
+    }
+
+    public void showSnackbarErrorMsg(String erroMsg) {
+        Snackbar.make(rootView, erroMsg, Snackbar.LENGTH_LONG).show();
+    }
+
+    public void showSnackbarErrorMsgWithButton(String erroMsg) {
+        Snackbar.make(rootView, erroMsg, Snackbar.LENGTH_INDEFINITE)
+                .setAction("OK", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    }
+                })
+                .setActionTextColor(getResources().getColor(R.color.colorSnackbarButtonText))
+                .show();
     }
 }
