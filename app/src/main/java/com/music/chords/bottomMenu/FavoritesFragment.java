@@ -32,6 +32,7 @@ import com.music.chords.interfaces.SongAdapterListener;
 import com.music.chords.interfaces.TriggerDBChangeListener;
 import com.music.chords.interfaces.TriggerTabChangeListener;
 import com.music.chords.objects.SongObject;
+import com.music.chords.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,7 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+//        recyclerView.addItemDecoration(Utils.getDividerItemDecoration(getActivity()));
         recyclerView.setAdapter(adapter);
         adapter.setSongAdapterListener(this);
 
@@ -254,7 +256,6 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
         triggerFavoritesChangeListener.onDBDataChanged();
     }
 
-
     private class ActionModeCallback implements ActionMode.Callback {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -344,6 +345,10 @@ public class FavoritesFragment extends Fragment implements SongAdapterListener, 
 
         updateFavoritesInDB(songObject);
         triggerFavoritesChangedListener();
+
+        if (listFavoriteSongs.size() == 0) {
+            showEmptyView();
+        }
     }
 
     @Override

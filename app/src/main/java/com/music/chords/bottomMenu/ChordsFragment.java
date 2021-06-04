@@ -39,6 +39,7 @@ import com.music.chords.service.retrofit.ApiInterface;
 import com.music.chords.service.retrofit.RetroClient;
 import com.music.chords.utils.Application;
 import com.music.chords.utils.InternetConnection;
+import com.music.chords.utils.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -119,6 +120,7 @@ public class ChordsFragment extends Fragment implements SongAdapterListener, Swi
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+//        recyclerView.addItemDecoration(Utils.getDividerItemDecoration(getActivity()));
         recyclerView.setAdapter(adapter);
         adapter.setSongAdapterListener(this);
 

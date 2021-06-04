@@ -4,8 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rl_rootLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/primaryBackgroundColor">
+    android:background="@mipmap/bg_search"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/gradient_bg"
+        android:scaleType="fitXY"/>
+
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/rl_rootLayout"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@color/primaryBackgroundColor">-->
 
     <include
         android:id="@+id/view_toolbar"
@@ -21,6 +35,7 @@
             android:id="@+id/rv_productItems"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/transparent"
             android:orientation="vertical"
             android:visibility="visible"></androidx.recyclerview.widget.RecyclerView>
 

@@ -71,18 +71,17 @@
                 <!--                    android:gravity="center"-->
                 <!--                    android:src="@drawable/rect_red" />-->
 
-                <com.music.chords.custom.MyTextViewBold
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/who_we_are_title"
-                    android:textColor="@color/main_text"
-                    android:textSize="19sp" />
+<!--                <com.music.chords.custom.MyTextViewBold-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/who_we_are_title"-->
+<!--                    android:textColor="@color/main_text"-->
+<!--                    android:textSize="19sp" />-->
 
                 <com.music.chords.custom.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:gravity="fill_horizontal"
                     android:lineSpacingExtra="4dp"
                     android:text="@string/who_we_are_description"
@@ -270,6 +269,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:gravity="center"
+                        android:lineSpacingExtra="4dp"
                         android:text="@string/contact_us_description"
                         android:textColor="@color/subtext"
                         android:textSize="15sp" />

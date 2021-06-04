@@ -31,6 +31,7 @@ import com.music.chords.interfaces.Constants;
 import com.music.chords.interfaces.SongAdapterListener;
 import com.music.chords.interfaces.TriggerDBChangeListener;
 import com.music.chords.objects.SongObject;
+import com.music.chords.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +120,7 @@ public class SearchFragment extends Fragment implements SongAdapterListener, Con
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+//        recyclerView.addItemDecoration(Utils.getDividerItemDecoration(getActivity()));
         recyclerView.setAdapter(adapterSearch);
         adapterSearch.setSongAdapterListener(this);
 

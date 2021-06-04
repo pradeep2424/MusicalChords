@@ -1,8 +1,14 @@
 package com.music.chords.utils;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.text.Spannable;
 import android.text.style.URLSpan;
+
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
+
+import com.music.chords.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -55,6 +61,12 @@ public class Utils {
 
     public static int dpToPx(float dp) {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
+    public static DividerItemDecoration getDividerItemDecoration(Context context) {
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(ContextCompat.getDrawable(context, R.drawable.divider));
+        return itemDecorator;
     }
 
 }

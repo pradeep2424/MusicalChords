@@ -131,9 +131,9 @@ public class DBSongDetails extends CreateDB {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor res = db.rawQuery("SELECT * from " + TABLE_SONG_DETAILS + " WHERE "
-                + KEY_SONG_TITLE + " LIKE '" + searchText + "%' OR "
-                + KEY_SONG_SUBTITLE + " LIKE '" + searchText + "%' OR "
-                + KEY_SONG_ARTIST + " LIKE '" + searchText + "%'", null);
+                + KEY_SONG_TITLE + " LIKE '%" + searchText + "%' OR "
+                + KEY_SONG_SUBTITLE + " LIKE '%" + searchText + "%' OR "
+                + KEY_SONG_ARTIST + " LIKE '%" + searchText + "%' ", null);
         return res;
     }
 

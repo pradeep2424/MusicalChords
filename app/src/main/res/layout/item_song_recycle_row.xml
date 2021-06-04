@@ -20,16 +20,15 @@
         android:layout_toLeftOf="@+id/icon_star"
         android:paddingRight="16dp">
 
-        <com.music.chords.custom.MyTextView
+        <com.music.chords.custom.MyTextViewBold
             android:id="@+id/from"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
             android:text="From"
-            android:textColor="@color/main_dark_text"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textColor="@color/white"
+            android:textSize="17sp" />
 
         <com.music.chords.custom.MyTextView
             android:id="@+id/txt_primary"
@@ -38,8 +37,8 @@
             android:ellipsize="end"
             android:lines="1"
             android:text="Primary"
-            android:textColor="@color/main_text"
-            android:textSize="14sp"
+            android:textColor="@color/light_gray"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <com.music.chords.custom.MyTextView
@@ -49,8 +48,8 @@
             android:ellipsize="end"
             android:lines="1"
             android:text="Secondary"
-            android:textColor="@color/subtext"
-            android:textSize="14sp" />
+            android:textColor="@color/light_gray"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -115,3 +114,121 @@
         android:layout_alignParentBottom="true" />
 
 </RelativeLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:clickable="true"-->
+<!--    android:focusable="true"-->
+<!--    android:orientation="vertical"-->
+<!--    android:paddingLeft="?listPreferredItemPaddingLeft"-->
+<!--    android:paddingTop="16dp"-->
+<!--    android:paddingRight="?listPreferredItemPaddingRight"-->
+<!--    android:paddingBottom="16dp">-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/message_container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:clickable="true"-->
+<!--        android:orientation="vertical"-->
+<!--        android:paddingLeft="72dp"-->
+<!--        android:layout_toLeftOf="@+id/icon_star"-->
+<!--        android:paddingRight="16dp">-->
+
+<!--        <com.music.chords.custom.MyTextView-->
+<!--            android:id="@+id/from"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:ellipsize="end"-->
+<!--            android:lines="1"-->
+<!--            android:text="From"-->
+<!--            android:textColor="@color/main_dark_text"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <com.music.chords.custom.MyTextView-->
+<!--            android:id="@+id/txt_primary"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:ellipsize="end"-->
+<!--            android:lines="1"-->
+<!--            android:text="Primary"-->
+<!--            android:textColor="@color/main_text"-->
+<!--            android:textSize="14sp"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <com.music.chords.custom.MyTextView-->
+<!--            android:id="@+id/txt_secondary"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:ellipsize="end"-->
+<!--            android:lines="1"-->
+<!--            android:text="Secondary"-->
+<!--            android:textColor="@color/subtext"-->
+<!--            android:textSize="14sp" />-->
+
+<!--    </LinearLayout>-->
+
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/icon_container"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical">-->
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/icon_back"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:src="@drawable/bg_circle" />-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="25dp"-->
+<!--                android:layout_height="25dp"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:src="@drawable/ic_tick" />-->
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/icon_front"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/icon_profile"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp" />-->
+
+<!--            <com.music.chords.custom.MyTextView-->
+<!--                android:id="@+id/icon_text"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="22sp" />-->
+<!--        </RelativeLayout>-->
+
+<!--    </RelativeLayout>-->
+
+<!--    &lt;!&ndash;    <com.music.chords.custom.MyTextView&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:id="@+id/timestamp"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:layout_alignParentRight="true"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:textColor="@color/color_divider"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:textSize="12sp"&ndash;&gt;-->
+<!--    &lt;!&ndash;        android:textStyle="bold" />&ndash;&gt;-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/icon_star"-->
+<!--        android:layout_width="25dp"-->
+<!--        android:layout_height="25dp"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_alignParentBottom="true" />-->
+
+<!--</RelativeLayout>-->
