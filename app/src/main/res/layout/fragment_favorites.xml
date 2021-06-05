@@ -7,7 +7,13 @@
     android:layout_height="match_parent"
     android:background="@mipmap/bg_favorites">
 
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/gradient_bg"
+        android:scaleType="fitXY"/>
+
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
 <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
 <!--    xmlns:tools="http://schemas.android.com/tools"-->
 <!--    android:id="@+id/rl_rootLayout"-->
@@ -36,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/view_toolbar"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"

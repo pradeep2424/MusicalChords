@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryBackgroundColor"
     android:fillViewport="true"
+    android:background="@mipmap/bg_settings"
     android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/gradient_bg"
+        android:scaleType="fitXY"/>
+
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    android:id="@+id/rl_rootLayout"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:background="@color/primaryBackgroundColor"-->
+    <!--    android:fillViewport="true"-->
+    <!--    android:orientation="vertical">-->
 
     <!--<ScrollView-->
     <!--android:id="@+id/myProfileScroll"-->
@@ -76,7 +93,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/settings_dark_theme"
-                            android:textColor="@color/main_text"
+                            android:textColor="@color/white"
                             android:textSize="16sp" />
 
                         <com.music.chords.custom.MyTextView
@@ -85,7 +102,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="@string/settings_dark_theme"
-                            android:textColor="@color/subtext"
+                            android:textColor="@color/light_gray"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -155,7 +172,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/settings_font_size"
-                            android:textColor="@color/main_text"
+                            android:textColor="@color/white"
                             android:textSize="16sp" />
 
                         <com.music.chords.custom.MyTextView
@@ -164,7 +181,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="@string/settings_font_size_subtext"
-                            android:textColor="@color/subtext"
+                            android:textColor="@color/light_gray"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -225,7 +242,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/settings_auto_scroll"
-                            android:textColor="@color/main_text"
+                            android:textColor="@color/white"
                             android:textSize="16sp" />
 
                         <com.music.chords.custom.MyTextView
@@ -234,7 +251,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="@string/settings_auto_scroll_subtext"
-                            android:textColor="@color/subtext"
+                            android:textColor="@color/light_gray"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -296,7 +313,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/settings_share"
-                            android:textColor="@color/main_text"
+                            android:textColor="@color/white"
                             android:textSize="16sp" />
 
                         <com.music.chords.custom.MyTextView
@@ -305,7 +322,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="@string/settings_share_subtext"
-                            android:textColor="@color/subtext"
+                            android:textColor="@color/light_gray"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -367,7 +384,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/settings_rate_us"
-                            android:textColor="@color/main_text"
+                            android:textColor="@color/white"
                             android:textSize="16sp" />
 
                         <com.music.chords.custom.MyTextView
@@ -376,7 +393,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="@string/settings_rate_us_subtext"
-                            android:textColor="@color/subtext"
+                            android:textColor="@color/light_gray"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -437,7 +454,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/settings_about_us"
-                            android:textColor="@color/main_text"
+                            android:textColor="@color/white"
                             android:textSize="16sp" />
 
                         <com.music.chords.custom.MyTextView
@@ -446,7 +463,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="@string/settings_about_us_subtext"
-                            android:textColor="@color/subtext"
+                            android:textColor="@color/light_gray"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -608,6 +625,627 @@
 
         </LinearLayout>
     </ScrollView>
+</RelativeLayout>
+
+<!--    <?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:id="@+id/rl_rootLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/primaryBackgroundColor"-->
+    <!--android:fillViewport="true"-->
+    <!--android:orientation="vertical">-->
+
+    <!--&lt;!&ndash;<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"&ndash;&gt;-->
+    <!--&lt;!&ndash;    xmlns:app="http://schemas.android.com/apk/res-auto"&ndash;&gt;-->
+    <!--&lt;!&ndash;    android:id="@+id/rl_rootLayout"&ndash;&gt;-->
+    <!--&lt;!&ndash;    android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;    android:layout_height="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;    android:background="@color/primaryBackgroundColor"&ndash;&gt;-->
+    <!--&lt;!&ndash;    android:fillViewport="true"&ndash;&gt;-->
+    <!--&lt;!&ndash;    android:orientation="vertical">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<ScrollView&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/myProfileScroll"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:fillViewport="true">&ndash;&gt;-->
+
+    <!--<com.google.android.material.appbar.AppBarLayout-->
+    <!--    android:id="@+id/appBar"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:theme="@style/AppTheme.AppBarOverlay">-->
+
+    <!--    <androidx.appcompat.widget.Toolbar-->
+    <!--        android:id="@+id/toolbar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="?attr/actionBarSize"-->
+    <!--        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
+    <!--</com.google.android.material.appbar.AppBarLayout>-->
+
+    <!--<ScrollView-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:layout_below="@+id/appBar"-->
+    <!--    android:scrollbars="none">-->
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:paddingBottom="20dp">-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/ll_darkTheme"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical">-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                android:padding="10dp">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_darkTheme"-->
+    <!--                    android:layout_width="20dp"-->
+    <!--                    android:layout_height="20dp"-->
+    <!--                    android:layout_alignParentLeft="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="20dp"-->
+    <!--                    android:src="@drawable/ic_dark_theme"-->
+    <!--                    app:tint="@color/hint_gray" />-->
+
+    <!--                <LinearLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="15dp"-->
+    <!--                    android:layout_toLeftOf="@+id/switch_darkTheme"-->
+    <!--                    android:layout_toRightOf="@id/iv_darkTheme"-->
+    <!--                    android:orientation="vertical"-->
+    <!--                    android:padding="10dp">-->
+
+    <!--                    <com.music.chords.custom.MyTextView-->
+    <!--                        android:id="@+id/tv_darkThemeText"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="@string/settings_dark_theme"-->
+    <!--                        android:textColor="@color/main_text"-->
+    <!--                        android:textSize="16sp" />-->
+
+    <!--                    <com.music.chords.custom.MyTextView-->
+    <!--                        android:id="@+id/tv_darkThemeSubtext"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginTop="5dp"-->
+    <!--                        android:text="@string/settings_dark_theme"-->
+    <!--                        android:textColor="@color/subtext"-->
+    <!--                        android:textSize="12sp" />-->
+
+    <!--                </LinearLayout>-->
+
+    <!--                <androidx.appcompat.widget.SwitchCompat-->
+    <!--                    android:id="@+id/switch_darkTheme"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_alignParentRight="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_gravity="center"-->
+    <!--                    android:layout_marginRight="10dp" />-->
+
+    <!--                &lt;!&ndash;            <ImageView&ndash;&gt;-->
+    <!--                &lt;!&ndash;                android:id="@+id/iv_themeArrow"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                android:layout_width="20dp"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                android:layout_height="20dp"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                android:layout_alignParentRight="true"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                android:layout_centerVertical="true"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                android:layout_marginRight="10dp"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                android:src="@drawable/ic_chevron_right_arrow"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                app:tint="#a9a0b0" />&ndash;&gt;-->
+    <!--            </RelativeLayout>-->
+
+    <!--            <View-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="0.7dp"-->
+    <!--                android:layout_marginLeft="20dp"-->
+    <!--                android:layout_marginRight="20dp"-->
+    <!--                android:background="@color/color_divider" />-->
+    <!--        </LinearLayout>-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/ll_fontSize"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical">-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                android:padding="10dp">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_fontSize"-->
+    <!--                    android:layout_width="20dp"-->
+    <!--                    android:layout_height="20dp"-->
+    <!--                    android:layout_alignParentLeft="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="20dp"-->
+    <!--                    android:src="@drawable/ic_font_size"-->
+    <!--                    app:tint="@color/hint_gray" />-->
+
+    <!--                <LinearLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="15dp"-->
+    <!--                    android:layout_toLeftOf="@+id/iv_fontSizeArrow"-->
+    <!--                    android:layout_toRightOf="@id/iv_fontSize"-->
+    <!--                    android:orientation="vertical"-->
+    <!--                    android:padding="10dp">-->
+
+    <!--                    <com.music.chords.custom.MyTextView-->
+    <!--                        android:id="@+id/tv_textFontText"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="@string/settings_font_size"-->
+    <!--                        android:textColor="@color/main_text"-->
+    <!--                        android:textSize="16sp" />-->
+
+    <!--                    <com.music.chords.custom.MyTextView-->
+    <!--                        android:id="@+id/tv_fontSizeSubtext"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginTop="5dp"-->
+    <!--                        android:text="@string/settings_font_size_subtext"-->
+    <!--                        android:textColor="@color/subtext"-->
+    <!--                        android:textSize="12sp" />-->
+
+    <!--                </LinearLayout>-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_fontSizeArrow"-->
+    <!--                    android:layout_width="20dp"-->
+    <!--                    android:layout_height="20dp"-->
+    <!--                    android:layout_alignParentRight="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginRight="10dp"-->
+    <!--                    android:src="@drawable/ic_chevron_right_arrow"-->
+    <!--                    app:tint="@color/hint_gray" />-->
+    <!--            </RelativeLayout>-->
+
+    <!--            <View-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="0.7dp"-->
+    <!--                android:layout_marginLeft="20dp"-->
+    <!--                android:layout_marginRight="20dp"-->
+    <!--                android:background="@color/color_divider" />-->
+    <!--        </LinearLayout>-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/ll_autoScroll"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical">-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                android:padding="10dp">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_autoScroll"-->
+    <!--                    android:layout_width="20dp"-->
+    <!--                    android:layout_height="20dp"-->
+    <!--                    android:layout_alignParentLeft="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="20dp"-->
+    <!--                    android:src="@drawable/ic_auto_scroll"-->
+    <!--                    app:tint="@color/hint_gray" />-->
+
+    <!--                <LinearLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="15dp"-->
+    <!--                    android:layout_toLeftOf="@+id/iv_autoScrollArrow"-->
+    <!--                    android:layout_toRightOf="@id/iv_autoScroll"-->
+    <!--                    android:orientation="vertical"-->
+    <!--                    android:padding="10dp">-->
+
+    <!--                    <com.music.chords.custom.MyTextView-->
+    <!--                        android:id="@+id/tv_autoScrollText"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="@string/settings_auto_scroll"-->
+    <!--                        android:textColor="@color/main_text"-->
+    <!--                        android:textSize="16sp" />-->
+
+    <!--                    <com.music.chords.custom.MyTextView-->
+    <!--                        android:id="@+id/tv_autoScrollSubtext"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginTop="5dp"-->
+    <!--                        android:text="@string/settings_auto_scroll_subtext"-->
+    <!--                        android:textColor="@color/subtext"-->
+    <!--                        android:textSize="12sp" />-->
+
+    <!--                </LinearLayout>-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_autoScrollArrow"-->
+    <!--                    android:layout_width="20dp"-->
+    <!--                    android:layout_height="20dp"-->
+    <!--                    android:layout_alignParentRight="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginRight="10dp"-->
+    <!--                    android:src="@drawable/ic_chevron_right_arrow"-->
+    <!--                    app:tint="@color/hint_gray" />-->
+    <!--            </RelativeLayout>-->
+
+    <!--            <View-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="0.7dp"-->
+    <!--                android:layout_marginLeft="20dp"-->
+    <!--                android:layout_marginRight="20dp"-->
+    <!--                android:background="@color/color_divider" />-->
+    <!--        </LinearLayout>-->
 
 
-</LinearLayout>
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/ll_share"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical">-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                android:padding="10dp">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_iconShare"-->
+    <!--                    android:layout_width="20dp"-->
+    <!--                    android:layout_height="20dp"-->
+    <!--                    android:layout_alignParentLeft="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="15dp"-->
+    <!--                    android:src="@drawable/ic_share"-->
+    <!--                    app:tint="@color/hint_gray" />-->
+
+    <!--                <LinearLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="20dp"-->
+    <!--                    android:layout_toLeftOf="@+id/iv_shareArrow"-->
+    <!--                    android:layout_toRightOf="@id/iv_iconShare"-->
+    <!--                    android:orientation="vertical"-->
+    <!--                    android:padding="10dp">-->
+
+    <!--                    <com.music.chords.custom.MyTextView-->
+    <!--                        android:id="@+id/tv_shareText"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="@string/settings_share"-->
+    <!--                        android:textColor="@color/main_text"-->
+    <!--                        android:textSize="16sp" />-->
+
+    <!--                    <com.music.chords.custom.MyTextView-->
+    <!--                        android:id="@+id/tv_shareSubtext"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginTop="5dp"-->
+    <!--                        android:text="@string/settings_share_subtext"-->
+    <!--                        android:textColor="@color/subtext"-->
+    <!--                        android:textSize="12sp" />-->
+
+    <!--                </LinearLayout>-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_shareArrow"-->
+    <!--                    android:layout_width="20dp"-->
+    <!--                    android:layout_height="20dp"-->
+    <!--                    android:layout_alignParentRight="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginRight="10dp"-->
+    <!--                    android:src="@drawable/ic_chevron_right_arrow"-->
+    <!--                    app:tint="@color/hint_gray" />-->
+    <!--            </RelativeLayout>-->
+
+    <!--            <View-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="0.7dp"-->
+    <!--                android:layout_marginLeft="20dp"-->
+    <!--                android:layout_marginRight="20dp"-->
+    <!--                android:background="@color/color_divider" />-->
+    <!--        </LinearLayout>-->
+
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/ll_rateUs"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical">-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                android:padding="10dp">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_iconRateUs"-->
+    <!--                    android:layout_width="20dp"-->
+    <!--                    android:layout_height="20dp"-->
+    <!--                    android:layout_alignParentLeft="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="15dp"-->
+    <!--                    android:src="@drawable/ic_rate_us"-->
+    <!--                    app:tint="@color/hint_gray" />-->
+
+    <!--                <LinearLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="20dp"-->
+    <!--                    android:layout_toLeftOf="@+id/iv_rateUsArrow"-->
+    <!--                    android:layout_toRightOf="@id/iv_iconRateUs"-->
+    <!--                    android:orientation="vertical"-->
+    <!--                    android:padding="10dp">-->
+
+    <!--                    <com.music.chords.custom.MyTextView-->
+    <!--                        android:id="@+id/tv_rateUsText"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="@string/settings_rate_us"-->
+    <!--                        android:textColor="@color/main_text"-->
+    <!--                        android:textSize="16sp" />-->
+
+    <!--                    <com.music.chords.custom.MyTextView-->
+    <!--                        android:id="@+id/tv_rateUsSubtext"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginTop="5dp"-->
+    <!--                        android:text="@string/settings_rate_us_subtext"-->
+    <!--                        android:textColor="@color/subtext"-->
+    <!--                        android:textSize="12sp" />-->
+
+    <!--                </LinearLayout>-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_rateUsArrow"-->
+    <!--                    android:layout_width="20dp"-->
+    <!--                    android:layout_height="20dp"-->
+    <!--                    android:layout_alignParentRight="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginRight="10dp"-->
+    <!--                    android:src="@drawable/ic_chevron_right_arrow"-->
+    <!--                    app:tint="@color/hint_gray" />-->
+    <!--            </RelativeLayout>-->
+
+    <!--            <View-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="0.7dp"-->
+    <!--                android:layout_marginLeft="20dp"-->
+    <!--                android:layout_marginRight="20dp"-->
+    <!--                android:background="@color/color_divider" />-->
+    <!--        </LinearLayout>-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/ll_aboutUs"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical">-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                android:padding="10dp">-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_iconAboutUs"-->
+    <!--                    android:layout_width="20dp"-->
+    <!--                    android:layout_height="20dp"-->
+    <!--                    android:layout_alignParentLeft="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="15dp"-->
+    <!--                    android:src="@drawable/ic_about_us"-->
+    <!--                    app:tint="@color/hint_gray" />-->
+
+    <!--                <LinearLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginLeft="20dp"-->
+    <!--                    android:layout_toLeftOf="@+id/iv_aboutUsArrow"-->
+    <!--                    android:layout_toRightOf="@id/iv_iconAboutUs"-->
+    <!--                    android:orientation="vertical"-->
+    <!--                    android:padding="10dp">-->
+
+    <!--                    <com.music.chords.custom.MyTextView-->
+    <!--                        android:id="@+id/tv_aboutUsText"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="@string/settings_about_us"-->
+    <!--                        android:textColor="@color/main_text"-->
+    <!--                        android:textSize="16sp" />-->
+
+    <!--                    <com.music.chords.custom.MyTextView-->
+    <!--                        android:id="@+id/tv_aboutUsSubtext"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginTop="5dp"-->
+    <!--                        android:text="@string/settings_about_us_subtext"-->
+    <!--                        android:textColor="@color/subtext"-->
+    <!--                        android:textSize="12sp" />-->
+
+    <!--                </LinearLayout>-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/iv_aboutUsArrow"-->
+    <!--                    android:layout_width="20dp"-->
+    <!--                    android:layout_height="20dp"-->
+    <!--                    android:layout_alignParentRight="true"-->
+    <!--                    android:layout_centerVertical="true"-->
+    <!--                    android:layout_marginRight="10dp"-->
+    <!--                    android:src="@drawable/ic_chevron_right_arrow"-->
+    <!--                    app:tint="@color/hint_gray" />-->
+    <!--            </RelativeLayout>-->
+
+    <!--            <View-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="0.7dp"-->
+    <!--                android:layout_marginLeft="20dp"-->
+    <!--                android:layout_marginRight="20dp"-->
+    <!--                android:background="@color/color_divider" />-->
+    <!--        </LinearLayout>-->
+
+
+    <!--        &lt;!&ndash;    <LinearLayout&ndash;&gt;-->
+    <!--        &lt;!&ndash;        android:id="@+id/ll_contactUs"&ndash;&gt;-->
+    <!--        &lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;        android:orientation="vertical">&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;        <RelativeLayout&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_height="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:orientation="horizontal"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:padding="10dp">&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;            <ImageView&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:id="@+id/iv_iconContactUs"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_width="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_height="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_alignParentLeft="true"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_centerVertical="true"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_marginLeft="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:src="@drawable/ic_bottom_menu_home" />&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;            <LinearLayout&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_centerVertical="true"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_marginLeft="15dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_toLeftOf="@+id/iv_contactUsArrow"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_toRightOf="@+id/iv_iconContactUs"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:orientation="vertical"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:padding="10dp">&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;                <com.music.chords.custom.MyTextView&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    android:id="@+id/tv_contactUsText"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    android:text="/settings_contact_us_title"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    android:textColor="@color/main_text"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    android:textSize="16sp" />&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;                <com.music.chords.custom.MyTextView&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    android:id="@+id/tv_contactUsSubtext"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    android:layout_marginTop="5dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    android:text="/settings_contact_us_subtitle"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    android:textColor="@color/subtext"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                    android:textSize="12sp" />&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;            </LinearLayout>&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;            <ImageView&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:id="@+id/iv_contactUsArrow"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_width="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_height="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_alignParentRight="true"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_centerVertical="true"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:layout_marginRight="10dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                android:src="@drawable/ic_chevron_right_arrow"&ndash;&gt;-->
+    <!--        &lt;!&ndash;                app:tint="#a9a0b0" />&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;        </RelativeLayout>&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;        <View&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_height="0.7dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_marginLeft="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:layout_marginRight="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;            android:background="@color/color_divider" />&ndash;&gt;-->
+    <!--        &lt;!&ndash;    </LinearLayout>&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;<LinearLayout&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:orientation="vertical">&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;<LinearLayout&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:orientation="horizontal"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:padding="13dp">&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;<ImageView&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:id="@+id/inbox"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_width="16dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_height="16dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_marginLeft="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_marginTop="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:src="@mipmap/ic_inbox" />&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;<LinearLayout&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_marginLeft="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:paddingTop="7dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:paddingBottom="7dp">&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;<com.pradeep.aartisangrah.customfonts.TextView_Roboto_Medium&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:id="@+id/txttrades"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:text="My Trades"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:textColor="#3b3b3b"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;<ImageView&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:id="@+id/arrow"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_width="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_height="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_gravity="right"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_marginTop="-14dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_marginRight="10dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_marginBottom="-3dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:src="@drawable/ic_chevron_right_arrow"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:tint="#a9a0b0" />&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;<com.pradeep.aartisangrah.customfonts.TextView_Roboto_Regular&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:id="@+id/txthistory"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:text="Check your trading history"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:textColor="#a9a9b0"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:textSize="13sp" />&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+    <!--        &lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+    <!--        &lt;!&ndash;<View&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_height="0.7dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_marginLeft="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:layout_marginRight="20dp"&ndash;&gt;-->
+    <!--        &lt;!&ndash;android:background="#1A979797" />&ndash;&gt;-->
+    <!--        &lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+    <!--    </LinearLayout>-->
+    <!--</ScrollView>-->
+
+
+    <!--</LinearLayout>-->

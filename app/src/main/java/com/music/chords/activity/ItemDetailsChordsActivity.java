@@ -79,6 +79,8 @@ import com.warkiz.widget.SeekParams;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import es.dmoral.toasty.Toasty;
 
@@ -93,6 +95,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
 //    TextView tvToolbarTitle;
     FullScreenHelper fullScreenHelper;
     YouTubePlayerView youTubePlayerView;
+    ImageView ivEmpty;
     TextView tvTitle;
     TextView tvSubtitle;
     TextView tvLyrics;
@@ -138,12 +141,18 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
 
         init();
         componentEvents();
-        initYouTubeViewPlayer();
         setSongData();
         setFontSizeToLyrics();
         setAutoScrollSpeed();
         initializeChordDictionary();
 //        applyColorScheme();
+
+        if (songObject.getSongYouTubeURL() != null && songObject.getSongYouTubeURL().length() > 0) {
+            initYouTubeViewPlayer();
+        } else {
+            ivEmpty.setVisibility(View.VISIBLE);
+            youTubePlayerView.setVisibility(View.GONE);
+        }
 
         if (songObject != null && songObject.getSongLyrics() != null) {
             chordText = songObject.getSongLyrics();
@@ -185,6 +194,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
 //        tvToolbarTitle = findViewById(R.id.tv_toolbarTitle);
         nestedScrollView = findViewById(R.id.nestedScrollView);
         fabExitFullScreen = findViewById(R.id.fab_exitFullScreen);
+        ivEmpty = findViewById(R.id.iv_empty);
 //        ivCoverPic =  findViewById(R.id.iv_coverPic);
         tvTitle = findViewById(R.id.tv_title);
         tvSubtitle = findViewById(R.id.tv_subtitle);
@@ -231,14 +241,14 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
                 youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
                     @Override
                     public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                        String videoId = "KPLWWIOCOOQ";
+//                        String videoId = "KPLWWIOCOOQ";
+                        String ytURL = songObject.getSongYouTubeURL();
+                        String videoId = extractYoutTubeID(ytURL);
                         youTubePlayer.cueVideo(videoId, 0);
-//                youTubePlayer.loadVideo(videoId, 0);
                     }
                 });
             }
         });
-
     }
 
     private void componentEvents() {
@@ -329,6 +339,18 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
 //                }
 //            }
 //        });
+    }
+
+    private String extractYoutTubeID(String ytUrl) {
+        String vId = null;
+        Pattern pattern = Pattern.compile(
+                "^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",
+                Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(ytUrl);
+        if (matcher.matches()) {
+            vId = matcher.group(1);
+        }
+        return vId;
     }
 
     private void setSongData() {

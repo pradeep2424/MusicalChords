@@ -1,9 +1,7 @@
 package com.music.chords.bottomMenu;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,13 +31,11 @@ import com.music.chords.adapter.SongItemAdapter;
 import com.music.chords.database.DBSongDetails;
 import com.music.chords.interfaces.Constants;
 import com.music.chords.interfaces.SongAdapterListener;
-import com.music.chords.main.SplashActivity;
 import com.music.chords.objects.SongObject;
 import com.music.chords.service.retrofit.ApiInterface;
 import com.music.chords.service.retrofit.RetroClient;
 import com.music.chords.utils.Application;
 import com.music.chords.utils.InternetConnection;
-import com.music.chords.utils.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -82,7 +78,7 @@ public class ChordsFragment extends Fragment implements SongAdapterListener, Swi
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        rootView = inflater.inflate(R.layout.fragment_chords, container, false);
 
         init();
 //        getDummyData();
