@@ -243,7 +243,7 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
                     public void onReady(@NonNull YouTubePlayer youTubePlayer) {
 //                        String videoId = "KPLWWIOCOOQ";
                         String ytURL = songObject.getSongYouTubeURL();
-                        String videoId = extractYoutTubeID(ytURL);
+                        String videoId = extractYouTubeID(ytURL);
                         youTubePlayer.cueVideo(videoId, 0);
                     }
                 });
@@ -341,15 +341,26 @@ public class ItemDetailsChordsActivity extends AppCompatActivity implements Cons
 //        });
     }
 
-    private String extractYoutTubeID(String ytUrl) {
-        String vId = null;
-        Pattern pattern = Pattern.compile(
-                "^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",
-                Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(ytUrl);
-        if (matcher.matches()) {
-            vId = matcher.group(1);
+    private String extractYouTubeID(String ytUrl) {
+        String vId = "";
+
+        String pattern = "(?<=watch\\?v=|/videos/|embed\\/|youtu.be\\/|\\/v\\/|\\/e\\/|watch\\?v%3D|watch\\?feature=player_embedded&v=|%2Fvideos%2F|embed%\u200C\u200B2F|youtu.be%2F|%2Fv%2F)[^#\\&\\?\\n]*";
+
+        Pattern compiledPattern = Pattern.compile(pattern);
+        Matcher matcher = compiledPattern.matcher(ytUrl); //url is youtube url for which you want to extract the id.
+        if (matcher.find()) {
+            vId = matcher.group();
         }
+
+//        String vId = null;
+//        Pattern pattern = Pattern.compile(
+//                "^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",
+//                Pattern.CASE_INSENSITIVE);
+//        Matcher matcher = pattern.matcher(ytUrl);
+//        if (matcher.matches()) {
+//            vId = matcher.group(1);
+//        }
+
         return vId;
     }
 
